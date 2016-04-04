@@ -1,2 +1,2 @@
-# open-semantic-search
-Open Semantic Search
+# Open Semantic Search
+http://www.opensemanticsearch.org
