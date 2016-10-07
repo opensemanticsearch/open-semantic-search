@@ -1,8 +1,0 @@
-#/bin/sh
-
-#
-# Build packages
-#
-
-# Build Debian package
-deb/build
