@@ -1,0 +1,74 @@
+#/bin/bash
+
+VERSION=`date +%y.%m.%d`
+PACKAGE=open-semantic-search_${VERSION}.deb
+DEBIAN_VERSION=stable
+BUILDDIR=/tmp/open-semantic-search-$$.deb
+INCLUDE_PACKAGES="solr.deb open-semantic-etl solr-php-ui open-semantic-search-apps tika-server.deb"
+
+
+echo "Building ${PACKAGE} in temp directory ${BUILDDIR}"
+mkdir ${BUILDDIR}
+
+
+# since this script is in build/deb, the basedir with sources, configs and files is two directories up
+BASEDIR=`dirname "$0"`
+BASEDIR="${BASEDIR}/../../"
+
+
+cp -a ${BASEDIR}/build/deb/${DEBIAN_VERSION}/* ${BUILDDIR}/
+
+
+for INCLUDE_PACKAGE in $INCLUDE_PACKAGES ; do
+
+    #build package
+    ${BASEDIR}/../${INCLUDE_PACKAGE}/build/deb/build
+
+    INCLUDE_PACKAGE_DEB="${INCLUDE_PACKAGE}_${VERSION}.deb"
+    echo "Including ${INCLUDE_PACKAGE} from ${INCLUDE_PACKAGE_DEB}"
+
+
+    # extract all content files
+    dpkg-deb --extract "${INCLUDE_PACKAGE_DEB}" ${BUILDDIR}/
+
+
+    # Append conffiles names from the included package to our conffiles info
+
+    dpkg-deb --info "${INCLUDE_PACKAGE_DEB}" conffiles &>/dev/null
+
+    if [ $? -eq 0 ]
+    then
+        dpkg-deb --info ${INCLUDE_PACKAGE_DEB} conffiles >> ${BUILDDIR}/DEBIAN/conffiles
+    fi
+
+
+    # Copy postinst files, which will be called from our postint script
+    dpkg-deb --info ${INCLUDE_PACKAGE_DEB} postinst &>/dev/null
+    if [ $? -eq 0 ]
+    then
+	dpkg-deb --info ${INCLUDE_PACKAGE_DEB} postinst > ${BUILDDIR}/opt/postinst.${INCLUDE_PACKAGE}
+	chmod +x ${BUILDDIR}/opt/postinst.${INCLUDE_PACKAGE}
+
+        # Add call to postinst script
+	cat << EOF >> ${BUILDDIR}/DEBIAN/postinst
+
+	    if [ -f /opt/postinst.${INCLUDE_PACKAGE} ]
+	    then
+	        if /opt/postinst.${INCLUDE_PACKAGE}
+	        then
+		        rm /opt/postinst.${INCLUDE_PACKAGE}
+	        else
+	            exit 1
+	        fi
+	    fi
+EOF
+
+
+    fi
+
+done
+
+
+
+# Build deb
+dpkg -b ${BUILDDIR} ${PACKAGE}

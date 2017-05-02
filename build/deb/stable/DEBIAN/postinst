@@ -1,0 +1,5 @@
+#!/bin/sh
+# postinst script for opensemanticsearch
+
+# call postinst scripts (extracted to opt) of the main components
+
