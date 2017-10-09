@@ -1,9 +1,9 @@
 Package: open-semantic-search
-Version: 17.07.02
+Version: 17.10.09
 Section: misc
 Priority: optional
 Architecture: all
-Depends: default-jre-headless(>=0), apache2(>=0), libapache2-mod-php(>=0), php(>=0), php-bcmath(>=0), libapache2-mod-wsgi-py3(>=0), python3-django(>=0), python3-pycurl(>=0), python3-rdflib(>=0), python3-requests(>=0), python3-pysolr(>=0), python3-dateutil(>=0), python3-lxml(>=0), python3-feedparser(>=0), poppler-utils(>=0), pst-utils(>=0), daemon(>=0), python3-pyinotify(>=0), python3-celery(>=0), rabbitmq-server(>=0)
+Depends: default-jre-headless(>=0), curl(>=0), apache2(>=0), libapache2-mod-php(>=0), php(>=0), php-bcmath(>=0), libapache2-mod-wsgi-py3(>=0), python3-django(>=0), python3-pycurl(>=0), python3-rdflib(>=0), python3-requests(>=0), python3-pysolr(>=0), python3-dateutil(>=0), python3-lxml(>=0), python3-feedparser(>=0), poppler-utils(>=0), pst-utils(>=0), daemon(>=0), python3-pyinotify(>=0), python3-celery(>=0), rabbitmq-server(>=0)
 Recommends: tesseract-ocr (>= 0), scantailor (>= 0)
 Suggests: tesseract-ocr-deu (>= 0)
 Installed-Size: 100
