@@ -19,6 +19,20 @@ BASEDIR="${BASEDIR}/../../"
 cp -a ${BASEDIR}/build/deb/${DEBIAN_VERSION}/* ${BUILDDIR}/
 
 
+#
+# Include python-tika since no official Debian package yet
+#
+
+mkdir -p ${BUILDDIR}/usr/lib/python3/dist-packages
+
+# copy python-tika library to created python libraries directory
+cp -a ${BASEDIR}/../tika-python/tika ${BUILDDIR}/usr/lib/python3/dist-packages/
+
+
+#
+# Build and include Debian packages
+#
+
 for INCLUDE_PACKAGE in $INCLUDE_PACKAGES ; do
 
     #build package
