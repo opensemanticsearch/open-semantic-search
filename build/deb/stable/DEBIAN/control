@@ -3,14 +3,11 @@ Version: 18.04.15
 Section: misc
 Priority: optional
 Architecture: all
-Depends: default-jre-headless(>=0), libjs-jquery(>=0), curl(>=0), apache2(>=0), libapache2-mod-php(>=0), php(>=0), php-xml(>=0), php-bcmath(>=0), libapache2-mod-wsgi-py3(>=0), python3-django(>=0), python3-pycurl(>=0), python3-rdflib(>=0), python3-requests(>=0), python3-pysolr(>=0), python3-dateutil(>=0), python3-lxml(>=0), python3-feedparser(>=0), poppler-utils(>=0), pst-utils(>=0), daemon(>=0), python3-pyinotify(>=0), python3-celery(>=0), python3-nltk(>=0), python3-pip(>=0), python3-dev(>=0), python3-falcon(>=0), python3-gunicorn(>=0), build-essential(>=0), rabbitmq-server(>=0), scantailor(>=0), tesseract-ocr(>=0), tesseract-ocr-deu(>=0)
+Depends: default-jre-headless(>=0), libjs-jquery(>=0), curl(>=0), apache2(>=0), libapache2-mod-php(>=0), php(>=0), php-xml(>=0), php-bcmath(>=0), libapache2-mod-wsgi-py3(>=0), python3-django(>=0), python3-pycurl(>=0), python3-rdflib(>=0), python3-requests(>=0), python3-pysolr(>=0), python3-dateutil(>=0), python3-lxml(>=0), python3-feedparser(>=0), poppler-utils(>=0), pst-utils(>=0), daemon(>=0), python3-pyinotify(>=0), python3-celery(>=0), python3-nltk(>=0), python3-pip(>=0), python3-dev(>=0), python3-falcon(>=0), python3-gunicorn(>=0), build-essential(>=0), rabbitmq-server(>=0), scantailor(>=0), tesseract-ocr(>=0), tesseract-ocr-all(>=0)
 Installed-Size: 100
 Maintainer: Markus Mandalka <debian@mandalka.name>
-Homepage: http://www.opensemanticsearch.org/
+Homepage: https://opensemanticsearch.org/
 Description: Search engine
  Solr PHP UI is a user interface to search in a Solr index.
  Open Semantic ETL index your files to Solr.
  Solr search server will manage the index and will do the searching.
- If tesseract-ocr installed there will be character recognition on images.
- Hint: install ocr language files like tesseract-ocr-deu for german texts.
- If poppler-utils installed there will be ocr for images inside pdf, too.
