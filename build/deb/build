@@ -30,6 +30,13 @@ cp -a ${BASEDIR}/../tika-python/tika ${BUILDDIR}/usr/lib/python3/dist-packages/
 
 
 #
+# Include Solr-Ontology-Tagger
+#
+
+cp -a ${BASEDIR}/../solr-ontology-tagger/src/* ${BUILDDIR}/usr/lib/python3/dist-packages/
+
+
+#
 # Build and include Debian packages
 #
 
