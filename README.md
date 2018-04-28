@@ -9,8 +9,10 @@ Git repositories which have to be in parallel folders:
 
 open-semantic-etl
 open-semantic-search-apps
+open-semantic-entity-search-api
 tika-server.deb
 solr.deb
 solr-php-ui
 tika-python
 solr-ontology-tagger
+spacy-services.deb

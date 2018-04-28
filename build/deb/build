@@ -9,6 +9,7 @@ INCLUDE_PACKAGES="solr.deb open-semantic-etl spacy-services.deb solr-php-ui open
 
 echo "Building ${PACKAGE} in temp directory ${BUILDDIR}"
 mkdir ${BUILDDIR}
+mkdir ${BUILDDIR}/opt
 
 
 # since this script is in build/deb, the basedir with sources, configs and files is two directories up
@@ -17,23 +18,6 @@ BASEDIR="${BASEDIR}/../../"
 
 
 cp -a ${BASEDIR}/build/deb/${DEBIAN_VERSION}/* ${BUILDDIR}/
-
-
-#
-# Include python-tika since no official Debian package yet
-#
-
-mkdir -p ${BUILDDIR}/usr/lib/python3/dist-packages
-
-# copy python-tika library to created python libraries directory
-cp -a ${BASEDIR}/../tika-python/tika ${BUILDDIR}/usr/lib/python3/dist-packages/
-
-
-#
-# Include Solr-Ontology-Tagger
-#
-
-cp -a ${BASEDIR}/../solr-ontology-tagger/src/* ${BUILDDIR}/usr/lib/python3/dist-packages/
 
 
 #
@@ -90,6 +74,33 @@ EOF
 done
 
 
+#
+# Include python-tika since no official Debian package yet
+#
 
+mkdir -p ${BUILDDIR}/usr/lib/python3/dist-packages
+
+# copy python-tika library to created python libraries directory
+cp -a ${BASEDIR}/../tika-python/tika ${BUILDDIR}/usr/lib/python3/dist-packages/
+
+#
+# Include Open Semantic Entity Search API
+#
+
+cp -a ${BASEDIR}/../open-semantic-entity-search-api/src/dictionary ${BUILDDIR}/usr/lib/python3/dist-packages/
+cp -a ${BASEDIR}/../open-semantic-entity-search-api/src/entity_linking ${BUILDDIR}/usr/lib/python3/dist-packages/
+cp -a ${BASEDIR}/../open-semantic-entity-search-api/src/solr/* ${BUILDDIR}/var/solr/data/
+cp -a ${BASEDIR}/../open-semantic-entity-search-api/src/entity_rest_api ${BUILDDIR}/var/lib/opensemanticsearch/
+
+#
+# Include Solr-Ontology-Tagger
+#
+
+cp -a ${BASEDIR}/../solr-ontology-tagger/src/* ${BUILDDIR}/usr/lib/python3/dist-packages/
+
+
+#
 # Build deb
+#
+
 dpkg -b ${BUILDDIR} ${PACKAGE}
