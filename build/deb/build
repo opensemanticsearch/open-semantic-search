@@ -89,8 +89,9 @@ cp -a ${BASEDIR}/../tika-python/tika ${BUILDDIR}/usr/lib/python3/dist-packages/
 
 cp -a ${BASEDIR}/../open-semantic-entity-search-api/src/dictionary ${BUILDDIR}/usr/lib/python3/dist-packages/
 cp -a ${BASEDIR}/../open-semantic-entity-search-api/src/entity_linking ${BUILDDIR}/usr/lib/python3/dist-packages/
-cp -a ${BASEDIR}/../open-semantic-entity-search-api/src/solr/* ${BUILDDIR}/var/solr/data/
+cp -a ${BASEDIR}/../open-semantic-entity-search-api/src/entity_manager ${BUILDDIR}/usr/lib/python3/dist-packages/
 cp -a ${BASEDIR}/../open-semantic-entity-search-api/src/entity_rest_api ${BUILDDIR}/var/lib/opensemanticsearch/
+cp -a ${BASEDIR}/../open-semantic-entity-search-api/src/solr/* ${BUILDDIR}/var/solr/data/
 
 #
 # Include Solr-Ontology-Tagger
