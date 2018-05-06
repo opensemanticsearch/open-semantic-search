@@ -4,7 +4,7 @@ VERSION=`date +%y.%m.%d`
 PACKAGE=open-semantic-search_${VERSION}.deb
 DEBIAN_VERSION=stable
 BUILDDIR=/tmp/open-semantic-search-$$.deb
-INCLUDE_PACKAGES="solr.deb open-semantic-etl spacy-services.deb solr-php-ui open-semantic-search-apps tika-server.deb"
+INCLUDE_PACKAGES="solr.deb open-semantic-etl neo4j.deb spacy-services.deb solr-php-ui open-semantic-search-apps tika-server.deb"
 
 
 echo "Building ${PACKAGE} in temp directory ${BUILDDIR}"
