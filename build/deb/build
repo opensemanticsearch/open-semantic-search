@@ -99,6 +99,13 @@ cp -a ${BASEDIR}/../open-semantic-entity-search-api/src/solr/* ${BUILDDIR}/var/s
 
 cp -a ${BASEDIR}/../open-semantic-visual-graph-explorer/src/* ${BUILDDIR}/var/lib/opensemanticsearch/
 
+# and its base / dependencies cytoscape.js and cytoscape.js-panzoom
+mkdir ${BUILDDIR}/var/lib/opensemanticsearch/visual_graph_explorer/static/
+cp -a ${BASEDIR}/../cytoscape.js/dist/* ${BUILDDIR}/var/lib/opensemanticsearch/visual_graph_explorer/static/
+cp -a ${BASEDIR}/../cytoscape.js-panzoom/cytoscape-panzoom.js ${BUILDDIR}/var/lib/opensemanticsearch/visual_graph_explorer/static/
+cp -a ${BASEDIR}/../cytoscape.js-panzoom/cytoscape.js-panzoom.css ${BUILDDIR}/var/lib/opensemanticsearch/visual_graph_explorer/static/
+cp -a ${BASEDIR}/../cytoscape.js-panzoom/font-awesome-4.0.3 ${BUILDDIR}/var/lib/opensemanticsearch/visual_graph_explorer/static/
+
 #
 # Include Solr-Ontology-Tagger
 #
