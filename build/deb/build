@@ -93,6 +93,14 @@ cp -a ${BASEDIR}/../open-semantic-entity-search-api/src/entity_manager ${BUILDDI
 cp -a ${BASEDIR}/../open-semantic-entity-search-api/src/entity_rest_api ${BUILDDIR}/var/lib/opensemanticsearch/
 cp -a ${BASEDIR}/../open-semantic-entity-search-api/src/solr/* ${BUILDDIR}/var/solr/data/
 
+
+#
+# Include Solr Ranking Analysis Tool
+#
+
+cp -a ${BASEDIR}/../solr-ranking-analysis/src/* ${BUILDDIR}/var/lib/opensemanticsearch/
+
+
 #
 # Include Open Semantic Visual Linked Data Explorer
 #

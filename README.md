@@ -11,6 +11,7 @@ open-semantic-etl
 open-semantic-search-apps
 open-semantic-entity-search-api
 open-semantic-visual-graph-explorer
+solr-ranking-analysis
 tika-server.deb
 solr.deb
 solr-php-ui
