@@ -95,10 +95,10 @@ cp -a ${BASEDIR}/../open-semantic-entity-search-api/src/solr/* ${BUILDDIR}/var/s
 
 
 #
-# Include Solr Ranking Analysis Tool
+# Include Solr Relevance Ranking Analysis Tool
 #
 
-cp -a ${BASEDIR}/../solr-ranking-analysis/src/* ${BUILDDIR}/var/lib/opensemanticsearch/
+cp -a ${BASEDIR}/../solr-relevance-ranking-analysis/src/* ${BUILDDIR}/var/lib/opensemanticsearch/
 
 
 #
