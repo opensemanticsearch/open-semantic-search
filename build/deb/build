@@ -4,7 +4,7 @@ VERSION=`date +%y.%m.%d`
 PACKAGE=open-semantic-search_${VERSION}.deb
 DEBIAN_VERSION=stable
 BUILDDIR=/tmp/open-semantic-search-$$.deb
-INCLUDE_PACKAGES="solr.deb spacy-services.deb open-semantic-etl neo4j.deb solr-php-ui open-semantic-search-apps tika-server.deb"
+INCLUDE_PACKAGES="solr.deb tika-server.deb spacy-services.deb open-semantic-etl neo4j.deb solr-php-ui open-semantic-search-apps"
 
 
 echo "Building ${PACKAGE} in temp directory ${BUILDDIR}"
@@ -98,7 +98,7 @@ cp -a ${BASEDIR}/../open-semantic-entity-search-api/src/solr/* ${BUILDDIR}/var/s
 # Include Solr Relevance Ranking Analysis Tool
 #
 
-cp -a ${BASEDIR}/../solr-relevance-ranking-analysis/src/* ${BUILDDIR}/var/lib/opensemanticsearch/
+#cp -a ${BASEDIR}/../solr-relevance-ranking-analysis/src/* ${BUILDDIR}/var/lib/opensemanticsearch/
 
 
 #
