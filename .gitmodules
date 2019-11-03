@@ -1,0 +1,36 @@
+[submodule "src/solr-php-ui"]
+	path = src/solr-php-ui
+	url = https://github.com/opensemanticsearch/solr-php-ui.git
+[submodule "src/open-semantic-etl"]
+	path = src/open-semantic-etl
+	url = https://github.com/opensemanticsearch/open-semantic-etl.git
+[submodule "src/solr-ontology-tagger"]
+	path = src/solr-ontology-tagger
+	url = https://github.com/opensemanticsearch/solr-ontology-tagger.git
+[submodule "src/open-semantic-visual-graph-explorer"]
+	path = src/open-semantic-visual-graph-explorer
+	url = https://github.com/opensemanticsearch/open-semantic-visual-graph-explorer.git
+[submodule "src/open-semantic-search-apps"]
+	path = src/open-semantic-search-apps
+	url = https://github.com/opensemanticsearch/open-semantic-search-apps.git
+[submodule "src/open-semantic-entity-search-api"]
+	path = src/open-semantic-entity-search-api
+	url = https://github.com/opensemanticsearch/open-semantic-entity-search-api.git
+[submodule "src/solr-relevance-ranking-analysis"]
+	path = src/solr-relevance-ranking-analysis
+	url = https://github.com/opensemanticsearch/solr-relevance-ranking-analysis.git
+[submodule "src/solr.deb"]
+	path = src/solr.deb
+	url = https://github.com/opensemanticsearch/solr.deb.git
+[submodule "src/tika-server.deb"]
+	path = src/tika-server.deb
+	url = https://github.com/opensemanticsearch/tika-server.deb.git
+[submodule "src/tika-python"]
+	path = src/tika-python
+	url = https://github.com/chrismattmann/tika-python.git
+[submodule "src/cytoscape.js"]
+	path = src/cytoscape.js
+	url = https://github.com/cytoscape/cytoscape.js.git
+[submodule "src/cytoscape.js-panzoom"]
+	path = src/cytoscape.js-panzoom
+	url = https://github.com/cytoscape/cytoscape.js-panzoom.git
