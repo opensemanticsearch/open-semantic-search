@@ -5,18 +5,4 @@ Integrated search server, ETL framework for document processing (crawling, text 
 
 # Dependencies
 
-Git repositories which have to be in parallel folders:
-
-open-semantic-etl
-open-semantic-search-apps
-open-semantic-entity-search-api
-open-semantic-visual-graph-explorer
-solr-ranking-analysis
-tika-server.deb
-solr.deb
-solr-php-ui
-tika-python
-solr-ontology-tagger
-spacy-services.deb
-cytoscape.js
-cytoscape.js-panzoom
+Dependencies on other Git repositories or submodules are defined in the Git config file .gitmodules
