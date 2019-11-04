@@ -34,3 +34,6 @@
 [submodule "src/cytoscape.js-panzoom"]
 	path = src/cytoscape.js-panzoom
 	url = https://github.com/cytoscape/cytoscape.js-panzoom.git
+[submodule "src/spacy-services.deb"]
+	path = src/spacy-services.deb
+	url = https://github.com/opensemanticsearch/spacy-services.deb.git
