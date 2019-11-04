@@ -2,7 +2,6 @@
 
 VERSION=`date +%y.%m.%d`
 PACKAGE=open-semantic-search_${VERSION}.deb
-DEBIAN_VERSION=stable
 BUILDDIR=/tmp/open-semantic-search-$$.deb
 INCLUDE_PACKAGES="solr.deb tika-server.deb spacy-services.deb open-semantic-etl neo4j.deb solr-php-ui open-semantic-search-apps"
 
@@ -12,47 +11,25 @@ mkdir ${BUILDDIR}
 mkdir ${BUILDDIR}/opt
 
 
-# since this script is in build/deb, the basedir with sources, configs and files is two directories up
-BASEDIR=`dirname "$0"`
-BASEDIR="${BASEDIR}/../../"
-
-
-cp -a ${BASEDIR}/build/deb/${DEBIAN_VERSION}/* ${BUILDDIR}/
+cp -a DEBIAN ${BUILDDIR}/
 
 
 #
-# Build and include Debian packages
+# Include Debian subpackages metadata and install scripts
 #
 
 for INCLUDE_PACKAGE in $INCLUDE_PACKAGES ; do
 
-    #build package
-    ${BASEDIR}/src/${INCLUDE_PACKAGE}/build/deb/build
-
-    INCLUDE_PACKAGE_DEB="${INCLUDE_PACKAGE}_${VERSION}.deb"
-    echo "Including ${INCLUDE_PACKAGE} from ${INCLUDE_PACKAGE_DEB}"
-
-
-    # extract all content files
-    dpkg-deb --extract "${INCLUDE_PACKAGE_DEB}" ${BUILDDIR}/
-
+    echo "Including ${INCLUDE_PACKAGE}"
 
     # Append conffiles names from the included package to our conffiles info
-
-    dpkg-deb --info "${INCLUDE_PACKAGE_DEB}" conffiles &>/dev/null
-
-    if [ $? -eq 0 ]
-    then
-        dpkg-deb --info ${INCLUDE_PACKAGE_DEB} conffiles >> ${BUILDDIR}/DEBIAN/conffiles
-    fi
-
+    [ -f src/${INCLUDE_PACKAGE}/DEBIAN/conffiles ] && cat src/${INCLUDE_PACKAGE}/DEBIAN/conffiles >> ${BUILDDIR}/DEBIAN/conffiles
 
     # Copy postinst files, which will be called from our postint script
-    dpkg-deb --info ${INCLUDE_PACKAGE_DEB} postinst &>/dev/null
-    if [ $? -eq 0 ]
+    if [ -f src/${INCLUDE_PACKAGE}/DEBIAN/postinst ]
     then
-	dpkg-deb --info ${INCLUDE_PACKAGE_DEB} postinst > ${BUILDDIR}/opt/postinst.${INCLUDE_PACKAGE}
-	chmod +x ${BUILDDIR}/opt/postinst.${INCLUDE_PACKAGE}
+
+	cp src/${INCLUDE_PACKAGE}/DEBIAN/postinst ${BUILDDIR}/opt/postinst.${INCLUDE_PACKAGE}
 
         # Add call to postinst script
 	cat << EOF >> ${BUILDDIR}/DEBIAN/postinst
@@ -73,25 +50,118 @@ EOF
 
 done
 
+mkdir -p ${BUILDDIR}/usr/lib/python3/dist-packages
+
+#
+# Include Open Semantic ETL
+#
+
+cp -a src/open-semantic-etl/etc ${BUILDDIR}/
+cp -a src/open-semantic-etl/usr ${BUILDDIR}/
+cp -a src/open-semantic-etl/src/* ${BUILDDIR}/usr/lib/python3/dist-packages/
+mkdir -p ${BUILDDIR}/var/opensemanticsearch/thumbnails
+
+#
+# Include Open Semantic Search Apps
+#
+
+cp -a src/open-semantic-search-apps/etc ${BUILDDIR}/
+mkdir -p ${BUILDDIR}/var/lib/opensemanticsearch/
+cp -a src/open-semantic-search-apps/src/* ${BUILDDIR}/var/lib/opensemanticsearch/
+
+#
+# Include solr-php-ui
+#
+cp -a src/solr-php-ui/etc ${BUILDDIR}/
+
+mkdir -p ${BUILDDIR}/usr/share/solr-php-ui/
+cp -a src/solr-php-ui/src/* ${BUILDDIR}/usr/share/solr-php-ui/
+
+# Move config from php directory config to systems config directory /etc
+mv ${BUILDDIR}/usr/share/solr-php-ui/config/* ${BUILDDIR}/etc/solr-php-ui
+
+# link from deleted php directory to this new config destination
+rmdir ${BUILDDIR}/usr/share/solr-php-ui/config
+ln -s /etc/solr-php-ui/ ${BUILDDIR}/usr/share/solr-php-ui/config
+
+
+#
+# Include solr.deb
+#
+
+# if not yet there, download Solr binary release
+if [ ! -f "src/solr.deb/usr/src/solr-7.7.2.tgz" ]; then
+    mkdir src/solr.deb/usr
+    mkdir src/solr.deb/usr/src
+    echo "Downloading Solr"
+    wget -P src/solr.deb/usr/src/ https://www-eu.apache.org/dist/lucene/solr/7.7.2/solr-7.7.2.tgz
+fi
+
+cp -a src/solr.deb/etc ${BUILDDIR}/
+cp -a src/solr.deb/var ${BUILDDIR}/
+cp -a src/solr.deb/usr ${BUILDDIR}/
+
+#
+# Include tika-server.deb
+#
+
+# if not yet there, download Tika-server binary release
+if [ ! -f "src/tika-server.deb/usr/share/java/tika-server-1.22.jar" ]; then
+    echo "Downloading Tika"
+    wget -P src/tika-server.deb/usr/share/java/ https://www-eu.apache.org/dist/tika/tika-server-1.22.jar
+fi
+
+cp -a src/tika-server.deb/etc ${BUILDDIR}/
+cp -a src/tika-server.deb/usr ${BUILDDIR}/
+
+# Change Tika default config
+
+# Extract Tika config from JAR
+jar xf ${BUILDDIR}/usr/share/java/tika-server-*.jar org/apache/tika/parser/ocr/TesseractOCRConfig.properties
+
+# Edit config: Increase OCR timeout
+sed -i -e 's/timeout=120/timeout=10000/g' org/apache/tika/parser/ocr/TesseractOCRConfig.properties
+
+# Update Tika JAR: Overwrite config with changed version
+jar uf ${BUILDDIR}/usr/share/java/tika-server-*.jar org/apache/tika/parser/ocr/TesseractOCRConfig.properties
+
+# Delete changed version of extracted config (since archived in JAR by step before)
+rm org/apache/tika/parser/ocr/TesseractOCRConfig.properties
+rmdir org/apache/tika/parser/ocr
+rmdir org/apache/tika/parser
+rmdir org/apache/tika
+rmdir org/apache
+rmdir org
+
+# set rights
+chown -R root:root ${BUILDDIR}/
+chmod g+r ${BUILDDIR}/usr/share/java/tika-server*
+chmod o+r ${BUILDDIR}/usr/share/java/tika-server*
+
 
 #
 # Include python-tika since no official Debian package yet
 #
 
-mkdir -p ${BUILDDIR}/usr/lib/python3/dist-packages
-
 # copy python-tika library to created python libraries directory
-cp -a ${BASEDIR}/src/tika-python/tika ${BUILDDIR}/usr/lib/python3/dist-packages/
+cp -a src/tika-python/tika ${BUILDDIR}/usr/lib/python3/dist-packages/
 
 #
 # Include Open Semantic Entity Search API
 #
 
-cp -a ${BASEDIR}/src/open-semantic-entity-search-api/src/entity_import ${BUILDDIR}/usr/lib/python3/dist-packages/
-cp -a ${BASEDIR}/src/open-semantic-entity-search-api/src/entity_linking ${BUILDDIR}/usr/lib/python3/dist-packages/
-cp -a ${BASEDIR}/src/open-semantic-entity-search-api/src/entity_manager ${BUILDDIR}/usr/lib/python3/dist-packages/
-cp -a ${BASEDIR}/src/open-semantic-entity-search-api/src/entity_rest_api ${BUILDDIR}/var/lib/opensemanticsearch/
-cp -a ${BASEDIR}/src/open-semantic-entity-search-api/src/solr/* ${BUILDDIR}/var/solr/data/
+cp -a src/open-semantic-entity-search-api/src/entity_import ${BUILDDIR}/usr/lib/python3/dist-packages/
+cp -a src/open-semantic-entity-search-api/src/entity_linking ${BUILDDIR}/usr/lib/python3/dist-packages/
+cp -a src/open-semantic-entity-search-api/src/entity_manager ${BUILDDIR}/usr/lib/python3/dist-packages/
+cp -a src/open-semantic-entity-search-api/src/entity_rest_api ${BUILDDIR}/var/lib/opensemanticsearch/
+cp -a src/open-semantic-entity-search-api/src/solr/* ${BUILDDIR}/var/solr/data/
+
+#
+# Include spacy-services.deb
+#
+
+cp -a src/spacy-services.deb/etc ${BUILDDIR}/
+cp -a src/spacy-services.deb/src/spacy-services ${BUILDDIR}/usr/lib/python3/dist-packages/
 
 
 #
@@ -105,20 +175,20 @@ cp -a ${BASEDIR}/src/open-semantic-entity-search-api/src/solr/* ${BUILDDIR}/var/
 # Include Open Semantic Visual Linked Data Explorer
 #
 
-cp -a ${BASEDIR}/src/open-semantic-visual-graph-explorer/src/* ${BUILDDIR}/var/lib/opensemanticsearch/
+cp -a src/open-semantic-visual-graph-explorer/src/* ${BUILDDIR}/var/lib/opensemanticsearch/
 
 # and its base / dependencies cytoscape.js and cytoscape.js-panzoom
 mkdir ${BUILDDIR}/var/lib/opensemanticsearch/visual_graph_explorer/static/
-cp -a ${BASEDIR}/src/cytoscape.js/dist/* ${BUILDDIR}/var/lib/opensemanticsearch/visual_graph_explorer/static/
-cp -a ${BASEDIR}/src/cytoscape.js-panzoom/cytoscape-panzoom.js ${BUILDDIR}/var/lib/opensemanticsearch/visual_graph_explorer/static/
-cp -a ${BASEDIR}/src/cytoscape.js-panzoom/cytoscape.js-panzoom.css ${BUILDDIR}/var/lib/opensemanticsearch/visual_graph_explorer/static/
-cp -a ${BASEDIR}/src/cytoscape.js-panzoom/font-awesome-4.0.3 ${BUILDDIR}/var/lib/opensemanticsearch/visual_graph_explorer/static/
+cp -a src/cytoscape.js/dist/* ${BUILDDIR}/var/lib/opensemanticsearch/visual_graph_explorer/static/
+cp -a src/cytoscape.js-panzoom/cytoscape-panzoom.js ${BUILDDIR}/var/lib/opensemanticsearch/visual_graph_explorer/static/
+cp -a src/cytoscape.js-panzoom/cytoscape.js-panzoom.css ${BUILDDIR}/var/lib/opensemanticsearch/visual_graph_explorer/static/
+cp -a src/cytoscape.js-panzoom/font-awesome-4.0.3 ${BUILDDIR}/var/lib/opensemanticsearch/visual_graph_explorer/static/
 
 #
 # Include Solr-Ontology-Tagger
 #
 
-cp -a ${BASEDIR}/src/solr-ontology-tagger/src/* ${BUILDDIR}/usr/lib/python3/dist-packages/
+cp -a src/solr-ontology-tagger/src/* ${BUILDDIR}/usr/lib/python3/dist-packages/
 
 
 #
