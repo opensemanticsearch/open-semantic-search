@@ -1,5 +1,21 @@
 #!/bin/sh
 
-service solr stop
+systemctl disable opensemanticetl-filemonitoring
+systemctl stop opensemanticetl-filemonitoring
+
+systemctl disable opensemanticetl
+systemctl stop opensemanticetl
+
+systemctl disable tika
+systemctl stop tika
+
+systemctl disable spacy
+systemctl stop spacy
+
+systemctl disable neo4j
+systemctl stop neo4j
+
+systemctl disable solr
+systemctl stop solr
 
 exit 0
