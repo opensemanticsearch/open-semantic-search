@@ -168,7 +168,7 @@ cp -a src/spacy-services.deb/src/spacy-services ${BUILDDIR}/usr/lib/python3/dist
 # Include Solr Relevance Ranking Analysis Tool
 #
 
-#cp -a ${BASEDIR}/src/solr-relevance-ranking-analysis/src/* ${BUILDDIR}/var/lib/opensemanticsearch/
+cp -a src/solr-relevance-ranking-analysis/src/* ${BUILDDIR}/var/lib/opensemanticsearch/
 
 
 #
@@ -190,6 +190,16 @@ cp -a src/cytoscape.js-panzoom/font-awesome-4.0.3 ${BUILDDIR}/var/lib/opensemant
 
 cp -a src/solr-ontology-tagger/src/* ${BUILDDIR}/usr/lib/python3/dist-packages/
 
+#
+# Include Neo4j
+#
+
+mkdir -p ${BUILDDIR}/opt/neo4j
+cp -a src/neo4j.deb/etc ${BUILDDIR}/
+cp -a src/neo4j.deb/neo4j*/* ${BUILDDIR}/opt/neo4j/
+mv ${BUILDDIR}/etc/neo4j/neo4j.conf ${BUILDDIR}/opt/neo4j/conf/neo4j.conf
+rmdir ${BUILDDIR}/etc/neo4j
+ln -s /opt/neo4j/conf ${BUILDDIR}/etc/neo4j
 
 #
 # Build deb
