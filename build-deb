@@ -168,7 +168,7 @@ cp -a src/spacy-services.deb/src/spacy-services ${BUILDDIR}/usr/lib/python3/dist
 # Include Solr Relevance Ranking Analysis Tool
 #
 
-cp -a src/solr-relevance-ranking-analysis/src/* ${BUILDDIR}/var/lib/opensemanticsearch/
+cp -a src/solr-relevance-ranking-analysis/src/solr_relevance_ranking_analysis ${BUILDDIR}/var/lib/opensemanticsearch/
 
 
 #
