@@ -97,21 +97,21 @@ COPY ./src/solr-ontology-tagger/src /usr/lib/python3/dist-packages/
 # export static files to directory for webserver
 RUN python3 /var/lib/opensemanticsearch/manage.py collectstatic --noinput
 
+# create directory for file uploads
+RUN mkdir /var/opensemanticsearch
+RUN mkdir /var/opensemanticsearch/db
+RUN mkdir /var/opensemanticsearch/media
+
+RUN chown -R www-data:www-data /var/opensemanticsearch
+
 # create or upgrade DB
 RUN python3 /var/lib/opensemanticsearch/manage.py migrate
 
-# create directory for file uploads
-RUN mkdir /var/opensemanticsearch
-RUN chown www-data:www-data /var/opensemanticsearch
-
 # allow Django running in apache2 context to read and write to DB
-RUN chgrp www-data /var/lib/opensemanticsearch
-RUN chmod g+w /var/lib/opensemanticsearch
-RUN chmod -R g+r /var/lib/opensemanticsearch
-RUN chown www-data:www-data /var/lib/opensemanticsearch/db.sqlite3
+RUN chown www-data:www-data /var/opensemanticsearch/db/db.sqlite3
 
 # but others should not be able to read DB entries
-RUN chmod o-r /var/lib/opensemanticsearch/db.sqlite3
+RUN chmod o-r /var/opensemanticsearch/db/db.sqlite3
 
 # allow Django running in apache2 context to write facets config
 RUN chgrp www-data /etc/opensemanticsearch/facets
