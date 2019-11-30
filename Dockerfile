@@ -127,6 +127,9 @@ RUN chmod g+w /etc/opensemanticsearch/etl-webadmin
 RUN chgrp www-data /etc/solr-php-ui/config.webadmin.php
 RUN chmod g+r /etc/solr-php-ui/config.webadmin.php
 RUN chmod g+w /etc/solr-php-ui/config.webadmin.php
+RUN chgrp www-data /etc/solr-php-ui/config.facets.php
+RUN chmod g+r /etc/solr-php-ui/config.facets.php
+RUN chmod g+w /etc/solr-php-ui/config.facets.php
 
 # enable apache2 module for Django
 RUN a2enmod wsgi
