@@ -20,11 +20,12 @@ services:
       - OPEN_SEMANTIC_ETL_SOLR=http://solr:8983/solr/
       - OPEN_SEMANTIC_ETL_TIKA_SERVER=http://tika:9998
     ports:
-      - "8888:80"
+      - "8080:80"
 
   etl:
     image: opensemanticsearch/open-semantic-etl
     depends_on:
+      - apps
       - rabbitmq
       - solr
       - tika
