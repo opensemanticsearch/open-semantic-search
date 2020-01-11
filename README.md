@@ -10,20 +10,24 @@ How to build the deb package for installation on Debian or Ubuntu server or the 
 
 ## Build deb package
 
-To build a deb package for Debian or Ubuntu, call the build script build-deb as user root (change user by su or sudo su):
+To build a deb package for Debian or Ubuntu, call the build script "build-deb" as user root (change user by su or sudo su):
 
 ./build-deb
 
-## Build docker container
+## Build docker image
 
-To build a docker image, call docker build of this repository in this directory (./) by following command:
+To build the Docker image, call "docker build" for this repository (if you are in this directory for ./) by the config file Dockerfile by following command:
 
 docker build ./
 
-Do the same for other docker images, on which the search engine is dependent on:
-These are open-semantic-etl, spacy-services.deb, solr.deb and tika-server.deb in subdirectory "src".
+Do the same for other Docker images, on which the search engine is dependent on:
 
-All this docker images are started together by docker-compose with the config file docker-compose.yml
+docker build ./src/open-semantic-etl
+docker build ./src/solr.deb
+docker build ./src/spacy-services.deb
+docker build ./src/tika-server.deb
+
+All this Docker images are started together by "docker-compose" with the config file docker-compose.yml
 
 
 # Dependencies
