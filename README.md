@@ -23,8 +23,11 @@ docker build ./
 Do the same for other Docker images, on which the search engine is dependent on:
 
 docker build ./src/open-semantic-etl
+
 docker build ./src/solr.deb
+
 docker build ./src/spacy-services.deb
+
 docker build ./src/tika-server.deb
 
 All this Docker images are started together by "docker-compose" with the config file docker-compose.yml
@@ -32,7 +35,7 @@ All this Docker images are started together by "docker-compose" with the config 
 
 # Dependencies
 
-Dependencies are resolved automatically by installation of the Debian or Ubuntu packages.
+Dependencies are resolved automatically by building or by installation of the Debian or Ubuntu packages or by building the Docker images.
 
 Documentation on this dependecies which may help debugging dependency hell issues or installations in other environments:
 
