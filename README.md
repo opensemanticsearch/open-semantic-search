@@ -3,6 +3,29 @@ https://opensemanticsearch.org
 
 Integrated search server, ETL framework for document processing (crawling, text extraction, text analysis, named entity recognition and OCR for images and embedded images in PDF), search user interfaces, text mining, text analytics and search apps for fulltext search, faceted search, exploratory search and knowledge graph search
 
+
+# Build
+
+How to build the deb package for installation on Debian or Ubuntu server or the docker images for running in Docker containers:
+
+## Build deb package
+
+To build a deb package for Debian or Ubuntu, call the build script build-deb as user root (change user by su or sudo su):
+
+./build-deb
+
+## Build docker container
+
+To build a docker image, call docker build of this repository in this directory (./) by following command:
+
+docker build ./
+
+Do the same for other docker images, on which the search engine is dependent on:
+These are open-semantic-etl, spacy-services.deb, solr.deb and tika-server.deb in subdirectory "src".
+
+All this docker images are started together by docker-compose with the config file docker-compose.yml
+
+
 # Dependencies
 
 Dependencies are resolved automatically by installation of the Debian or Ubuntu packages.
