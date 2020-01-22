@@ -3,6 +3,13 @@ https://opensemanticsearch.org
 
 Integrated search server, ETL framework for document processing (crawling, text extraction, text analysis, named entity recognition and OCR for images and embedded images in PDF), search user interfaces, text mining, text analytics and search apps for fulltext search, faceted search, exploratory search and knowledge graph search
 
+# Branches
+
+There are two main branches in this Git repository:
+
+Branch master for Python Django 2 (Django version in coming Debian and Ubuntu releases)
+
+Branch django1 for Python Django 1 (Django version in current Debian and Ubuntu releases)
 
 # Build
 
