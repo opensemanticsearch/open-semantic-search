@@ -36,6 +36,7 @@ services:
       - OPEN_SEMANTIC_ETL_SOLR=http://solr:8983/solr/
       - OPEN_SEMANTIC_ETL_TIKA_SERVER=http://tika:9998
       - OPEN_SEMANTIC_ETL_SPACY_SERVER=http://spacy-services:8080
+      - OMP_THREAD_LIMIT=1
     volumes:
       # read only (:ro), since workers don't need to change the config (is done only by admin or web ui in container apps)
       - config_etl:/etc/opensemanticsearch:ro
@@ -53,6 +54,8 @@ services:
 
   tika:
     image: opensemanticsearch/tika-server
+    environment:
+      - OMP_THREAD_LIMIT=1
 
   spacy-services:
     image: opensemanticsearch/spacy-services
