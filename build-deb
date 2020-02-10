@@ -60,6 +60,8 @@ cp -a src/open-semantic-etl/etc ${BUILDDIR}/
 cp -a src/open-semantic-etl/usr ${BUILDDIR}/
 cp -a src/open-semantic-etl/src/* ${BUILDDIR}/usr/lib/python3/dist-packages/
 mkdir -p ${BUILDDIR}/var/opensemanticsearch/media/thumbnails
+mkdir -p ${BUILDDIR}/var/cache/tesseract
+
 
 #
 # Include Open Semantic Search Apps
