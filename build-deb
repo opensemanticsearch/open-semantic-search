@@ -110,9 +110,9 @@ cp -a src/solr.deb/usr ${BUILDDIR}/
 #
 
 # if not yet there, download Tika-server binary release
-if [ ! -f "src/tika-server.deb/usr/share/java/tika-server-1.23.jar" ]; then
+if [ ! -f "src/tika-server.deb/usr/share/java/tika-server-1.24.jar" ]; then
     echo "Downloading Tika"
-    wget -P src/tika-server.deb/usr/share/java/ https://archive.apache.org/dist/tika/tika-server-1.23.jar
+    wget -P src/tika-server.deb/usr/share/java/ https://archive.apache.org/dist/tika/tika-server-1.24.jar
 fi
 
 cp -a src/tika-server.deb/etc ${BUILDDIR}/
