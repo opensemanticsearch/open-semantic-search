@@ -71,6 +71,7 @@ mkdir -p ${BUILDDIR}/var/cache/tesseract
 
 cp -a src/open-semantic-search-apps/etc ${BUILDDIR}/
 cp -a src/open-semantic-search-apps/var ${BUILDDIR}/
+mkdir -p ${BUILDDIR}/var/lib/opensemanticsearch/
 cp -a src/open-semantic-search-apps/src/* ${BUILDDIR}/var/lib/opensemanticsearch/
 
 #
