@@ -31,10 +31,6 @@ Do the same for other Docker images, on which the search engine is dependent on:
 
 docker build ./src/open-semantic-etl
 
-docker build ./src/solr.deb
-
-docker build ./src/spacy-services.deb
-
 docker build ./src/tika-server.deb
 
 All this Docker images are started together by "docker-compose" with the config file docker-compose.yml
