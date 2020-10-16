@@ -1,4 +1,4 @@
-FROM debian:buster
+FROM ubuntu:focal
 
 ENV DEBIAN_FRONTEND noninteractive
 
@@ -29,7 +29,7 @@ RUN apt-get update && apt-get install --no-install-recommends --yes \
     && apt-get clean -y && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # install django-import-export
-RUN pip3 install --no-cache-dir django-import-export==1.2.0
+RUN pip3 install --no-cache-dir django-import-export
 
 COPY ./src/tika-python/tika /usr/lib/python3/dist-packages/tika
 COPY ./src/open-semantic-etl/src /usr/lib/python3/dist-packages/
