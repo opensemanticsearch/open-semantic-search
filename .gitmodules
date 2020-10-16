@@ -37,3 +37,6 @@
 [submodule "src/spacy-services.deb"]
 	path = src/spacy-services.deb
 	url = https://github.com/opensemanticsearch/spacy-services.deb.git
+[submodule "src/solr-synonames"]
+	path = src/solr-synonames
+	url = https://github.com/opensemanticsearch/solr-synonames.git

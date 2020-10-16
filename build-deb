@@ -3,7 +3,7 @@
 VERSION=`date +%y.%m.%d`
 PACKAGE=open-semantic-search_${VERSION}.deb
 BUILDDIR=/tmp/open-semantic-search-$$.deb
-INCLUDE_PACKAGES="solr.deb tika-server.deb spacy-services.deb open-semantic-etl neo4j.deb solr-php-ui open-semantic-search-apps"
+INCLUDE_PACKAGES="solr.deb tika-server.deb spacy-services.deb open-semantic-etl neo4j.deb solr-php-ui open-semantic-search-apps solr-synonames"
 
 
 echo "Building ${PACKAGE} in temp directory ${BUILDDIR}"
@@ -105,6 +105,16 @@ fi
 cp -a src/solr.deb/etc ${BUILDDIR}/
 cp -a src/solr.deb/var ${BUILDDIR}/
 cp -a src/solr.deb/usr ${BUILDDIR}/
+
+
+#
+# Include solr-synonames
+#
+
+mkdir -p ${BUILDDIR}/usr/share/synonames
+cp src/solr-synonames/aleph-elasticsearch/synonames.txt ${BUILDDIR}/usr/share/synonames/
+cp src/solr-synonames/synonames2solr.py ${BUILDDIR}/usr/lib/python3/dist-packages/
+
 
 #
 # Include tika-server.deb
