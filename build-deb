@@ -95,11 +95,11 @@ ln -s /etc/solr-php-ui/ ${BUILDDIR}/usr/share/solr-php-ui/config
 #
 
 # if not yet there, download Solr binary release
-if [ ! -f "src/solr.deb/usr/src/solr-7.7.2.tgz" ]; then
+if [ ! -f "src/solr.deb/usr/src/solr-7.7.3.tgz" ]; then
     mkdir src/solr.deb/usr
     mkdir src/solr.deb/usr/src
     echo "Downloading Solr"
-    wget -P src/solr.deb/usr/src/ https://www-eu.apache.org/dist/lucene/solr/7.7.2/solr-7.7.2.tgz
+    wget -P src/solr.deb/usr/src/ https://www-eu.apache.org/dist/lucene/solr/7.7.3/solr-7.7.3.tgz
 fi
 
 cp -a src/solr.deb/etc ${BUILDDIR}/
