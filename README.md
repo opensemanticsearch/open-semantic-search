@@ -15,29 +15,21 @@ Branch django1 for Python Django 1 (Django version in current Debian and Ubuntu 
 
 How to build the deb package for installation on Debian or Ubuntu server or the docker images for running in Docker containers:
 
+
 ## Build deb package
 
 To build a deb package for Debian or Ubuntu, call the build script "build-deb" as user root (change user by su or sudo su):
 
 ./build-deb
 
-## Build docker image
 
-To build the Docker image, call "docker build" for this repository (if you are in this directory for ./) by the config file Dockerfile by following command:
+## Build docker images
 
-docker build ./
+To build the Docker images use the docker-compose config docker-compose.yml by
 
-Do the same for other Docker images, on which the search engine is dependent on:
+docker-compose build
 
-docker build ./src/open-semantic-etl
-
-docker build ./src/solr.deb
-
-docker build ./src/spacy-services.deb
-
-docker build ./src/tika-server.deb
-
-All this Docker images are started together by "docker-compose" with the config file docker-compose.yml
+After these builds all the Docker images/dependencies/services can by started together by docker-compose with the config file docker-compose.yml
 
 
 # Dependencies

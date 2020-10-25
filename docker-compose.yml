@@ -3,6 +3,8 @@ services:
 
   apps:
     image: opensemanticsearch/open-semantic-search
+    build:
+      context: .
     depends_on:
       - rabbitmq
       - solr
@@ -24,6 +26,8 @@ services:
 
   etl:
     image: opensemanticsearch/open-semantic-etl
+    build:
+      context: src/open-semantic-etl/
     depends_on:
       - apps
       - rabbitmq
@@ -45,6 +49,8 @@ services:
 
   solr:
     image: opensemanticsearch/solr
+    build:
+      context: src/solr.deb/
     volumes:
       - data_solr:/var/solr
 
@@ -54,11 +60,15 @@ services:
 
   tika:
     image: opensemanticsearch/tika-server
+    build:
+      context: src/tika-server.deb/
     environment:
       - OMP_THREAD_LIMIT=1
 
   spacy-services:
     image: opensemanticsearch/spacy-services
+    build:
+      context: src/spacy-services.deb/src/spacy-services/
 
   rabbitmq:
     image: rabbitmq
