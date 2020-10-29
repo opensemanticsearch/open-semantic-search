@@ -1,0 +1,61 @@
+version: '3'
+services:
+  sut:
+    build:
+      context: .
+      dockerfile: Dockerfile-test
+    command: jest test
+    depends_on:
+      - apps
+
+  apps:
+    image: opensemanticsearch/open-semantic-search
+    build:
+      context: .
+    depends_on:
+      - rabbitmq
+      - solr
+      - tika
+    environment:
+      - SOLR_PHP_UI_SOLR_HOST=solr
+      - OPEN_SEMANTIC_ETL_MQ_BROKER=amqp://rabbitmq
+      - OPEN_SEMANTIC_ETL_SOLR=http://solr:8983/solr/
+      - OPEN_SEMANTIC_ETL_TIKA_SERVER=http://tika:9998
+
+  etl:
+    image: opensemanticsearch/open-semantic-etl
+    build:
+      context: src/open-semantic-etl/
+    depends_on:
+      - apps
+      - rabbitmq
+      - solr
+      - tika
+      - spacy-services
+    environment:
+      - OPEN_SEMANTIC_ETL_MQ_BROKER=amqp://rabbitmq
+      - OPEN_SEMANTIC_ETL_METADATA_SERVER=http://apps/search-apps/annotate/rdf?uri=[uri]
+      - OPEN_SEMANTIC_ETL_SOLR=http://solr:8983/solr/
+      - OPEN_SEMANTIC_ETL_TIKA_SERVER=http://tika:9998
+      - OPEN_SEMANTIC_ETL_SPACY_SERVER=http://spacy-services:8080
+      - OMP_THREAD_LIMIT=1
+
+  solr:
+    image: opensemanticsearch/solr
+    build:
+      context: src/solr.deb/
+
+  tika:
+    image: opensemanticsearch/tika-server
+    build:
+      context: src/tika-server.deb/
+    environment:
+      - OMP_THREAD_LIMIT=1
+
+  spacy-services:
+    image: opensemanticsearch/spacy-services
+    build:
+      context: src/spacy-services.deb/src/spacy-services/
+
+  rabbitmq:
+    image: rabbitmq

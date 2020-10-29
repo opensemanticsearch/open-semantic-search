@@ -1,0 +1,6 @@
+FROM mcr.microsoft.com/playwright:focal
+
+RUN npm install jest --global
+RUN npm install playwright
+
+COPY ./test /
