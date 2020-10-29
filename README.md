@@ -32,6 +32,23 @@ docker-compose build
 After these builds all the Docker images/dependencies/services can by started together by docker-compose with the config file docker-compose.yml
 
 
+# Automated tests
+
+For CI/CD there are some different automated tests:
+
+## Integration tests
+
+Since the submodule Open Semantic ETL uses and needs different powerful services like Solr, spacY-services or Tika-Server by HTTP and REST-API, the automated tests run as integration tests within the docker-compose environment configured in docker-compose.etl-test.yml so these services are available while running the unittests.
+
+## End to end tests
+
+Some automated integration tests and end-to-end (E2E) tests within a web browser controlled by the browser automation framework playwright and the node.js / javascript based test framework JEST.
+
+You can extend the automated tests in test/test.js
+
+They run by the docker image Dockerfile-test and need the services of the docker-compose environment docker-compose.test.yml
+
+
 # Dependencies
 
 Dependencies are resolved automatically by building or by installation of the Debian or Ubuntu packages or by building the Docker images.
