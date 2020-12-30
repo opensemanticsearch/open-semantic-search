@@ -121,9 +121,9 @@ cp src/solr-synonames/synonames2solr.py ${BUILDDIR}/usr/lib/python3/dist-package
 #
 
 # if not yet there, download Tika-server binary release
-if [ ! -f "src/tika-server.deb/usr/share/java/tika-server-1.24.jar" ]; then
+if [ ! -f "src/tika-server.deb/usr/share/java/tika-server-1.25.jar" ]; then
     echo "Downloading Tika"
-    wget -P src/tika-server.deb/usr/share/java/ https://archive.apache.org/dist/tika/tika-server-1.24.jar
+    wget -P src/tika-server.deb/usr/share/java/ https://archive.apache.org/dist/tika/tika-server-1.25.jar
 fi
 
 cp -a src/tika-server.deb/etc ${BUILDDIR}/
