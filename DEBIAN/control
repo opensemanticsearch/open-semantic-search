@@ -3,7 +3,7 @@ Version: 20.01.17
 Section: misc
 Priority: optional
 Architecture: all
-Depends: default-jre-headless(>=0), libjs-jquery(>=0), curl(>=0), apache2(>=0), libapache2-mod-php(>=0), php(>=0), php-xml(>=0), php-bcmath(>=0), libapache2-mod-wsgi-py3(>=0), python3-django(>=0), python3-mysqldb(>=0), python3-pycurl(>=0), python3-rdflib(>=0), python3-requests(>=0), python3-openssl(>=0), python3-pysolr(>=0), python3-dateutil(>=0), python3-lxml(>=0), python3-feedparser(>=0), poppler-utils(>=0), pst-utils(>=0), python3-pyinotify(>=0), python3-celery(>=0), python3-nltk(>=0), python3-pip(>=0), python3-dev(>=0), build-essential(>=0), libssl-dev(>=0), libffi-dev(>=0), rabbitmq-server(>=0), tesseract-ocr(>=0), tesseract-ocr-all(>=0), hunspell-de-de-frami, hunspell-hu
+Depends: default-jre-headless(>=0), lsb-release(>=0), libjs-jquery(>=0), curl(>=0), apache2(>=0), libapache2-mod-php(>=0), php(>=0), php-xml(>=0), php-bcmath(>=0), libapache2-mod-wsgi-py3(>=0), python3-django(>=0), python3-mysqldb(>=0), python3-pycurl(>=0), python3-rdflib(>=0), python3-requests(>=0), python3-openssl(>=0), python3-pysolr(>=0), python3-dateutil(>=0), python3-lxml(>=0), python3-feedparser(>=0), poppler-utils(>=0), pst-utils(>=0), python3-pyinotify(>=0), python3-celery(>=0), python3-nltk(>=0), python3-pip(>=0), python3-dev(>=0), build-essential(>=0), libssl-dev(>=0), libffi-dev(>=0), rabbitmq-server(>=0), tesseract-ocr(>=0), tesseract-ocr-all(>=0), hunspell-de-de-frami, hunspell-hu
 Installed-Size: 100
 Maintainer: Markus Mandalka <debian@mandalka.name>
 Homepage: https://opensemanticsearch.org/
