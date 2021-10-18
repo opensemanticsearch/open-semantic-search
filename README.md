@@ -54,9 +54,13 @@ http://localhost:8080/search/
 
 For CI/CD there are some different automated tests:
 
+
 ## Integration tests
 
-Since the submodule Open Semantic ETL uses and needs different powerful services like Solr, spacY-services or Tika-Server by HTTP and REST-API, the automated tests run as integration tests within the docker-compose environment configured in docker-compose.etl-test.yml so these services are available while running the unittests.
+Since the submodule Open Semantic ETL uses and needs different powerful services like Solr, spacY-services or Tika-Server by HTTP and REST-API, the automated tests run as integration tests within the docker-compose environment configured in docker-compose.etl-test.yml so these services are available while running the unittests and integration tests.
+
+<code>docker-compose -f docker-compose.etl-test.yml up</code>
+
 
 ## End to end tests
 
@@ -66,6 +70,8 @@ You can extend the automated tests in test/test.js
 
 They run by the docker image Dockerfile-test and need the services of the docker-compose environment docker-compose.test.yml
 
+<code>docker-compose -f docker-compose.test.yml up</code>
+
 
 # Dependencies
 
@@ -73,11 +79,13 @@ Dependencies are resolved automatically by building or by installation of the De
 
 Documentation on this dependecies which may help debugging dependency hell issues or installations in other environments:
 
+
 ## Build dependencies on Source code (GIT)
 
 Dependencies on other Git repositories / submodules of components like Open Semantic ETL are defined in the Git config file .gitmodules
 
 The submodules will be checked out automatically to the subdirectory "src", if you check out this repository by git in recursive mode.
+
 
 ## Packaging dependencies of Java archives (JAR)
 
@@ -85,11 +93,13 @@ The submodules tika.deb and solr.deb need the JAR of Apache Tika-Server and Apac
 
 If not there, they will be downloaded from Apache Software Foundation by wget in the submodule "build" script or its "Dockerfile".
 
+
 ## Installation dependencies on Debian/Ubuntu packages (DEB)
 
 Dependecies of tools and libraries, which are available in the Debian or Ubuntu package repositories, are defined in the section "Depends" of the deb package config file DEBIAN/control
 
 https://github.com/opensemanticsearch/open-semantic-search/blob/master/DEBIAN/control
+
 
 ## Installation dependencies on Python packages (PIP)
 
@@ -100,4 +110,3 @@ https://github.com/opensemanticsearch/open-semantic-etl/blob/master/src/opensema
 This dependencies will be installed automatically on installation of the Debian/Ubuntu packages by DEBIAN/postinst of the Debian/Ubuntu packages or by docker build configured by Dockerfile by
 
 pip3 install -r /usr/lib/python3/dist-packages/opensemanticetl/requirements.txt
-
