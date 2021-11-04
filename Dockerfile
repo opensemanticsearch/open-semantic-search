@@ -29,10 +29,13 @@ RUN apt-get update && apt-get install --no-install-recommends --yes \
     && apt-get clean -y && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # install django-import-export
-RUN pip3 install --no-cache-dir django-import-export
+RUN pip3 install --no-cache-dir django-import-export && \
+    pip3 install --no-cache-dir py2neo && \
+    pip3 install --no-cache-dir warcio
 
 COPY ./src/tika-python/tika /usr/lib/python3/dist-packages/tika
 COPY ./src/open-semantic-etl/src /usr/lib/python3/dist-packages/
+COPY ./src/open-semantic-etl/src/tesseract-ocr-cache /usr/lib/python3/dist-packages/
 COPY ./src/open-semantic-etl/etc /etc/
 
 #
