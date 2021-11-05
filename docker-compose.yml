@@ -1,10 +1,13 @@
-version: '3'
+version: '3.8'
+
 services:
 
   apps:
     image: opensemanticsearch/open-semantic-search
     build:
       context: .
+      dockerfile: Dockerfile.multi
+      target: osems_app
     depends_on:
       - rabbitmq
       - solr
@@ -27,30 +30,36 @@ services:
   etl:
     image: opensemanticsearch/open-semantic-etl
     build:
-      context: src/open-semantic-etl/
+      context: .
+      dockerfile: Dockerfile.multi
+      target: osems_etl
     depends_on:
       - apps
       - rabbitmq
       - solr
       - tika
-      - spacy-services
+      - spacy
+      #- neo4j
     environment:
       - OPEN_SEMANTIC_ETL_MQ_BROKER=amqp://rabbitmq
       - OPEN_SEMANTIC_ETL_METADATA_SERVER=http://apps/search-apps/annotate/rdf?uri=[uri]
       - OPEN_SEMANTIC_ETL_SOLR=http://solr:8983/solr/
       - OPEN_SEMANTIC_ETL_TIKA_SERVER=http://tika:9998
-      - OPEN_SEMANTIC_ETL_SPACY_SERVER=http://spacy-services:8080
+      - OPEN_SEMANTIC_ETL_SPACY_SERVER=http://spacy:8080
+      #- OPEN_SEMANTIC_ETL_NEO4J_HOST=http://neo4j:7474
       - OMP_THREAD_LIMIT=1
+    ports:
+      - "5555:5555"
     volumes:
-      # read only (:ro), since workers don't need to change the config (is done only by admin or web ui in container apps)
-      - config_etl:/etc/opensemanticsearch:ro
       # write access to persistant thumbnails dir
       - data_media:/var/opensemanticsearch/media
 
   solr:
     image: opensemanticsearch/solr
     build:
-      context: src/solr.deb/
+      context: .
+      dockerfile: Dockerfile.multi
+      target: osems_solr
     volumes:
       - data_solr:/var/solr
 
@@ -61,17 +70,24 @@ services:
   tika:
     image: opensemanticsearch/tika-server
     build:
-      context: src/tika-server.deb/
+      context: .
+      dockerfile: Dockerfile.multi
+      target: osems_tika
     environment:
       - OMP_THREAD_LIMIT=1
 
-  spacy-services:
+  spacy:
     image: opensemanticsearch/spacy-services
     build:
-      context: src/spacy-services.deb/src/spacy-services/
+      context: .
+      dockerfile: Dockerfile.multi
+      target: osems_spacy
 
   rabbitmq:
     image: rabbitmq
+
+  #neo4j:
+  #  image: neo4j
 
 volumes:
   config_etl:

@@ -1,0 +1,284 @@
+##############################################################################
+# osems_app
+##############################################################################
+
+FROM debian:bullseye AS osems_app
+
+ARG DEBIAN_FRONTEND noninteractive
+
+RUN apt-get update \
+ && apt-get install --no-install-recommends --yes \
+    apache2 \
+    libapache2-mod-php \
+    libapache2-mod-wsgi-py3 \
+    libjs-jquery \
+    php \
+    php-xml \
+    php-bcmath \
+    librabbitmq4 \
+    python3-django \
+    python3-pycurl \
+    python3-rdflib \
+    python3-sparqlwrapper \
+    python3-sqlparse \
+    python3-requests \
+    python3-pysolr \
+    python3-dateutil \
+    python3-lxml \
+    python3-feedparser \
+    python3-celery \
+    python3-pip \
+    python3-setuptools \
+    python3-wheel \
+    python3-dev \
+ && apt-get clean -y \
+ && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+# install django-import-export
+RUN pip3 install --no-cache-dir django-import-export
+
+COPY ./src/tika-python/tika /usr/lib/python3/dist-packages/tika
+COPY ./src/open-semantic-etl/src /usr/lib/python3/dist-packages/
+COPY ./src/open-semantic-etl/etc /etc/
+
+#
+# Include solr-php-ui
+#
+
+COPY ./src/solr-php-ui/etc /etc
+COPY ./src/solr-php-ui/src /usr/share/solr-php-ui/
+
+# Move config from php directory config to systems config directory /etc
+RUN mv ${BUILDDIR}/usr/share/solr-php-ui/config/* /etc/solr-php-ui/ \
+ # link from deleted php directory to this new config destination
+ && rmdir /usr/share/solr-php-ui/config \
+ && ln -s /etc/solr-php-ui/ /usr/share/solr-php-ui/config
+
+
+#
+# Include Solr Relevance Ranking Analysis Tool
+#
+COPY ./src/solr-relevance-ranking-analysis/src/solr_relevance_ranking_analysis /var/lib/opensemanticsearch/solr_relevance_ranking_analysis
+
+#
+# Include Open Semantic Search Apps
+#
+COPY ./src/open-semantic-search-apps/src /var/lib/opensemanticsearch/
+COPY ./src/open-semantic-search-apps/etc /etc/
+
+#
+# Include Open Semantic Entity Search API
+#
+
+# include Django app
+COPY ./src/open-semantic-entity-search-api/src/entity_rest_api /var/lib/opensemanticsearch/entity_rest_api
+# include libraries
+COPY ./src/open-semantic-entity-search-api/src/entity_import /usr/lib/python3/dist-packages/entity_import
+COPY ./src/open-semantic-entity-search-api/src/entity_linking /usr/lib/python3/dist-packages/entity_linking
+COPY ./src/open-semantic-entity-search-api/src/entity_manager /usr/lib/python3/dist-packages/entity_manager
+
+#
+# Include Open Semantic Visual Linked Data Explorer
+#
+
+COPY ./src/open-semantic-visual-graph-explorer/src /var/lib/opensemanticsearch/
+
+# and its base / dependencies cytoscape.js and cytoscape.js-panzoom
+COPY ./src/cytoscape.js/dist /var/lib/opensemanticsearch/visual_graph_explorer/static/
+COPY ./src/cytoscape.js-panzoom/cytoscape-panzoom.js /var/lib/opensemanticsearch/visual_graph_explorer/static/
+COPY ./src/cytoscape.js-panzoom/cytoscape.js-panzoom.css /var/lib/opensemanticsearch/visual_graph_explorer/static/
+COPY ./src/cytoscape.js-panzoom/font-awesome-4.0.3 /var/lib/opensemanticsearch/visual_graph_explorer/static/
+
+#
+# Include Solr-Ontology-Tagger
+#
+
+COPY ./src/solr-ontology-tagger/src /usr/lib/python3/dist-packages/
+
+# export static files to directory for webserver
+RUN python3 /var/lib/opensemanticsearch/manage.py collectstatic --noinput \
+ # create directory for file uploads
+ && mkdir -p /var/opensemanticsearch \
+ && mkdir -p /var/opensemanticsearch/db \
+ && mkdir -p /var/opensemanticsearch/media \
+ && chown -R www-data:www-data /var/opensemanticsearch \
+ # create or upgrade DB
+ && python3 /var/lib/opensemanticsearch/manage.py migrate \
+ # allow Django running in apache2 context to read and write to DB
+ && chown www-data:www-data /var/opensemanticsearch/db/db.sqlite3 \
+ # but others should not be able to read DB entries
+ && chmod o-r /var/opensemanticsearch/db/db.sqlite3 \
+ # allow Django running in apache2 context to write facets config
+ && chgrp www-data /etc/opensemanticsearch/facets \
+ && chmod g+r /etc/opensemanticsearch/facets \
+ && chmod g+w /etc/opensemanticsearch/facets \
+ # allow Django running in apache2 context to write ETL config
+ && chgrp www-data /etc/opensemanticsearch/etl-webadmin \
+ && chmod g+r /etc/opensemanticsearch/etl-webadmin \
+ && chmod g+w /etc/opensemanticsearch/etl-webadmin \
+ # allow Django running in apache2 context to write UI config
+ && chgrp www-data /etc/solr-php-ui/config.webadmin.php \
+ && chmod g+r /etc/solr-php-ui/config.webadmin.php \
+ && chmod g+w /etc/solr-php-ui/config.webadmin.php \
+ && chgrp www-data /etc/solr-php-ui/config.facets.php \
+ && chmod g+r /etc/solr-php-ui/config.facets.php \
+ && chmod g+w /etc/solr-php-ui/config.facets.php \
+ # enable apache2 module for Django
+ && a2enmod wsgi \
+ # allow Django running in apache2 context to write OCR dictionary
+ && chown www-data:www-data /etc/opensemanticsearch/ocr/dictionary.txt \
+ && chmod o+r /etc/opensemanticsearch/ocr/dictionary.txt
+
+ENTRYPOINT ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]
+
+
+##############################################################################
+#  osems_etl
+##############################################################################
+
+FROM debian:buster AS osems_etl
+
+ARG DEBIAN_FRONTEND=noninteractive
+ENV CRYPTOGRAPHY_DONT_BUILD_RUST=1
+
+RUN apt-get update \
+ && apt-get install --no-install-recommends --yes \
+    curl \
+    file \
+    build-essential \
+    libssl-dev \
+    libffi-dev \
+    librabbitmq4 \
+    poppler-utils \
+    pst-utils \
+    python3-pycurl \
+    python3-rdflib \
+    python3-requests \
+    python3-pysolr \
+    python3-dateutil \
+    python3-lxml \
+    python3-feedparser \
+    python3-celery \
+    python3-pyinotify \
+    python3-pip \
+    python3-setuptools \
+    python3-wheel \
+    python3-dev \
+    scantailor \
+    tesseract-ocr \
+#    tesseract-ocr-all \
+ && apt-get clean -y \
+ && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+COPY ./src/open-semantic-etl/src/opensemanticetl/requirements.txt /usr/lib/python3/dist-packages/opensemanticetl/requirements.txt
+# install Python PIP dependecies
+# Note that the repo's requirements file still (as of 2021-11-04) relies on py2neo==3.1.2,
+# which the py2neo project no longer publishes. It's necessary to use the archived version
+# of the package, as per this issue: https://github.com/opensemanticsearch/open-semantic-etl/issues/143
+RUN sed -i 's#py2neo==3\.1\.2#https://github.com/technige/py2neo/archive/refs/tags/py2neo-3.1.2.zip#' /usr/lib/python3/dist-packages/opensemanticetl/requirements.txt \
+ && pip3 install -U pip \
+ && CRYPTOGRAPHY_DONT_BUILD_RUST=1 pip3 install -r /usr/lib/python3/dist-packages/opensemanticetl/requirements.txt
+
+COPY ./src/open-semantic-etl/src/opensemanticetl /usr/lib/python3/dist-packages/opensemanticetl
+COPY ./src/open-semantic-etl/src/tesseract-ocr-cache/tesseract_cache /usr/lib/python3/dist-packages/tesseract_cache
+COPY ./src/open-semantic-etl/src/tesseract-ocr-cache/tesseract_fake /usr/lib/python3/dist-packages/tesseract_fake
+COPY ./src/open-semantic-etl/src/open-semantic-entity-search-api/src/entity_linking /usr/lib/python3/dist-packages/entity_linking
+COPY ./src/open-semantic-etl/etc/opensemanticsearch /etc/opensemanticsearch
+
+# add user
+RUN adduser --system --disabled-password opensemanticetl \
+ && mkdir -p /var/cache/tesseract \
+ && chown opensemanticetl /var/cache/tesseract \
+ && sed -i "s/^\(config.*append.*export_neo4j.*\)$/#\1/" /etc/opensemanticsearch/etl
+
+USER opensemanticetl
+
+# start Open Semantic ETL celery workers (reading and executing ETL tasks from message queue)
+CMD ["/usr/bin/python3", "/usr/lib/python3/dist-packages/opensemanticetl/tasks.py"]
+
+##############################################################################
+# osems_solr
+##############################################################################
+
+FROM solr AS osems_solr
+
+USER root
+
+RUN apt-get update \
+ && apt-get install --no-install-recommends --yes \
+    hunspell-hu \
+ && apt-get clean -y \
+ && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+COPY --chown=solr:solr ./src/solr.deb/var/solr/data/opensemanticsearch /var/solr/data/opensemanticsearch
+COPY --chown=solr:solr ./src/solr.deb/src/open-semantic-entity-search-api/src/solr/opensemanticsearch-entities /var/solr/data/opensemanticsearch-entities
+
+USER solr
+
+##############################################################################
+# osems_tika
+##############################################################################
+
+FROM debian:buster AS osems_tika
+
+ENV TIKA_VERSION 1.24
+ENV TIKA_URL https://archive.apache.org/dist/tika/tika-server-$TIKA_VERSION.jar
+
+ARG DEBIAN_FRONTEND noninteractive
+
+RUN apt-get update \
+ && apt-get install --no-install-recommends --yes \
+    default-jre-headless \
+    wget \
+    python3 \
+    tesseract-ocr \
+    tesseract-ocr-all \
+ && apt-get clean -y \
+ && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+RUN wget -P /usr/share/java $TIKA_URL \
+ && adduser --system --disabled-password tika \
+ && chown -R tika /usr/share/java \
+ && mkdir -p /var/cache/tesseract \
+ && chown tika /var/cache/tesseract
+
+RUN ln -s /usr/share/java/tika-server-${TIKA_VERSION}.jar /usr/share/java/tika-server.jar
+
+COPY ./src/tika-server.deb/tesseract-ocr-cache/tesseract_cache /usr/lib/python3/dist-packages/tesseract_cache
+COPY ./src/tika-server.deb/tesseract-ocr-cache/tesseract_fake /usr/lib/python3/dist-packages/tesseract_fake
+
+USER tika
+
+ENTRYPOINT ["java", "-jar", "/usr/share/java/tika-server.jar", "-h", "0.0.0.0"]
+
+##############################################################################
+# osems_spacy
+##############################################################################
+
+FROM debian:buster AS osems_spacy
+
+ARG DEBIAN_FRONTEND noninteractive
+
+RUN apt-get update \
+ && apt-get install --no-install-recommends --yes \
+    build-essential \
+    python3-pip \
+    python3-setuptools \
+    python3-wheel \
+    python3-dev \
+ && apt-get clean -y \
+ && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+COPY ./src/spacy-services.deb/src/spacy-services/displacy /usr/lib/python3/dist-packages/spacy-services/displacy
+
+RUN adduser --system --disabled-password spacy \
+ && python3 -m pip install --upgrade pip \
+ # install dependencies like SpaCy and language specific models
+ && python3 -m pip install --no-cache-dir -r /usr/lib/python3/dist-packages/spacy-services/displacy/requirements.txt \
+ && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+USER spacy
+
+ENTRYPOINT ["/usr/bin/python3", "/usr/lib/python3/dist-packages/spacy-services/displacy/app.py"]
+
+
