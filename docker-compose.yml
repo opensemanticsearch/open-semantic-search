@@ -73,6 +73,13 @@ services:
   rabbitmq:
     image: rabbitmq
 
+  # Cron service to enable crawlers to start
+  cron:
+    image: opensemanticsearch/cron
+    build:
+      context: .
+      dockerfile: Dockerfile-cron
+
 volumes:
   config_etl:
   config_solr-php-ui:
