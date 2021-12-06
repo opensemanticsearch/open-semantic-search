@@ -21,6 +21,7 @@ services:
       - OPEN_SEMANTIC_ETL_MQ_BROKER=amqp://rabbitmq
       - OPEN_SEMANTIC_ETL_SOLR=http://solr:8983/solr/
       - OPEN_SEMANTIC_ETL_TIKA_SERVER=http://tika:9998
+      - OPEN_SEMANTIC_ETL_SPACY_SERVER=http://spacy-services:8080
     ports:
       - "8080:80"
 
