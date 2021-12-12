@@ -4,6 +4,15 @@ https://opensemanticsearch.org
 Integrated search server, ETL framework for document processing (crawling, text extraction, text analysis, named entity recognition and OCR for images and embedded images in PDF), search user interfaces, text mining, text analytics and search apps for fulltext search, faceted search, exploratory search and knowledge graph search
 
 
+# Documentation
+
+The documentation is available in Markdown format in the directory [docs](docs).
+
+A HTML site of this documentation can be build by [MkDocs](https://www.mkdocs.org/) with the config file [mkdocs.yml](mkdocs.yml).
+
+This will be integrated with the UI and the build process of the software packages in next release, so full documentation will be available in the UI of each installation.
+
+
 # Build
 
 How to build the deb package for installation on Debian or Ubuntu server or the docker images for running in Docker containers:
