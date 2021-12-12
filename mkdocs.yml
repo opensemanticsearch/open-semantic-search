@@ -1,0 +1,29 @@
+site_name: Open Semantic Search
+site_url: https://opensemanticsearch.org
+repo_url: https://github.com/opensemanticsearch/open-semantic-search/
+
+nav:
+    - 'About': 'README.md'
+    - 'Usage':
+        - 'Search': 'doc/search/README.md'
+        - 'Search operators': 'doc/search/operators/README.md'
+        - 'Interactive filters (Faceted search)': 'doc/search/#overview-and-exploration-with-facets'
+        - 'Fuzzy search': 'doc/search/fuzzy/README.md'
+        - 'Tagging and annotation': 'doc/datamanagement/annotation/README.md'
+        - 'Structuring data and documents (Metadata management)':
+            - 'Vocabulary and thesaurus (dictionary of names or concepts)': 'doc/datamanagement/thesaurus/README.md'
+            - 'Lists, Dictionaries, Vocabularies and Thesauri (Ontologies)': 'doc/datamanagement/ontologies/README.md'
+        - 'Analyze and explore (Analytics)':
+            - 'Investigate massive leaks for investigative reporting': 'investigative_journalism/howto-analyze-leaks/README.md'
+            - 'Legal codes and law clauses': 'doc/analytics/law/README.md'
+        - 'Search by list of names (batch searches)': 'doc/search/list/README.md'
+    - 'Administration':
+        - 'Getting started': 'doc/tutorial/README.md'
+        - 'Installation': 'doc/admin/install/README.md'
+        - 'Configuration': 'doc/admin/config/README.md'
+    - 'Download': 'download/README.md'
+    - 'Development': 'https://github.com/opensemanticsearch/open-semantic-search/'
+    - 'Donate': 'donate/README.md'
+
+theme:
+    name: readthedocs
