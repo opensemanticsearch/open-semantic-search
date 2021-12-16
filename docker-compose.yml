@@ -22,6 +22,9 @@ services:
       - OPEN_SEMANTIC_ETL_SOLR=http://solr:8983/solr/
       - OPEN_SEMANTIC_ETL_TIKA_SERVER=http://tika:9998
       - OPEN_SEMANTIC_ETL_SPACY_SERVER=http://spacy-services:8080
+      - OPEN_SEMANTIC_ETL_NEO4J_HOST=neo4j
+    env_file:
+      - neo4j.env
     ports:
       - "8080:80"
 
@@ -41,7 +44,10 @@ services:
       - OPEN_SEMANTIC_ETL_SOLR=http://solr:8983/solr/
       - OPEN_SEMANTIC_ETL_TIKA_SERVER=http://tika:9998
       - OPEN_SEMANTIC_ETL_SPACY_SERVER=http://spacy-services:8080
+      - OPEN_SEMANTIC_ETL_NEO4J_HOST=neo4j
       - OMP_THREAD_LIMIT=1
+    env_file:
+      - neo4j.env
     volumes:
       # read only (:ro), since workers don't need to change the config (is done only by admin or web ui in container apps)
       - config_etl:/etc/opensemanticsearch:ro
@@ -74,6 +80,14 @@ services:
   rabbitmq:
     image: rabbitmq
 
+  neo4j:
+    image: neo4j
+    restart: always
+    env_file:
+      - neo4j.env
+    volumes:
+      - data_neo4j:/data
+
   # Cron service to enable crawlers to start
   cron:
     image: opensemanticsearch/cron
@@ -86,4 +100,5 @@ volumes:
   config_solr-php-ui:
   data_db:
   data_media:
+  data_neo4j:
   data_solr:
