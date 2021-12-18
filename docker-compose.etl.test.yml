@@ -1,6 +1,7 @@
 version: '3'
 services:
 
+  # system under test (sut)
   sut:
     image: opensemanticsearch/open-semantic-etl
     command: python3 -m unittest discover -s /usr/lib/python3/dist-packages/opensemanticetl/
