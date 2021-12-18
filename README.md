@@ -6,9 +6,9 @@ Integrated search server, ETL framework for document processing (crawling, text 
 
 # Documentation
 
-The documentation is available in Markdown format in the directory [docs](docs).
+The documentation is available in Markdown format in the directory <code>[docs](docs)</code>.
 
-A HTML site of this documentation can be build by [MkDocs](https://www.mkdocs.org/) with the config file [mkdocs.yml](mkdocs.yml).
+A HTML site of this documentation can be build by [MkDocs](https://www.mkdocs.org/) with the config file <code>[mkdocs.yml](mkdocs.yml)</code>.
 
 This will be integrated with the UI and the build process of the software packages in next release, so full documentation will be available in the UI of each installation.
 
@@ -72,7 +72,7 @@ docker-compose -f docker-compose.etl.test.yml up
 
 Some automated integration tests and end-to-end (E2E) tests within a web browser controlled by the browser automation framework playwright and the node.js / javascript based test framework JEST.
 
-You can extend the automated tests in test/test.js
+You can extend the automated tests in <code>[test/test.js](test/test.js)</code>
 
 They run by the docker image Dockerfile-test and need the services of the docker-compose environment docker-compose.test.yml
 
@@ -91,9 +91,9 @@ Documentation on this dependencies which may help debugging dependency hell issu
 
 ## Build dependencies on Source code (GIT)
 
-Dependencies on other Git repositories / submodules of components like Open Semantic ETL are defined in the Git config file .gitmodules
+Dependencies on other Git repositories / submodules of components like Open Semantic ETL are defined in the Git config file <code>[.gitmodules](.gitmodules)</code>
 
-The submodules will be checked out automatically to the subdirectory "src", if you check out this repository by git in recursive mode.
+The submodules will be checked out automatically to the subdirectory <code>[src](src)</code>, if you check out this repository by git in recursive mode.
 
 
 ## Packaging dependencies of Java archives (JAR)
@@ -107,14 +107,14 @@ If not there, they will be downloaded from Apache Software Foundation by wget in
 
 Dependencies of tools and libraries, which are available in the Debian or Ubuntu package repositories, are defined in the section "Depends" of the deb package config file DEBIAN/control
 
-https://github.com/opensemanticsearch/open-semantic-search/blob/master/DEBIAN/control
+<code>[DEBIAN/control](DEBIAN/control)</code>
 
 
 ## Installation dependencies on Python packages (PIP)
 
 Dependencies of Python libraries which are not available as packages of the Linux distribution but in Python Package Index (PyPI), are defined in
 
-https://github.com/opensemanticsearch/open-semantic-etl/blob/master/src/opensemanticetl/requirements.txt
+<code>[src/open-semantic-etl/src/opensemanticetl/requirements.txt](src/open-semantic-etl/src/opensemanticetl/requirements.txt)</code>
 
 This dependencies will be installed automatically on installation of the Debian/Ubuntu packages by DEBIAN/postinst of the Debian/Ubuntu packages or by docker build configured by Dockerfile by
 
