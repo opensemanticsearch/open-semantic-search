@@ -8,7 +8,14 @@ Integrated search server, ETL framework for document processing (crawling, text 
 
 The documentation is available in Markdown format in the directory <code>[docs](docs)</code>.
 
-A HTML site of this documentation can be build by [MkDocs](https://www.mkdocs.org/) with the config file <code>[mkdocs.yml](mkdocs.yml)</code>.
+## Generate HTML
+A HTML site of this documentation can be build by the static site generator [MkDocs](https://www.mkdocs.org/) with the config file <code>[mkdocs.yml](mkdocs.yml)</code>:
+
+Therefore install mkdocs (for example by `apt install mkdocs`) and call:
+
+`mkdocs build`
+
+After that the documentation is available as static HTML site in the directory <code>site</code>.
 
 This will be integrated with the UI and the build process of the software packages in next release, so full documentation will be available in the UI of each installation.
 
