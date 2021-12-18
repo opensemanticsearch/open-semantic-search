@@ -60,9 +60,12 @@ For CI/CD there are some different automated tests:
 
 ## Integration tests
 
-Since the submodule Open Semantic ETL uses and needs different powerful services like Solr, spacY-services or Tika-Server by HTTP and REST-API, the automated tests run as integration tests within the docker-compose environment configured in docker-compose.etl-test.yml so these services are available while running the unittests and integration tests.
+Since the submodule Open Semantic ETL uses and needs different powerful services like Solr, spaCY-services or Tika-Server by HTTP and REST-API, the automated tests run as integration tests within the docker-compose environment configured in docker-compose.etl-test.yml so these services are available while running the unittests and integration tests.
 
-`docker-compose -f docker-compose.etl.test.yml up`
+```
+docker-compose -f docker-compose.etl.test.yml build
+docker-compose -f docker-compose.etl.test.yml up
+```
 
 
 ## End to end tests
@@ -73,7 +76,10 @@ You can extend the automated tests in test/test.js
 
 They run by the docker image Dockerfile-test and need the services of the docker-compose environment docker-compose.test.yml
 
-`docker-compose -f docker-compose.test.yml up`
+```
+docker-compose -f docker-compose.test.yml build
+docker-compose -f docker-compose.test.yml up
+```
 
 
 # Dependencies
