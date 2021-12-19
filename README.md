@@ -35,13 +35,13 @@ Clone the repository including the dependencies :
 git clone --recurse-submodules --remote-submodules https://github.com/opensemanticsearch/open-semantic-search.git
 ```
 
-Inside the opensemanticsearch directory, build the Docker images use the docker-compose config docker-compose.yml : 
+Inside the opensemanticsearch directory, build the Docker images use the docker-compose config [docker-compose.yml](docker-compose.yml):
 ```
-cd opensemanticsearch
+cd open-semantic-search
 docker-compose build
 ```
 
-After these builds all the Docker images/dependencies/services can by started together by docker-compose with the config file docker-compose.yml.
+After these builds all the Docker images/dependencies/services can by started together by docker-compose with the config file [docker-compose.yml](docker-compose.yml).
 
 You can run the instance by typing 
 
@@ -60,7 +60,7 @@ For CI/CD there are some different automated tests:
 
 ## Integration tests
 
-Since the submodule Open Semantic ETL uses and needs different powerful services like Solr, spaCY-services or Tika-Server by HTTP and REST-API, the automated tests run as integration tests within the docker-compose environment configured in docker-compose.etl-test.yml so these services are available while running the unittests and integration tests.
+Since the [submodule Open Semantic ETL](src/open-semantic-etl) uses and needs different powerful services like [Solr](src/solr.deb), [spaCy-services](src/spacy-services.deb) or [Tika-Server](src/tika-server.deb) by HTTP and REST-API, many automated tests run as integration tests within the docker-compose environment configured in [docker-compose.etl.test.yml](docker-compose.etl.test.yml) so these services are available while running the unittests and integration tests.
 
 ```
 docker-compose -f docker-compose.etl.test.yml build
@@ -74,7 +74,7 @@ Some automated integration tests and end-to-end (E2E) tests within a web browser
 
 You can extend the automated tests in <code>[test/test.js](test/test.js)</code>
 
-They run by the docker image Dockerfile-test and need the services of the docker-compose environment docker-compose.test.yml
+They run by the docker image Dockerfile-test and need the services of the docker-compose environment [docker-compose.test.yml](docker-compose.test.yml)
 
 ```
 docker-compose -f docker-compose.test.yml build
