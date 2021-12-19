@@ -75,6 +75,16 @@ mkdir -p ${BUILDDIR}/var/lib/opensemanticsearch/
 cp -a src/open-semantic-search-apps/src/* ${BUILDDIR}/var/lib/opensemanticsearch/
 
 #
+# Include docs
+#
+
+mkdir -p ${BUILDDIR}/usr/share/doc/open-semantic-search
+cp -a docs ${BUILDDIR}/usr/share/doc/open-semantic-search/
+cp mkdocs.yml ${BUILDDIR}/usr/share/doc/open-semantic-search/
+
+mkdocs build --config-file ${BUILDDIR}/usr/share/doc/open-semantic-search/mkdocs.yml
+
+#
 # Include solr-php-ui
 #
 cp -a src/solr-php-ui/etc ${BUILDDIR}/
