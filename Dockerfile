@@ -11,6 +11,7 @@ RUN apt-get update && apt-get install --no-install-recommends --yes \
     php-xml \
     php-bcmath \
     librabbitmq4 \
+    mkdocs \
     python3-django \
     python3-pycurl \
     python3-rdflib \
@@ -39,6 +40,15 @@ COPY ./src/open-semantic-etl/src/tesseract-ocr-cache /usr/lib/python3/dist-packa
 COPY ./src/open-semantic-etl/etc /etc/
 
 #
+# Include docs
+#
+
+COPY ./docs /usr/share/doc/open-semantic-search/docs
+COPY mkdocs.yml /usr/share/doc/open-semantic-search/
+
+RUN mkdocs build --config-file /usr/share/doc/open-semantic-search/mkdocs.yml
+
+#
 # Include solr-php-ui
 #
 
@@ -52,7 +62,6 @@ RUN mv ${BUILDDIR}/usr/share/solr-php-ui/config/* /etc/solr-php-ui/
 # link from deleted php directory to this new config destination
 RUN rmdir /usr/share/solr-php-ui/config
 RUN ln -s /etc/solr-php-ui/ /usr/share/solr-php-ui/config
-
 
 #
 # Include Solr Relevance Ranking Analysis Tool
