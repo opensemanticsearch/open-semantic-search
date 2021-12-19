@@ -1,5 +1,9 @@
 #/bin/bash
 
+TIKA_VERSION=2.2.0
+TIKA_URL=https://archive.apache.org/dist/tika/$TIKA_VERSION/tika-server-standard-$TIKA_VERSION.jar
+
+
 VERSION=`date +%y.%m.%d`
 PACKAGE=open-semantic-search_${VERSION}.deb
 BUILDDIR=/tmp/open-semantic-search-$$.deb
@@ -131,32 +135,16 @@ cp src/solr-synonames/synonames2solr.py ${BUILDDIR}/usr/lib/python3/dist-package
 #
 
 # if not yet there, download Tika-server binary release
-if [ ! -f "src/tika-server.deb/usr/share/java/tika-server-1.25.jar" ]; then
+if [ ! -f "src/tika-server.deb/usr/share/java/tika-server-standard-$TIKA_VERSION.jar" ]; then
     echo "Downloading Tika"
-    wget -P src/tika-server.deb/usr/share/java/ https://archive.apache.org/dist/tika/tika-server-1.25.jar
+    wget -P src/tika-server.deb/usr/share/java/ $TIKA_URL
 fi
 
 cp -a src/tika-server.deb/etc ${BUILDDIR}/
 cp -a src/tika-server.deb/usr ${BUILDDIR}/
 
-# Change Tika default config
+ln -s tika-server-standard-$TIKA_VERSION.jar ${BUILDDIR}/usr/share/java/tika-server-standard.jar
 
-# Extract Tika config from JAR
-jar xf ${BUILDDIR}/usr/share/java/tika-server-*.jar org/apache/tika/parser/ocr/TesseractOCRConfig.properties
-
-# Edit config: Increase OCR timeout
-sed -i -e 's/timeout=120/timeout=10000/g' org/apache/tika/parser/ocr/TesseractOCRConfig.properties
-
-# Update Tika JAR: Overwrite config with changed version
-jar uf ${BUILDDIR}/usr/share/java/tika-server-*.jar org/apache/tika/parser/ocr/TesseractOCRConfig.properties
-
-# Delete changed version of extracted config (since archived in JAR by step before)
-rm org/apache/tika/parser/ocr/TesseractOCRConfig.properties
-rmdir org/apache/tika/parser/ocr
-rmdir org/apache/tika/parser
-rmdir org/apache/tika
-rmdir org/apache
-rmdir org
 
 # set rights
 chown -R root:root ${BUILDDIR}/
