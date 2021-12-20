@@ -1,9 +1,5 @@
 #/bin/bash
 
-TIKA_VERSION=2.2.0
-TIKA_URL=https://archive.apache.org/dist/tika/$TIKA_VERSION/tika-server-standard-$TIKA_VERSION.jar
-
-
 VERSION=`date +%y.%m.%d`
 PACKAGE=open-semantic-search_${VERSION}.deb
 BUILDDIR=/tmp/open-semantic-search-$$.deb
@@ -13,7 +9,6 @@ INCLUDE_PACKAGES="solr.deb tika-server.deb spacy-services.deb open-semantic-etl 
 echo "Building ${PACKAGE} in temp directory ${BUILDDIR}"
 mkdir ${BUILDDIR}
 mkdir ${BUILDDIR}/opt
-
 
 cp -a DEBIAN ${BUILDDIR}/
 
@@ -134,6 +129,9 @@ cp src/solr-synonames/synonames2solr.py ${BUILDDIR}/usr/lib/python3/dist-package
 # Include tika-server.deb
 #
 
+# read $TIKA_VERSION and $TIKA_URL from config file tika-version.env
+source src/tika-server.deb/tika-version.env
+
 # if not yet there, download Tika-server binary release
 if [ ! -f "src/tika-server.deb/usr/share/java/tika-server-standard-$TIKA_VERSION.jar" ]; then
     echo "Downloading Tika"
@@ -141,7 +139,9 @@ if [ ! -f "src/tika-server.deb/usr/share/java/tika-server-standard-$TIKA_VERSION
 fi
 
 cp -a src/tika-server.deb/etc ${BUILDDIR}/
-cp -a src/tika-server.deb/usr ${BUILDDIR}/
+
+mkdir -p ${BUILDDIR}/usr/share/java/
+cp src/tika-server.deb/usr/share/java/tika-server-standard-$TIKA_VERSION.jar ${BUILDDIR}/usr/share/java/
 
 ln -s tika-server-standard-$TIKA_VERSION.jar ${BUILDDIR}/usr/share/java/tika-server-standard.jar
 
