@@ -79,22 +79,22 @@ services:
       - OMP_THREAD_LIMIT=1
 
   tika-cache:
-    image: opensemanticsearch/tika-server-cache
+    image: opensemanticsearch/tika-server
     build:
       context: src/tika-server.deb/
-      dockerfile: Dockerfile.cache
     environment:
       - OMP_THREAD_LIMIT=1
+      - TIKA_CONFIG=/etc/tika/tika-config-cache.xml
     volumes:
       - cache_tesseract:/var/cache/tesseract
 
   tika-fakecache:
-    image: opensemanticsearch/tika-server-fakecache
+    image: opensemanticsearch/tika-server
     build:
       context: src/tika-server.deb/
-      dockerfile: Dockerfile.fakecache
     environment:
       - OMP_THREAD_LIMIT=1
+      - TIKA_CONFIG=/etc/tika/tika-config-fakecache.xml
     volumes:
       - cache_tesseract:/var/cache/tesseract
 
