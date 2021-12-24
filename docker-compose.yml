@@ -21,7 +21,6 @@ services:
       - OPEN_SEMANTIC_ETL_MQ_BROKER=amqp://rabbitmq
       - OPEN_SEMANTIC_ETL_SOLR=http://solr:8983/solr/
       - OPEN_SEMANTIC_ETL_TIKA_SERVER=http://tika:9998
-      - OPEN_SEMANTIC_ETL_TIKA_SERVER_CACHE=http://tika-cache:9998
       - OPEN_SEMANTIC_ETL_TIKA_SERVER_FAKECACHE=http://tika-fakecache:9998
       - OPEN_SEMANTIC_ETL_SPACY_SERVER=http://spacy-services:8080
       - OPEN_SEMANTIC_ETL_NEO4J_HOST=neo4j
@@ -40,13 +39,13 @@ services:
       - rabbitmq
       - solr
       - tika
+      - tika-fakecache
       - spacy-services
     environment:
       - OPEN_SEMANTIC_ETL_MQ_BROKER=amqp://rabbitmq
       - OPEN_SEMANTIC_ETL_METADATA_SERVER=http://apps/search-apps/annotate/rdf?uri=[uri]
       - OPEN_SEMANTIC_ETL_SOLR=http://solr:8983/solr/
       - OPEN_SEMANTIC_ETL_TIKA_SERVER=http://tika:9998
-      - OPEN_SEMANTIC_ETL_TIKA_SERVER_CACHE=http://tika-cache:9998
       - OPEN_SEMANTIC_ETL_TIKA_SERVER_FAKECACHE=http://tika-fakecache:9998
       - OPEN_SEMANTIC_ETL_SPACY_SERVER=http://spacy-services:8080
       - OPEN_SEMANTIC_ETL_NEO4J_HOST=neo4j
@@ -56,7 +55,7 @@ services:
     volumes:
       # read only (:ro), since workers don't need to change the config (is done only by admin or web ui in container apps)
       - config_etl:/etc/opensemanticsearch:ro
-      # write access to persistant thumbnails dir
+      # write access to persistent thumbnails dir
       - data_media:/var/opensemanticsearch/media
       - cache_tesseract:/var/cache/tesseract
 
@@ -72,13 +71,6 @@ services:
     #  - "8983:8983"
 
   tika:
-    image: opensemanticsearch/tika-server
-    build:
-      context: src/tika-server.deb/
-    environment:
-      - OMP_THREAD_LIMIT=1
-
-  tika-cache:
     image: opensemanticsearch/tika-server
     build:
       context: src/tika-server.deb/
