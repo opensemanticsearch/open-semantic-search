@@ -24,7 +24,6 @@ services:
       - OPEN_SEMANTIC_ETL_TIKA_SERVER_FAKECACHE=http://tika-fakecache:9998
       - OPEN_SEMANTIC_ETL_SPACY_SERVER=http://spacy-services:8080
       - OPEN_SEMANTIC_ETL_NEO4J_HOST=neo4j
-      - TIKA_VERSION=2.1.0
     env_file:
       - neo4j.env
     ports:
