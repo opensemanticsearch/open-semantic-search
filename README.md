@@ -6,7 +6,7 @@ Integrated search server, ETL framework for document processing (crawling, text 
 
 # Documentation
 
-This README.md is documentation for developers.
+This README.md is documentation for software developers.
 
 The [documentation for admins](docs/doc/admin/install/README.md) and the [documentation for users](docs/doc/search/README.md) is included in the software packages/images and linked in the search user interface (Menu "Help").
 
@@ -20,9 +20,18 @@ The source of the documentation (Markdown format) is editable in the directory <
 How to build the deb package for installation on Debian or Ubuntu server or the docker images for running in Docker containers:
 
 
+## Clone git repositories
+Clone the repository including the dependencies:
+
+```
+git clone --recurse-submodules --remote-submodules https://github.com/opensemanticsearch/open-semantic-search.git
+cd open-semantic-search
+```
+
+
 ## Build deb package
 
-To build a deb package for Debian or Ubuntu, call the build script "build-deb" as user root (change user by su or sudo su):
+To build a deb package for Debian or Ubuntu, call the build script <code>[build-deb](build-deb)</code> as user root (change user by `su` or `sudo su`):
 
 ```
 ./build-deb
@@ -31,26 +40,22 @@ To build a deb package for Debian or Ubuntu, call the build script "build-deb" a
 
 ## Build docker images
 
-Clone the repository including the dependencies : 
+Build the Docker images using the default docker-compose config [docker-compose.yml](docker-compose.yml):
 
 ```
-git clone --recurse-submodules --remote-submodules https://github.com/opensemanticsearch/open-semantic-search.git
-```
-
-Inside the opensemanticsearch directory, build the Docker images use the docker-compose config [docker-compose.yml](docker-compose.yml):
-```
-cd open-semantic-search
 docker-compose build
 ```
 
-After these builds all the Docker images/dependencies/services can by started together by docker-compose with the config file [docker-compose.yml](docker-compose.yml).
+After these builds all the Docker images/dependencies/services can by started together by docker-compose with the config file <code>[docker-compose.yml](docker-compose.yml)</code>.
 
 You can run the instance by typing 
 
-`docker-compose up`
+```
+docker-compose up
+```
 
 
-You can browse OpenSemanticSearch in your favourite browser at this url : 
+You can browse the Open Semantic Search user interface in your favourite browser at this URL: 
 
 `http://localhost:8080/search/`
 
@@ -62,7 +67,7 @@ For CI/CD there are some different automated tests:
 
 ## Integration tests
 
-Since the [submodule Open Semantic ETL](src/open-semantic-etl) uses and needs different powerful services like [Solr](src/solr.deb), [spaCy-services](src/spacy-services.deb) or [Tika-Server](src/tika-server.deb) by HTTP and REST-API, many automated tests run as integration tests within the docker-compose environment configured in [docker-compose.etl.test.yml](docker-compose.etl.test.yml) so these services are available while running the unittests and integration tests.
+Since the [submodule Open Semantic ETL](src/open-semantic-etl) uses and needs different powerful services like [Solr](src/solr.deb), [spaCy-services](src/spacy-services.deb) or [Tika-Server](src/tika-server.deb) by HTTP and REST-API, many automated tests run as integration tests within the docker-compose environment configured in <code>[docker-compose.etl.test.yml](docker-compose.etl.test.yml)</code> so these services are available while running the unittests and integration tests.
 
 ```
 docker-compose -f docker-compose.etl.test.yml build
@@ -76,7 +81,7 @@ Some automated integration tests and end-to-end (E2E) tests within a web browser
 
 You can extend the automated tests in <code>[test/test.js](test/test.js)</code>
 
-They run by the docker image Dockerfile-test and need the services of the docker-compose environment [docker-compose.test.yml](docker-compose.test.yml)
+They run by the docker image <code>[Dockerfile-test](Dockerfile-test)</code> and need the services of the docker-compose environment <code>[docker-compose.test.yml](docker-compose.test.yml)</code>:
 
 ```
 docker-compose -f docker-compose.test.yml build
@@ -100,16 +105,14 @@ The submodules will be checked out automatically to the subdirectory <code>[src]
 
 ## Packaging dependencies of Java archives (JAR)
 
-The submodules tika.deb and solr.deb need the JAR of Apache Tika-Server and Apache Solr.
+The submodules <code>[src/tika-server.deb](src/tika-server.deb)</code> and <code>[src/solr.deb](src/solr.deb)</code> need the JAR of [Apache Tika-Server](https://tika.apache.org/) and [Apache Solr](https://solr.apache.org/).
 
-If not there, they will be downloaded from Apache Software Foundation by wget in the submodule "build" script or its "Dockerfile".
+If not there, they will be downloaded from Apache Software Foundation by wget in the <code>[build-deb](build-deb)</code> script or the submodules <code>Dockerfile</code>.
 
 
 ## Installation dependencies on Debian/Ubuntu packages (DEB)
 
-Dependencies of tools and libraries, which are available in the Debian or Ubuntu package repositories, are defined in the section "Depends" of the deb package config file DEBIAN/control
-
-<code>[DEBIAN/control](DEBIAN/control)</code>
+Dependencies of tools and libraries, which are available in the Debian or Ubuntu package repositories, are defined in the section <code>Depends</code> of the deb package config file <code>[DEBIAN/control](DEBIAN/control)</code>
 
 
 ## Installation dependencies on Python packages (PIP)
