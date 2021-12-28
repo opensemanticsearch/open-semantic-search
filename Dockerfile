@@ -105,14 +105,13 @@ COPY ./src/cytoscape.js-panzoom/font-awesome-4.0.3 /var/lib/opensemanticsearch/v
 
 COPY ./src/solr-ontology-tagger/src /usr/lib/python3/dist-packages/
 
-
 # export static files to directory for webserver
 RUN python3 /var/lib/opensemanticsearch/manage.py collectstatic --noinput
 
-# create directory for file uploads
-RUN mkdir /var/opensemanticsearch
+# Copy ontologies from/to var/opensemanticsearch/media/ontologies (which creates /var/opensemanticsearch/)
+COPY ./src/open-semantic-search-apps/var /var/
+
 RUN mkdir /var/opensemanticsearch/db
-RUN mkdir /var/opensemanticsearch/media
 
 RUN chown -R www-data:www-data /var/opensemanticsearch
 
@@ -150,4 +149,7 @@ RUN a2enmod wsgi
 RUN chown www-data:www-data /etc/opensemanticsearch/ocr/dictionary.txt
 RUN chmod o+r /etc/opensemanticsearch/ocr/dictionary.txt
 
-ENTRYPOINT ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]
+COPY ./docker-entrypoint.sh /
+RUN chmod 755 /docker-entrypoint.sh
+
+ENTRYPOINT ["/docker-entrypoint.sh"]
