@@ -80,7 +80,7 @@ docker-compose -f docker-compose.etl.test.yml up
 
 ## End to end tests
 
-Some automated integration tests and end-to-end (E2E) tests within a web browser controlled by the browser automation framework playwright and the node.js / javascript based test framework JEST.
+Some automated integration tests and end-to-end (E2E) tests within a web browser controlled by the browser automation framework [Playwright](https://playwright.dev/) and the node.js / javascript based test framework [JEST](https://jestjs.io/).
 
 You can extend the automated tests in <code>[test/test.js](test/test.js)</code>
 
