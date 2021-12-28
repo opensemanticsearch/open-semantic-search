@@ -66,8 +66,8 @@ services:
       - data_solr:/var/solr
 
     # uncomment next two lines, if you want access the Solr API and admin UI on host IP
-    ports:
-      - "8983:8983"
+    #ports:
+    #  - "8983:8983"
 
   tika:
     image: opensemanticsearch/tika-server
