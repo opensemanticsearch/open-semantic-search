@@ -42,7 +42,7 @@ services:
       - spacy-services
     environment:
       - OPEN_SEMANTIC_ETL_MQ_BROKER=amqp://rabbitmq
-      - OPEN_SEMANTIC_ETL_METADATA_SERVER=http://apps/search-apps/annotate/rdf?uri=[uri]
+      - OPEN_SEMANTIC_ETL_METADATA_SERVER=http://apps/search-apps/annotate/json
       - OPEN_SEMANTIC_ETL_SOLR=http://solr:8983/solr/
       - OPEN_SEMANTIC_ETL_TIKA_SERVER=http://tika:9998
       - OPEN_SEMANTIC_ETL_TIKA_SERVER_FAKECACHE=http://tika-fakecache:9998
@@ -66,8 +66,8 @@ services:
       - data_solr:/var/solr
 
     # uncomment next two lines, if you want access the Solr API and admin UI on host IP
-    #ports:
-    #  - "8983:8983"
+    ports:
+      - "8983:8983"
 
   tika:
     image: opensemanticsearch/tika-server
