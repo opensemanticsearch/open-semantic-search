@@ -31,7 +31,7 @@ cd open-semantic-search
 
 ## Build deb package
 
-To build a deb package for Debian or Ubuntu, call the build script <code>[build-deb](build-deb)</code> as user root (change user by `su` or `sudo su`):
+To build a <code>deb</code> package for *Debian GNU/Linux* or *Ubuntu Linux*, call the build script <code>[build-deb](build-deb)</code> as user root (change user by `su` or `sudo su`):
 
 ```
 ./build-deb
@@ -40,22 +40,25 @@ To build a deb package for Debian or Ubuntu, call the build script <code>[build-
 
 ## Build docker images
 
-Build the Docker images using the default docker-compose config [docker-compose.yml](docker-compose.yml):
+Build the Docker images using the default docker-compose config <code>[docker-compose.yml](docker-compose.yml)</code>:
 
 ```
 docker-compose build
 ```
 
-After these builds all the Docker images/dependencies/services can by started together by docker-compose with the config file <code>[docker-compose.yml](docker-compose.yml)</code>.
+## Run docker containers
 
-You can run the instance by typing 
+After these builds all the Docker images/dependencies/services can be started together by docker-compose with the config file <code>[docker-compose.yml](docker-compose.yml)</code>.
+
+You can start the whole environment by
 
 ```
 docker-compose up
 ```
 
+which will expose the web user interface on port <code>8080</code>.
 
-You can browse the Open Semantic Search user interface in your favourite browser at this URL: 
+You can browse the Open Semantic Search user interface in your favourite browser by this URL: 
 
 `http://localhost:8080/search/`
 
