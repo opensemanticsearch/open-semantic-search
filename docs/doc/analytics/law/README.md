@@ -61,8 +61,7 @@ For getting the [open data list / thesaurus of law code labels and their alterna
 
 
 ```
-
-PREFIX skos: 
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 CONSTRUCT {
  ?uri rdfs:label ?label ;
  skos:prefLabel ?prefLabel ;
@@ -83,10 +82,7 @@ WHERE {
  ?uri skos:altLabel ?altLabel .
  }
 }
-
 ```
-
-
 
 
 So we get relevant law code labels like "Strafgesetzbuch" (German penal code) and aliases or alternate labels like "STGB" which is an abbreviation for "Strafgesetzbuch" (German penal code).
