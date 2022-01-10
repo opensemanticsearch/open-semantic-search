@@ -24,14 +24,14 @@ This is based on analysis results of specialized Open Source ETL plugin for anal
 
 
 
-This documentation describes how this legal codes and law clause extraction works in detail and how you can [blacklist custom law code labels or aliases, which are too ambigous](#blacklist) in your documents context.
+This documentation describes how this legal codes and law clause extraction works in detail and how you can [blacklist custom law code labels or aliases, which are too ambiguous](#blacklist) in your documents context.
 
 
 ## Open Source ETL plugin for textmining of structured legal data from full text of documents
 
 
 
-The [Open Semantic ETL (extracts documents full text to more strucured data and search index)](https://github.com/opensemanticsearch/open-semantic-etl) open source [plugin "extract law"](https://github.com/opensemanticsearch/open-semantic-etl/blob/master/src/opensemanticetl/enhance_extract_law.py) is based on and combines multiple natural language processing (NLP) and textmining methods to extract, aggregate and normalize **law codes** and **law clauses** in multiple variants from the full texts of your documents:
+The [Open Semantic ETL (extracts documents full text to more structured data and search index)](https://github.com/opensemanticsearch/open-semantic-etl) open source [plugin "extract law"](https://github.com/opensemanticsearch/open-semantic-etl/blob/master/src/opensemanticetl/enhance_extract_law.py) is based on and combines multiple natural language processing (NLP) and textmining methods to extract, aggregate and normalize **law codes** and **law clauses** in multiple variants from the full texts of your documents:
 
 
 ## Extract law clauses by Regex (text pattern based extraction)
@@ -57,7 +57,7 @@ Since this SKOS thesaurus of law codes is preconfigured in [Ontology Manager](..
 
 
 
-For getting the [open data list / thesaurus of law code labels and their alternate labels/aliases](https://github.com/opensemanticsearch/open-semantic-search-apps/blob/master/var/opensemanticsearch/media/ontologies/law_codes.rdf) we [query, extract and import Open Data of entities from Wikipedia from the the free universal knowledge graph Wikidata](../../datamanagement/opendata/wikidata) by the following **SPARQL query** returning RDFS labels and SKOS thesaurus alternate labels):
+For getting the [open data list / thesaurus of law code labels and their alternate labels/aliases](https://github.com/opensemanticsearch/open-semantic-search-apps/blob/master/var/opensemanticsearch/media/ontologies/law_codes.rdf) we [query, extract and import Open Data of entities from Wikipedia from the the free universal knowledge graph Wikidata](../../datamanagement/opendata/wikidata) by the following **SPARQL query** returning RDFS labels and SKOS thesaurus alternate labels:
 
 
 ```
@@ -89,7 +89,7 @@ WHERE {
 
 
 
-So we get relevant law code labels like "Strafgesetzbuch" (German penality code) and aliases or alternate labels like "STGB" which is a abbreviation for "Strafgesetzbuch" (German penality code).
+So we get relevant law code labels like "Strafgesetzbuch" (German penal code) and aliases or alternate labels like "STGB" which is an abbreviation for "Strafgesetzbuch" (German penal code).
 
 ![](../../../screenshots/law-codes-sparql.png)
 ## Combine law codes and law clauses to law code clauses
@@ -113,8 +113,8 @@ Alternate names are normalized to the preferred label of the entity / law code, 
 
 
 
-Some alternate names of law codes are too general or too ambigous.
+Some alternate names of law codes are too general or too ambiguous.
 
 For example the alias "CC" of the law code "Civil code" is used with another meaning in many other contexts (f.e. in many emails as abbreviation of "carbon copy (CC)" function).
 
-So this alias *CC* is listed in the blacklist [`/etc/opensemanticsearch/blacklist/enhance_extract_law/blacklist-lawcode-if-no-clause`](https://github.com/opensemanticsearch/open-semantic-etl/blob/master/etc/opensemanticsearch/blacklist/enhance_extract_law/blacklist-lawcode-if-no-clause) so the law code "Civil code" will be only added to the facet "Law codes" if the occuring alias CC is used combined with a law clause like *§ 123 CC* or *CC § 123* but not if only the alias "CC" is in the text, while if the prefered label "Civil code" is in the text without such a law clause, it will be added to the facet "Law codes", because this label is not blacklisted.
+So this alias *CC* is listed in the blacklist [`/etc/opensemanticsearch/blacklist/enhance_extract_law/blacklist-lawcode-if-no-clause`](https://github.com/opensemanticsearch/open-semantic-etl/blob/master/etc/opensemanticsearch/blacklist/enhance_extract_law/blacklist-lawcode-if-no-clause) so the law code "Civil code" will be only added to the facet "Law codes" if the occuring alias CC is used combined with a law clause like *§ 123 CC* or *CC § 123* but not if only the alias "CC" is in the text, while if the preferred label "Civil code" is in the text without such a law clause, it will be added to the facet "Law codes", because this label is not blacklisted.
