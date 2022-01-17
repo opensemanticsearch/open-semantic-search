@@ -6,8 +6,12 @@ authors:
 
 # Administration
 
+You can start administration tasks of the search engine (i.e. crawling directories)
 
-You can admin the search engine (i.e. crawling directories)
-* via web admin interface
-* via [REST-API](rest-api) or
-* via [command line tools](cmd)
+* via web admin interface (f.e. in menu *Config* or *Datasources*)
+* via [REST-API](rest-api/README.md) or
+* via [command line tools](cmd/README.md)
+
+## Logfiles
+
+[Locations of logfiles](config/log/README.md)
