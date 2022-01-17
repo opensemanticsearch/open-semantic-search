@@ -7,45 +7,44 @@ authors:
 # Config
 
 
-*Standard installations and most parts should be usable out of the box without further configuration.
-You don't have to configure complex options described below, but you can (i.e. to enable OCR).*
-# Search server
+Standard installations and most parts should be usable out of the box without further configuration.
 
+Many config options are set by a web user interface in the menu *Configuration*.
+
+So in most cases you don't have to configure complex (partially outdated) config file options described below:
+
+
+# Search server
 
 ## Language of the index
 
-
-If your language is not english and you don't use an localized package or virtual machine:
+If your language is not english and you don't use a localized package or virtual machine:
 
 Most important because not changeable for yet indexed documents is to [change the language for stemming](stemming) before indexing documents.
 
-# User interface
 
+# User interface
 
 ## Config file
 
-
 The config file of the user interface is ***/etc/solr-php-ui/config.php***
-## Language of the user interface
 
+## Language of the user interface
 
 The default language is english.
 
 To switch the language of the user interface to german set the option ***$language*** to *de*
 `# Set language to german
 $language = "de";`
+
 # Scheduler: Starting (re)crawls automatically
 
-
-If you dont use [filemonitoring](../../../trigger/filemonitoring) (and even then you should sometimes recrawl, if something failed or was changed at a bad moment), you should recrawl data sources from time to time automatically.
+If you don't use [filemonitoring](../../../trigger/filemonitoring) (and even then you should sometimes recrawl, if something failed or was changed at a bad moment), you should recrawl data sources from time to time automatically.
 
 If you use our connectors and want most flexibility use Cron and add a Cronjob using our [command line tools](../cmd) into a Crontab or you call our [webservice (REST-API)](../rest-api) from a script or another webservice (i.e. webcron).
 
-If you use Apache ManifoldCF for imports, there is a scheduler built in there. Just set the time in the web admin interface.
-
 
 # File indexer
-
 
 ## Config file
 
@@ -93,23 +92,12 @@ Or set the OCR language to multiple languages, which are used in your documents:
 `# language for automatic text recognition (ocr)
 config['ocr_lang'] = "eng+deu"`
 
-### Deskewing low quality scans before OCR
 
-
-To enable an additional deskewing of low quality scans with [Scantailor](http://scantailor.org) before OCR for getting better results in some cases:
-
-Install Scantailor:
-`apt-get install scantailor`
-
-Enable additional optimization with Scantailor before OCR by uncomment the descewing plugin:
-`config['plugins'].append('enhance_ocr_descew')`
 ## Enrich with metadata from RDF sources (Resource Desciption Framework)
-
 
 In */etc/opensemanticsearch/enhancer-rdf* you can configure servers or services for metadata (like annotations or tagging) which is accessable as open standard RDF (Ressource Description Framework) and map them to Solr fields or facets.
 
 ## Adding custom fields / custom facets
-
 
 To be able to use external, independent and modular tools and components writing directly to the Solr index, there is more than one place to configure mappings of new fields:
 * Your metadata plattform (i.e. [Drupal](../../../enhancer/rdf-drupal)) where you edit them or a scraping plattform where you read them saving the data in fields with fieldnames
@@ -120,8 +108,6 @@ To be able to use external, independent and modular tools and components writing
 You can configure additional facets (interactive filters):
 
 ### Mapping from database fields or RDF properties to custom fields / custom facets in Solr within the connector / importer / enhancer
-
-
 
 Config in which Solr-fields to write the additional data from the (meta)datasource:
 
