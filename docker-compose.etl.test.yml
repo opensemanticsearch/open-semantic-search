@@ -4,7 +4,7 @@ services:
   # system under test (sut)
   sut:
     image: opensemanticsearch/open-semantic-etl
-    command: python3 -m unittest discover -s /usr/lib/python3/dist-packages/opensemanticetl/
+    command: /usr/lib/python3/dist-packages/opensemanticetl/testdata/run_integrationtests.sh
     build:
       context: src/open-semantic-etl/
     depends_on:
@@ -12,14 +12,18 @@ services:
       - rabbitmq
       - solr
       - tika
+      - tika-fakecache
       - spacy-services
     environment:
       - OPEN_SEMANTIC_ETL_MQ_BROKER=amqp://rabbitmq
-      - OPEN_SEMANTIC_ETL_METADATA_SERVER=http://apps/search-apps/annotate/rdf?uri=[uri]
+      - OPEN_SEMANTIC_ETL_METADATA_SERVER=http://apps/search-apps/annotate/json
       - OPEN_SEMANTIC_ETL_SOLR=http://solr:8983/solr/
       - OPEN_SEMANTIC_ETL_TIKA_SERVER=http://tika:9998
+      - OPEN_SEMANTIC_ETL_TIKA_SERVER_FAKECACHE=http://tika-fakecache:9998
       - OPEN_SEMANTIC_ETL_SPACY_SERVER=http://spacy-services:8080
       - OMP_THREAD_LIMIT=1
+    volumes:
+      - test_cache_tesseract:/var/cache/tesseract
 
   apps:
     image: opensemanticsearch/open-semantic-search
@@ -34,11 +38,18 @@ services:
       - OPEN_SEMANTIC_ETL_MQ_BROKER=amqp://rabbitmq
       - OPEN_SEMANTIC_ETL_SOLR=http://solr:8983/solr/
       - OPEN_SEMANTIC_ETL_TIKA_SERVER=http://tika:9998
+      - OPEN_SEMANTIC_ETL_TIKA_SERVER_FAKECACHE=http://tika-fakecache:9998
+    # uncomment next two lines, if you want access the web UI at host port 8080
+    # ports:
+    #   - "8080:80"
 
   solr:
     image: opensemanticsearch/solr
     build:
       context: src/solr.deb/
+    # uncomment next two lines, if you want access the Solr API and admin UI on host IP
+    # ports:
+    #   - "8983:8983"
 
   tika:
     image: opensemanticsearch/tika-server
@@ -46,6 +57,19 @@ services:
       context: src/tika-server.deb/
     environment:
       - OMP_THREAD_LIMIT=1
+      - TIKA_CONFIG=/etc/tika/tika-config-cache.xml
+    volumes:
+      - test_cache_tesseract:/var/cache/tesseract
+
+  tika-fakecache:
+    image: opensemanticsearch/tika-server
+    build:
+      context: src/tika-server.deb/
+    environment:
+      - OMP_THREAD_LIMIT=1
+      - TIKA_CONFIG=/etc/tika/tika-config-fakecache.xml
+    volumes:
+      - test_cache_tesseract:/var/cache/tesseract
 
   spacy-services:
     image: opensemanticsearch/spacy-services
@@ -54,3 +78,7 @@ services:
 
   rabbitmq:
     image: rabbitmq
+
+
+volumes:
+  test_cache_tesseract:
