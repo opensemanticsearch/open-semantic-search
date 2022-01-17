@@ -9,7 +9,9 @@ authors:
 
 Standard installations and most parts should be usable out of the box without further configuration.
 
-Many config options are set by a web user interface in the menu *Configuration*.
+Many config options are set by a web user interface in the menu *Configuration*:
+
+![](../../../screenshots/config.png)
 
 So in most cases you don't have to configure complex (partially outdated) config file options described below:
 
