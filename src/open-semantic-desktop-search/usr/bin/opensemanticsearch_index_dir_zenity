@@ -1,0 +1,6 @@
+#!/bin/sh
+
+DIR=$1
+
+# start opensemanticsearch-index-dir in documents folder with progressbar by Zenity GUI
+opensemanticsearch-index-dir "$DIR" | zenity --progress --pulsate --auto-close --no-cancel --title="Adding new documents to processing queue" --text="Adding new documents in directory $DIR to processing queue ..."

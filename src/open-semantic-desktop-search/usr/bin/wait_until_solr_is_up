@@ -1,0 +1,10 @@
+#!/bin/sh
+
+printf 'Waiting until Solr search server is up'
+
+until $(curl --output /dev/null --silent --head --fail http://localhost:8983/solr/opensemanticsearch/select); do
+    printf '.'
+    sleep 1
+done
+
+echo "\nSolr is up and the core is loaded"

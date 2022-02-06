@@ -1,0 +1,4 @@
+#!/bin/sh
+
+# start waiting for Solr with progressbar by Zenity GUI
+wait_until_solr_is_up | zenity --progress --pulsate --auto-close --no-cancel --title="Waiting for Solr search server" --text="Waiting until Solr search server is up and loaded the core ..."
