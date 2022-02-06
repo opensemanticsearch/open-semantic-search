@@ -1,0 +1,7 @@
+[Desktop Entry]
+Comment=Thesaurus and Named Entities Manager to structure exploratory search and interactive filters
+Terminal=false
+Name=Thesaurus for management of Named Entities (i.e. organizations, persons, locations or concepts)
+Exec=firefox http://localhost/search-apps/thesaurus/
+Type=Application
+Icon=accessories-dictionary-symbolic

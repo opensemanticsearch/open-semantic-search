@@ -1,0 +1,7 @@
+[Desktop Entry]
+Comment=
+Terminal=false
+Name=Open Semantic Desktop Search
+Exec=/usr/bin/open-semantic-desktop-search
+Type=Application
+Icon=document-open-symbolic

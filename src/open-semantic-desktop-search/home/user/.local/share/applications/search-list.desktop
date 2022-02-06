@@ -1,0 +1,7 @@
+[Desktop Entry]
+Comment=Fuzzy search for each list entry
+Terminal=false
+Name=Search with list
+Exec=firefox http://localhost/search-apps/search-list
+Type=Application
+Icon=view-list-symbolic

@@ -1,0 +1,7 @@
+[Desktop Entry]
+Comment=
+Terminal=false
+Name=Extract named entities from thesaurus in new documents
+Exec=firefox http://localhost/search-apps/thesaurus/apply
+Type=Application
+Icon=mark-location-symbolic
