@@ -1,0 +1,6 @@
+{
+  "policies": {
+    "LocalFileLinks": ["http://localhost/"]
+  }
+}
+
