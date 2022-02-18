@@ -3,7 +3,7 @@
 VERSION=`date +%y.%m.%d`
 PACKAGE=open-semantic-search_${VERSION}.deb
 BUILDDIR=/tmp/open-semantic-search-$$.deb
-INCLUDE_PACKAGES="solr.deb tika-server.deb spacy-services.deb open-semantic-etl solr-php-ui open-semantic-search-apps solr-synonames"
+INCLUDE_PACKAGES="solr.deb tika-server.deb spacy-services.deb open-semantic-etl solr-php-ui open-semantic-search-apps solr-synonames flower"
 
 
 echo "Building ${PACKAGE} in temp directory ${BUILDDIR}"
@@ -62,6 +62,12 @@ cp -a src/open-semantic-etl/src/tesseract-ocr-cache/tesseract_cache ${BUILDDIR}/
 cp -a src/open-semantic-etl/src/tesseract-ocr-cache/tesseract_fake ${BUILDDIR}/usr/lib/python3/dist-packages/
 mkdir -p ${BUILDDIR}/var/opensemanticsearch/media/thumbnails
 mkdir -p ${BUILDDIR}/var/cache/tesseract
+
+#
+# Include flower
+#
+
+cp -a src/flower/etc ${BUILDDIR}/
 
 
 #

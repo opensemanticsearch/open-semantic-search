@@ -1,0 +1,21 @@
+#!/bin/sh
+
+adduser --system --disabled-password flower
+
+# install dependencies
+pip3 install flower
+
+# load our additional systemd service config
+systemctl daemon-reload
+
+# start while booting
+systemctl enable flower
+
+# (re)start after installation (or upgrade)
+systemctl restart flower
+
+# Enable apache2 reverse proxy modules
+a2enmod proxy
+a2enmod proxy_http
+
+systemctl restart apache2

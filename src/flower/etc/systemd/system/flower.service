@@ -1,0 +1,12 @@
+[Unit]
+Description=Flower
+After=network.target rabbitmq-server.service
+
+[Service]
+Type=simple
+User=flower
+ExecStart=/usr/local/bin/celery flower --address=127.0.0.1 --url_prefix=flower
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

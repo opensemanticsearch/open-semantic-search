@@ -1,0 +1,11 @@
+Package: flower
+Version: 22.02.18
+Section: misc
+Priority: optional
+Architecture: all
+Depends: python3-pip(>=0)
+Installed-Size: 100
+Maintainer: Markus Mandalka <debian@mandalka.name>
+Homepage: https://opensemanticsearch.org/
+Description: Flower
+ Task queue manager for Celery tasks

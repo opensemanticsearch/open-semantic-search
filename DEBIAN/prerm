@@ -12,8 +12,8 @@ systemctl stop tika
 systemctl disable spacy
 systemctl stop spacy
 
-systemctl disable neo4j
-systemctl stop neo4j
+systemctl disable flower
+systemctl stop flower
 
 systemctl disable solr
 systemctl stop solr

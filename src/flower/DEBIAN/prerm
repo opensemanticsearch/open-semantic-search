@@ -1,0 +1,7 @@
+#!/bin/sh
+
+systemctl disable flower
+
+systemctl stop flower
+
+exit 0
