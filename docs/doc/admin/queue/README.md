@@ -1,3 +1,9 @@
+---
+title: Task queue management and monitoring
+authors:
+    - Markus Mandalka
+---
+
 # Task queue management
 
 The task queue for the ETL workers is managed by *Celery* in a [*RabbitMQ*](https://packages.debian.org/de/bullseye/rabbitmq-server) queue.
