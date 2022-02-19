@@ -9,6 +9,13 @@ authors:
 *Administration of Open Semantic Search via command line interface (CLI):*
 
 
+# Task queue
+
+Command line interfaces for managing tasks:
+
+[Task queue management](../queue/README.md)
+
+
 # Indexing files
 
 ## Index a file
