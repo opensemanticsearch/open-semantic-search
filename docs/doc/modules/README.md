@@ -6,15 +6,13 @@ authors:
 
 # Search engine components and architecture
 
-
 **Open source search engine architecture (components and modules) and processing (data integration, data analysis and data enrichment)**
-# Architecture overview
 
+# Architecture overview
 
 ## Components and Modules
 
-
-* **[User Interface](../search)**: Client and user interface
+* **[User Interface](../search/README.md)**: Client and user interface
 	+ **Search query forms**: Search query form for full text search
 	+ **Explorer and navigator**: Search with full text search and navigate (exploratory search) the index or search results with **interactive filters (facets)**
 	+ **Viewers**: Parts of the UI to show different views (i.e. analytics like wordlcouds or trend charts) and previews for special formats (i.e. photos, documents, email ...)
@@ -28,15 +26,13 @@ authors:
 	+ **ETL Exporter** or Loader for Solr or [Elastic Search](../../etl/elasticsearch): Indexing the data to search index
 * **Trigger**: Your CMS or your file system (file system monitoring) will notify the web service (API) when there is new data or when content changed, so you dont have to burn resources for recrawl often to be able to find new or changed content very soon
 * **[Web services (REST-API)](../admin/rest-api)**: Available via standard network protocol HTTP and waiting until you (i.e. using the web admin interface) or another service (i.e. using the REST-API) demands actions like crawling a directory or a webpage and starting this actions
-* **[Queue manager (Celery on RabbitMQ)](../admin/config/queue)**: Managing task queue and starting of text extraction, analysis, data enrichment and indexing jobs by the right balance of parallel workers
+* **[Queue manager (Celery on RabbitMQ)](../admin/queue/README.md)**: Managing task queue and starting of text extraction, analysis, data enrichment and indexing jobs by the right balance of parallel workers
 * **[Scheduler](../admin/config/scheduler)**: Managing starting of scheduled indexing jobs. This can be crontab for Cron starting the command line tools. Or you schedule (re)crawl or data import jobs with the web interface of ManifoldCF which brings its own scheduler)
 
 
 # Workflow of document processing, extract, transform, load (ETL) and enhancing by data enrichment and data analysis
 
-
-
-How new data will be handled with this components and [ETL (extract, transform, load), document processing, data analysis and data enrichment](../../open-semantic-etl):
+How new data will be handled by this components and [ETL (extract, transform, load), document processing, data analysis and data enrichment](../../open-semantic-etl):
 * A user manually or a Cron daemon automatically from time to time starts a command
 * The command line tools or the web API getting this command starts a ETL (extract, transform, load), data analysis and data enrichment chain to import, analyze and index data
 * A input plugin or [connector](../admin/connectors) (i.e. the connector for the file system or the connector for a website) reads from its datasource
@@ -48,9 +44,7 @@ How new data will be handled with this components and [ETL (extract, transform, 
 
 # User Interface and search applications
 
-
 ## [Solr-PHP-UI](../../solr-php-ui)
-
 
 User Interface (supports responsive design for mobiles and tablets) for search, facetted search, preview, different views and visualizations.
 
@@ -61,10 +55,8 @@ Based on Solr client *solr-php-client* (pure vanilla php) and standard User Inte
 
 ## Alternate search clients and user interfaces
 
-
 * [Kibana](https://www.elastic.co/products/kibana)
-* [Velocity](https://cwiki.apache.org/confluence/display/solr/Velocity+Search+UI
-)
+* [Velocity](https://cwiki.apache.org/confluence/display/solr/Velocity+Search+UI)
 * [Solarium](http://www.solarium-project.org/)
 * [Drupal Solr](https://drupal.org/project/apachesolr) or [Sarnia](https://drupal.org/project/sarnia)
 * [Hue Hadoop User Interface](http://www.gethue.com/)
@@ -73,22 +65,18 @@ Based on Solr client *solr-php-client* (pure vanilla php) and standard User Inte
 
 # Index server
 
-
 ## [Solr search server (daemon)](../../solr)
-
 
 Preconfigured Solr Server running as daemon (so you have only to install the package and no further configuration needed)
 
 [Learn more](../../solr) ...
 
-# Annotation
 
+# Annotation
 
 *Tools for editing and managing metadata like tags, notes, relations and content structure (i.e. taxonomies):*
 
-
 ## Open Semantic Tagger
-
 
 [Tagger](../../tagger) is a light weight responsive web app for tagging web pages and documents.
 
@@ -96,7 +84,6 @@ Preconfigured Solr Server running as daemon (so you have only to install the pac
 
 
 ## Drupal CMS
-
 
 [Drupal](../../enhancer/rdf-drupal) provides collaborative editing, structure (taxonomies and semantic web technologies) and forms (Fields)
 
