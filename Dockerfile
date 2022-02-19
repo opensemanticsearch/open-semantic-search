@@ -99,10 +99,7 @@ COPY ./src/cytoscape.js-panzoom/cytoscape-panzoom.js /var/lib/opensemanticsearch
 COPY ./src/cytoscape.js-panzoom/cytoscape.js-panzoom.css /var/lib/opensemanticsearch/visual_graph_explorer/static/
 COPY ./src/cytoscape.js-panzoom/font-awesome-4.0.3 /var/lib/opensemanticsearch/visual_graph_explorer/static/
 
-#
 # Include Solr-Ontology-Tagger
-#
-
 COPY ./src/solr-ontology-tagger/src /usr/lib/python3/dist-packages/
 
 # export static files to directory for webserver
@@ -148,6 +145,12 @@ RUN a2enmod wsgi
 # allow Django running in apache2 context to write OCR dictionary
 RUN chown www-data:www-data /etc/opensemanticsearch/ocr/dictionary.txt
 RUN chmod o+r /etc/opensemanticsearch/ocr/dictionary.txt
+
+# Reverse proxy for Flower task management web ui
+COPY ./src/flower/etc/apache2 /etc/apache2
+COPY ./src/flower/etc/flower /etc/flower
+RUN a2enmod proxy && \
+    a2enmod proxy_http
 
 COPY ./docker-entrypoint.sh /
 RUN chmod 755 /docker-entrypoint.sh
