@@ -20,7 +20,7 @@ If this feature is not disabled by config, the status of file imports and OCR ta
 
 ![](../../../screenshots/prioritize-import.png)
 
-There you can prioritize certain files by click on "*Prioritize import*".
+While the file import is running, you can yet search by filenames and prioritize the import of certain files by click on "*Prioritize import*".
 
 
 ## Web user interface for task management (Flower web UI)
