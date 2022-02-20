@@ -21,6 +21,8 @@ nav:
         - 'Getting started': 'doc/tutorial/README.md'
         - 'Installation': 'doc/admin/install/README.md'
         - 'Configuration': 'doc/admin/config/README.md'
+        - 'Task queue': 'doc/admin/queue/README.md'
+        - 'Logs': 'doc/admin/config/log/README.md'
     - 'Download': 'download/README.md'
     - 'Development': 'https://github.com/opensemanticsearch/open-semantic-search/'
     - 'Donate': 'donate/README.md'
