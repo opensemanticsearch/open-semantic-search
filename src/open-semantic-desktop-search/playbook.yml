@@ -62,13 +62,43 @@
 
     - name: Copy Open Semantic Search deb package to VM
       ansible.builtin.copy:
-        src: open-semantic-search_22.02.20.deb
+        src: open-semantic-search.deb
         dest: /open-semantic-search.deb
       become: yes
 
     - name: Install Open Semantic Search deb package
       apt:
         deb: /open-semantic-search.deb
+      become: yes
+
+    - name: Stop Solr
+      ansible.builtin.service:
+        name: solr
+        state: stopped
+      become: yes
+
+    - name: Stop RabbitMQ
+      ansible.builtin.service:
+        name: rabbitmq-server
+        state: stopped
+      become: yes
+
+    - name: Stop spaCy
+      ansible.builtin.service:
+        name: spacy
+        state: stopped
+      become: yes
+
+    - name: Stop ETL workers
+      ansible.builtin.service:
+        name: opensemanticetl
+        state: stopped
+      become: yes
+
+    - name: Stop Tika
+      ansible.builtin.service:
+        name: tika
+        state: stopped
       become: yes
 
     - name: Remove deb package
@@ -148,12 +178,6 @@
         src: "/media"
         dest: "/home/user/Documents"
         state: link
-      become: yes
-
-    - name: Stop Solr
-      ansible.builtin.service:
-        name: solr
-        state: stopped
       become: yes
 
     - name: Status shared folder for document index
