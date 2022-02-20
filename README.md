@@ -37,6 +37,10 @@ To build a <code>deb</code> package for *Debian GNU/Linux* or *Ubuntu Linux*, ca
 ./build-deb
 ```
 
+## Build Desktop Search VM
+
+How to build an *Open Semantic Desktop Search* Appliance for *Virtual Box* is documented in
+[`src/open-semantic-desktop-search/README.md`](src/open-semantic-desktop-search/README.md).
 
 ## Build docker images
 
