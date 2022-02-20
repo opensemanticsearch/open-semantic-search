@@ -30,6 +30,8 @@ Vagrant.configure("2") do |config|
   # via 127.0.0.1 to disable public access
   # config.vm.network "forwarded_port", guest: 80, host: 8080, host_ip: "127.0.0.1"
 
+  config.vm.network "forwarded_port", guest: 80, host: 8080, host_ip: "127.0.0.1"
+
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
   # config.vm.network "private_network", ip: "192.168.33.10"
@@ -61,12 +63,22 @@ Vagrant.configure("2") do |config|
   # information on available options.
 
   config.vm.provider "virtualbox" do |vb|
+
     # Display the VirtualBox GUI when booting the machine
-    vb.gui = true
+    #vb.gui = true
+
+    # Set CPUs
+    vb.cpus = 2
 
     # Customize the amount of memory on the VM:
-    vb.memory = "8000"
+    vb.memory = "5000"
+
+    # Set name so we can access the VM in build.sh by name
+    vb.name = "Open_Semantic_Desktop_Search"
   end
+
+  # Resize disk
+  config.vm.disk :disk, size: "60GB", primary: true
 
   # Enable provisioning with a shell script. Additional provisioners such as
   # Ansible, Chef, Docker, Puppet and Salt are also available. Please see the
