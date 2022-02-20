@@ -129,3 +129,29 @@ This dependencies will be installed automatically on installation of the Debian/
 ```
 pip3 install -r /usr/lib/python3/dist-packages/opensemanticetl/requirements.txt
 ```
+
+# Contributors
+
+Most contributors are not shown by the Github user interface as "*Contributors*" of this repository,
+since this main repository is structured by [Git submodules](.gitmodules) like [*Open Semantic ETL*](https://github.com/opensemanticsearch/open-semantic-etl)
+and other modules, which are managed in separated Git(hub) repositories.
+
+So thanks to all (current and former) contributors:
+
+- Markus Mandalka (@mandalka)
+- @g-braeunlich
+- @maehr
+- @sdinten
+- @wsldankers
+- @rivimey
+- @rbussche
+- @mosea3
+- @bhelou
+- @hpiedcoq
+- @andreclinio
+- @agharbeia
+- @ciyer
+
+...
+
+Feel free to extend if you contributed/supported/sponsored in different forms.
