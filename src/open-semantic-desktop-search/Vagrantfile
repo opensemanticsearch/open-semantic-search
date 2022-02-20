@@ -80,6 +80,9 @@ Vagrant.configure("2") do |config|
   # Resize disk
   config.vm.disk :disk, size: "60GB", primary: true
 
+  # Disable default Vagrant share
+  config.vm.synced_folder ".", "/vagrant", disabled: true
+
   # Enable provisioning with a shell script. Additional provisioners such as
   # Ansible, Chef, Docker, Puppet and Salt are also available. Please see the
   # documentation for more information about their specific syntax and use.
@@ -91,6 +94,6 @@ Vagrant.configure("2") do |config|
   config.vm.provision "ansible" do |ansible|
     ansible.verbose = "v"
     ansible.playbook = "playbook.yml"
-  end  
+  end
 
 end
