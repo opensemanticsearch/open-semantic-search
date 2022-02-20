@@ -19,7 +19,7 @@ Dependencies for the VM build process:
 
 - *Virtual Box*
 - *Vagrant*
-- *Debian* package of *Open Semantic Search*
+- *Debian* package of *Open Semantic Search* as `open-semantic-search.deb` in this directory
 
 ## Build
 
