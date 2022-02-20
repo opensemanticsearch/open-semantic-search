@@ -31,6 +31,6 @@ To build the Open Semantic Desktop Search VM call the bash script [`build.sh`](b
 
 It will start to create a Virtual Machine (VM) by *Vagrant*.
 
-This *Debian GNU/Linux* based VM is provisioned by the *Ansible* playbook [`playbook.yml`](playbook.yml) which defines the installation and configuration of Open Semantic Search and the desktop environment.
+This *Debian GNU/Linux* based VM is provisioned by the [*Ansible*](https://docs.ansible.com/ansible/latest/index.html) playbook [`playbook.yml`](playbook.yml) which defines the installation and configuration of Open Semantic Search and the desktop environment.
 
 After that it exports the VM as a *Virtual Box* Appliance.
