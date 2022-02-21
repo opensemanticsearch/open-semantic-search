@@ -34,3 +34,37 @@ It will start to create a Virtual Machine (VM) by *Vagrant*.
 This *Debian GNU/Linux* based VM is provisioned by the [*Ansible*](https://docs.ansible.com/ansible/latest/index.html) playbook [`playbook.yml`](playbook.yml) which defines the installation and configuration of Open Semantic Search and the *Gnome* desktop environment.
 
 After that it exports the VM as a *Virtual Box* Appliance to the file `open-semantic-desktop-search.ova`.
+
+
+## Debugging
+
+### Start the build VM
+
+To start the build VM without using the full build script `build.sh` use the command
+
+```
+vagrant up
+```
+
+
+### Replay playbook
+
+After fixing bugs in the playbook you can replay the playbook by
+
+```
+vagrant provision
+```
+
+### Shell
+
+You can get a shell running inside the VM by the command
+
+```
+vagrant ssh
+```
+
+Within the opened shell you can get root by
+
+```
+sudo su
+```
