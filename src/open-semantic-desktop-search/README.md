@@ -10,7 +10,14 @@ authors:
 
 This `README.md` is documentation for developers who want to build an Open Semantic Desktop Search VM.
 
-The admin and usage documentation of Open Semantic Desktop Search VM is located in [`docs/doc/desktop_search`](../../docs/doc/desktop_search/README.md).
+The admin and usage documentation of *Open Semantic Desktop Search* VM is located in [`docs/doc/desktop_search`](../../docs/doc/desktop_search/README.md).
+
+
+## VM provisioning by Ansible
+
+The *Open Semantic Desktop Search* VM is provisioned by the automation tool [*Ansible*](https://docs.ansible.com/ansible/latest/index.html).
+
+The installation and configuration of *Open Semantic Search* and the *Gnome* desktop environment is defined in the Ansible playbook [`playbook.yml`](playbook.yml).
 
 
 ## Prerequisites
@@ -21,6 +28,7 @@ Dependencies for the VM build process:
 - *Vagrant*
 - [*Debian* package of *Open Semantic Search*](../../README.md#build-deb-package) as `open-semantic-search.deb` in this directory
 
+
 ## Build
 
 To build the Open Semantic Desktop Search VM call the bash script [`build.sh`](build.sh):
@@ -29,11 +37,11 @@ To build the Open Semantic Desktop Search VM call the bash script [`build.sh`](b
 ./build.sh
 ```
 
-It will start to create a Virtual Machine (VM) by *Vagrant*.
+It will create and start a *Debian GNU/Linux* based Virtual Machine (VM) by *Vagrant*.
 
-This *Debian GNU/Linux* based VM is provisioned by the [*Ansible*](https://docs.ansible.com/ansible/latest/index.html) playbook [`playbook.yml`](playbook.yml) which defines the installation and configuration of Open Semantic Search and the *Gnome* desktop environment.
+The running VM is provisioned by the *Ansible* playbook [`playbook.yml`](playbook.yml).
 
-After that it exports the VM as a *Virtual Box* Appliance to the file `open-semantic-desktop-search.ova`.
+After that it stops and exports the VM as a *Virtual Box* Appliance to the file `open-semantic-desktop-search.ova`.
 
 
 ## Debugging
