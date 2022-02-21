@@ -37,7 +37,7 @@ To build the Open Semantic Desktop Search VM call the bash script [`build.sh`](b
 ./build.sh
 ```
 
-It will create and start a *Debian GNU/Linux* based Virtual Machine (VM) by *Vagrant*.
+It will create and start a *Debian GNU/Linux* based Virtual Machine (VM) by *Vagrant* using the config file [`Vagrantfile`](Vagrantfile).
 
 The running VM is provisioned by the *Ansible* playbook [`playbook.yml`](playbook.yml).
 
@@ -76,3 +76,8 @@ Within the opened shell you can get root by
 ```
 sudo su
 ```
+
+### Virtual Box GUI
+
+To start the VM in the Virtual Box GUI, where you have access to Gnome Desktop UI too,
+you can set/uncomment the option `vb.gui = true` in `Vagrantfile`.
