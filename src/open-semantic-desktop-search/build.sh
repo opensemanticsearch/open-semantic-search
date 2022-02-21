@@ -12,6 +12,9 @@ vagrant up
 # stop build VM
 vagrant halt
 
+# Remove Vagrants autoconfigured port forwarding to ssh
+VBoxManage modifyvm Open_Semantic_Desktop_Search --natpf1 delete ssh
+
 # export appliance
 VBoxManage export ${VMNAME} --output open-semantic-desktop-search.ova --options manifest,nomacs --vsys 0 --vmname "Open Semantic Desktop Search" --product "Open Semantic Desktop Search" --producturl https://opensemanticsearch.org
 
