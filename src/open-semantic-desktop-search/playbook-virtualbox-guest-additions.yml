@@ -1,0 +1,51 @@
+---
+
+- name: Installation of Virtual Box guest additions
+  hosts: all
+  tasks:
+
+    - name: Add Debian Repos contrib and non-free
+      ansible.builtin.apt_repository:
+        repo: deb http://deb.debian.org/debian bullseye main contrib non-free
+        state: present
+      become: yes
+
+    - name: Upgrade the OS (apt-get dist-upgrade)
+      apt:
+        upgrade: dist
+        update_cache: yes
+      become: yes
+
+    - name: Install packages for virtual box guest additions
+      apt:
+        pkg:
+          - virtualbox-guest-additions-iso
+          - linux-image-amd64
+          - linux-headers-amd64
+          - build-essential
+          - module-assistant
+      become: yes
+
+    - name: Mount virtual box guest additions iso image
+      ansible.posix.mount:
+        src: /usr/share/virtualbox/VBoxGuestAdditions.iso
+        path: /mnt/cdrom
+        state: mounted
+        fstype: auto
+        opts: exec
+      become: yes
+
+    - name: Install virtual box guest additions
+      command: /mnt/cdrom/VBoxLinuxAdditions.run
+      # Virtual Box guest additions installer returns the return code 2
+      # but seems to work, so quick and dirty handle return code 2 not as fail
+      # Feel free to debug and add a pull request with full solution
+      register: ret
+      failed_when: ret.rc == 1 or ret.rc > 2
+      become: yes
+
+    - name: Unmount virtual box guest additions iso image
+      ansible.posix.mount:
+        path: /mnt/cdrom
+        state: absent
+      become: yes

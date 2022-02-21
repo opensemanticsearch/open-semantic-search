@@ -25,7 +25,11 @@ The installation and configuration of *Open Semantic Search* and the *Gnome* des
 Dependencies for the VM build process:
 
 - *Virtual Box*
+
 - *Vagrant*
+
+- *Vagrant* plugin *vagrant-reload* (Command: `vagrant plugin install vagrant-reload`)
+
 - [*Debian* package of *Open Semantic Search*](../../README.md#build-deb-package) as `open-semantic-search.deb` in this directory
 
 
@@ -63,6 +67,7 @@ After fixing bugs in the playbook you can replay the playbook by
 vagrant provision
 ```
 
+
 ### Shell
 
 You can get a shell running inside the VM by the command
@@ -77,7 +82,8 @@ Within the opened shell you can get root by
 sudo su
 ```
 
+
 ### Virtual Box GUI
 
 To start the VM in the Virtual Box GUI, where you have access to Gnome Desktop UI too,
-you can set/uncomment the option `vb.gui = true` in `Vagrantfile`.
+you can set/uncomment the option `vb.gui = true` in the config file [`Vagrantfile`](Vagrantfile).

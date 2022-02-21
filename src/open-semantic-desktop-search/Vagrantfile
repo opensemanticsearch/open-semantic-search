@@ -89,6 +89,19 @@ Vagrant.configure("2") do |config|
   #   apt-get install -y apache2
   # SHELL
 
+  # Install Virtualbox guest additions
+  config.vm.provision "ansible" do |ansible|
+    ansible.verbose = "v"
+    ansible.playbook = "playbook-virtualbox-guest-additions.yml"
+  end
+
+  # Reboot VM to enable Virtual Box Additions with new kernel
+  # since if not, it seems on the very first start of exported VM
+  # shared folders are mounted with rights root:root (not group vboxsf)
+  # and indexing will fail due missing rights of user and etl
+  config.vm.provision :reload
+
+  # Install Open Semantic Search and Gnome desktop environment
   config.vm.provision "ansible" do |ansible|
     ansible.verbose = "v"
     ansible.playbook = "playbook.yml"
