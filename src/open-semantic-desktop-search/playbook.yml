@@ -260,3 +260,28 @@
     - name: Overwrite deleted files with zeros for better compression of disk image export
       shell: dd if=/dev/zero of=/ZEROS bs=1M; sync; rm -f /ZEROS
       become: yes
+
+    - name: Create swap file
+      command: fallocate -l 4G /swapfile
+      become: yes
+
+    - name: change swap file permissions
+      file:
+        path: /swapfile
+        owner: root
+        group: root
+        mode: 0600
+      become: yes
+
+    - name: Format swap file
+      command: mkswap /swapfile
+      become: yes
+
+    - name: Mount entry for swap file
+      mount:
+        src: /swapfile
+        path: none
+        fstype: swap
+        opts: sw
+        state: present
+      become: yes
