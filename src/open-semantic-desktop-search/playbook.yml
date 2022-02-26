@@ -21,6 +21,12 @@
         name: task-desktop
       become: yes
 
+    - name: Stop Gnome Display Manager
+      ansible.builtin.service:
+        name: gdm
+        state: stopped
+      become: yes
+
     - name: Install zenity
       apt:
         name: zenity
@@ -37,15 +43,21 @@
         deb: /open-semantic-search.deb
       become: yes
 
-    - name: Stop Solr
+    - name: Stop cron
       ansible.builtin.service:
-        name: solr
+        name: cron
         state: stopped
       become: yes
 
-    - name: Stop RabbitMQ
+    - name: Stop Flower
       ansible.builtin.service:
-        name: rabbitmq-server
+        name: flower
+        state: stopped
+      become: yes
+
+    - name: Stop Apache
+      ansible.builtin.service:
+        name: apache2
         state: stopped
       become: yes
 
@@ -55,15 +67,39 @@
         state: stopped
       become: yes
 
+    - name: Stop Filemonitoring
+      ansible.builtin.service:
+        name: opensemanticetl-filemonitoring
+        state: stopped
+      become: yes
+
     - name: Stop ETL workers
       ansible.builtin.service:
         name: opensemanticetl
         state: stopped
       become: yes
 
+    - name: Stop RabbitMQ
+      ansible.builtin.service:
+        name: rabbitmq-server
+        state: stopped
+      become: yes
+
+    - name: Stop Solr
+      ansible.builtin.service:
+        name: solr
+        state: stopped
+      become: yes
+
     - name: Stop Tika
       ansible.builtin.service:
         name: tika
+        state: stopped
+      become: yes
+
+    - name: Stop Tika Fake OCR service
+      ansible.builtin.service:
+        name: tika-fake-ocr
         state: stopped
       become: yes
 
