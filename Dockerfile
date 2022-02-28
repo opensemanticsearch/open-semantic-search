@@ -56,12 +56,11 @@ COPY ./src/solr-php-ui/etc /etc
 
 COPY ./src/solr-php-ui/src /usr/share/solr-php-ui/
 
-# Move config from php directory config to systems config directory /etc
-RUN mv ${BUILDDIR}/usr/share/solr-php-ui/config/* /etc/solr-php-ui/
+# This directory will provide initial content to the configuration volume:
+RUN mv /usr/share/solr-php-ui/config /usr/share/solr-php-ui/etc-volume
 
-# link from deleted php directory to this new config destination
-RUN rmdir /usr/share/solr-php-ui/config
-RUN ln -s /etc/solr-php-ui/ /usr/share/solr-php-ui/config
+# link from renamed php directory to the configuration volume:
+RUN ln -s /etc/solr-php-ui /usr/share/solr-php-ui/config
 
 #
 # Include Solr Relevance Ranking Analysis Tool
@@ -75,6 +74,14 @@ COPY ./src/solr-relevance-ranking-analysis/src/solr_relevance_ranking_analysis /
 
 COPY ./src/open-semantic-search-apps/src /var/lib/opensemanticsearch/
 COPY ./src/open-semantic-search-apps/etc /etc/
+COPY ./src/open-semantic-search-apps/var /var/
+
+#
+# Gather the initial content for the volumes
+#
+
+RUN mv /var/opensemanticsearch /var/lib/opensemanticsearch/var-volume
+RUN mv /etc/opensemanticsearch /var/lib/opensemanticsearch/etc-volume
 
 #
 # Include Open Semantic Entity Search API
@@ -105,46 +112,8 @@ COPY ./src/solr-ontology-tagger/src /usr/lib/python3/dist-packages/
 # export static files to directory for webserver
 RUN python3 /var/lib/opensemanticsearch/manage.py collectstatic --noinput
 
-# Copy ontologies from/to var/opensemanticsearch/media/ontologies (which creates /var/opensemanticsearch/)
-COPY ./src/open-semantic-search-apps/var /var/
-
-RUN mkdir /var/opensemanticsearch/db
-
-RUN chown -R www-data:www-data /var/opensemanticsearch
-
-# create or upgrade DB
-RUN python3 /var/lib/opensemanticsearch/manage.py migrate
-
-# allow Django running in apache2 context to read and write to DB
-RUN chown www-data:www-data /var/opensemanticsearch/db/db.sqlite3
-
-# but others should not be able to read DB entries
-RUN chmod o-r /var/opensemanticsearch/db/db.sqlite3
-
-# allow Django running in apache2 context to write facets config
-RUN chgrp www-data /etc/opensemanticsearch/facets
-RUN chmod g+r /etc/opensemanticsearch/facets
-RUN chmod g+w /etc/opensemanticsearch/facets
-
-# allow Django running in apache2 context to write ETL config
-RUN chgrp www-data /etc/opensemanticsearch/etl-webadmin
-RUN chmod g+r /etc/opensemanticsearch/etl-webadmin
-RUN chmod g+w /etc/opensemanticsearch/etl-webadmin
-
-# allow Django running in apache2 context to write UI config
-RUN chgrp www-data /etc/solr-php-ui/config.webadmin.php
-RUN chmod g+r /etc/solr-php-ui/config.webadmin.php
-RUN chmod g+w /etc/solr-php-ui/config.webadmin.php
-RUN chgrp www-data /etc/solr-php-ui/config.facets.php
-RUN chmod g+r /etc/solr-php-ui/config.facets.php
-RUN chmod g+w /etc/solr-php-ui/config.facets.php
-
 # enable apache2 module for Django
 RUN a2enmod wsgi
-
-# allow Django running in apache2 context to write OCR dictionary
-RUN chown www-data:www-data /etc/opensemanticsearch/ocr/dictionary.txt
-RUN chmod o+r /etc/opensemanticsearch/ocr/dictionary.txt
 
 # Reverse proxy for Flower task management web ui
 COPY ./src/flower/etc/apache2 /etc/apache2
