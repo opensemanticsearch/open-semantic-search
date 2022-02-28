@@ -63,6 +63,8 @@ services:
     image: opensemanticsearch/solr
     build:
       context: src/solr.deb/
+    environment:
+      - SOLR_LOCAL_HOST=0.0.0.0
     volumes:
       - data_solr:/var/solr
 
