@@ -39,6 +39,9 @@ chown -R www-data:www-data /var/opensemanticsearch
 # but others should not be able to read DB entries
 chmod -R o-rwx /var/opensemanticsearch/db
 
+# write Open Semantic ETL config and Solr PHP UI config by settings of web admin ui / in Django DB
+python3 /var/lib/opensemanticsearch/manage.py configs
+
 # setup facets/classes in Open Semantic ETL config and index entities in Open Semantic Entity Search API
 python3 /var/lib/opensemanticsearch/manage.py entities
 
