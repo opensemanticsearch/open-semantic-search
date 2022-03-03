@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 
 VERSION=`date +%y.%m.%d`
 PACKAGE=open-semantic-search_${VERSION}.deb
