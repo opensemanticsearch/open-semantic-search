@@ -1,10 +1,11 @@
 #!/bin/bash
 
-VERSION=`date +%y.%m.%d`
-PACKAGE=open-semantic-search_${VERSION}.deb
+PACKAGE=open-semantic-search.deb
 BUILDDIR=/tmp/open-semantic-search-$$.deb
 INCLUDE_PACKAGES="solr.deb tika-server.deb spacy-services.deb open-semantic-etl solr-php-ui open-semantic-search-apps solr-synonames flower"
 
+# Change dir to src dir (for the case this build script is started from other dir)
+cd "$(dirname "$0")"
 
 echo "Building ${PACKAGE} in temp directory ${BUILDDIR}"
 mkdir ${BUILDDIR}

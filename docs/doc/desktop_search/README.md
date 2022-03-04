@@ -4,11 +4,11 @@ authors:
     - Markus Mandalka
 ---
 
-# Open Semantic Desktop Search
+# Open Semantic Desktop Search (VM)
 
 ## Free software for your own desktop search engine for full text search, exploratory search and text analysis on Windows or Mac
 
-Open Semantic Desktop search is **free open source software** for your own **desktop search engine** with integrated text analytics and research tools for **full text search, exploratory search & text mining** in large document sets, many PDF files, Word documents and many other file formats on Windows or Mac.
+Open Semantic Desktop Search is **free open source software** for your own **desktop search engine** with integrated text analytics and research tools for **full text search, exploratory search & text mining** in large document sets, many PDF files, Word documents and many other file formats on Windows or Mac.
 
 
 ## Desktop search engine package as virtual machine for single Linux, Windows or Mac users
@@ -24,7 +24,7 @@ Like described in the [tutorial with screenshots how to install and configure th
 ## Starting the search engine
 
 * Start [*Virtual Box*](https://www.virtualbox.org)
-* Start the virtual machine "*Open Semantic Desktop Search*"
+* Start the virtual machine (VM) "*Open Semantic Desktop Search*"
 
 
 ## Search, explore and analyse

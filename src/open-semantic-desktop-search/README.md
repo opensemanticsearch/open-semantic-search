@@ -30,8 +30,6 @@ Dependencies for the VM build process:
 
 - *Vagrant* plugin *vagrant-reload* (Command: `vagrant plugin install vagrant-reload`)
 
-- [*Debian* package of *Open Semantic Search*](../../README.md#build-deb-package) as `open-semantic-search.deb` in this directory
-
 
 ## Build
 
