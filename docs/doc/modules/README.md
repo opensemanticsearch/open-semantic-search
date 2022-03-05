@@ -10,41 +10,93 @@ authors:
 
 # Architecture overview
 
-## Flowchart of document processing
+## Flowchart of dataflow and document processing
 
 ```mermaid
 
-flowchart
+flowchart TD
+
 FILEMONITORING[Filesystem monitoring]
 FILEMONITORING-->|Immediatelly add task if changed or new file| TASK_QUEUE
+
 SCHEDULER[Cron scheduler]
 SCHEDULER -->|Regularly start crawler| FILECRAWLER
+
 FILECRAWLER[File directory crawler]
 FILECRAWLER -->|Add task for each new or changed file in crawled directory| TASK_QUEUE
-TASK_QUEUE[Celery task queue]
+
+TASK_QUEUE[(Celery task queue)]
 TASK_QUEUE-->|Parallel processing of files by multiple ETL workers| ETL_WORKER
+
 ETL_WORKER[Open Semantic ETL worker]
-ETL_WORKER -->|Running configured plugins| TIKA_PLUGIN
-TIKA_PLUGIN[ETL Plugin for Apache Tika] -->|Text extraction| TIKA
-TIKA[Apache Tika Server]
-TIKA-->|Image files or images in documents|OCR
-OCR[Tesseract OCR]
-OCR-->|Recognized plain text| TIKA
-TIKA -->|Plain text| EPLUGINS
-EPLUGINS[Plugins for extraction of named entities]
-EPLUGINS -->|Entity extraction and entity linking| EL
-EPLUGINS -->|Named entity recognition by machine learning| NER
-EL[Open Semantic Entity Search API]
-EL -->|Extracted named entities| OTHER_PLUGINS
-NER[SpaCy NER]
-NER -->|Recognized named entities| OTHER_PLUGINS
-OTHER_PLUGINS[Enhancer plugins for data analysis and data enrichment f.e. extract amounts of money]
+ETL_WORKER -->|Running configured plugins one by one| TIKA
+
+subgraph TIKA [Apache Tika for metadata and text extraction]
+  direction LR
+
+  TIKA_PLUGIN[ETL plugin calling Tika]
+  TIKA_PLUGIN -->|Document file| TIKA_SERVER
+
+  TIKA_SERVER[Apache Tika Server]
+  TIKA_SERVER -->|Image files or images in PDF|OCR
+  TIKA_SERVER -->|Extracted text| TIKA_PLUGIN
+  
+  OCR[Tesseract OCR]
+  OCR-->|Recognized plain text| TIKA_SERVER
+
+end
+
+TIKA -->|Extracted text and metadata| EntitySearchAPI
+
+
+subgraph EntitySearchAPI [Named Entity Extraction by lists of names, thesaurus and ontologies]
+  direction LR
+  
+  EL_PLUGIN[ETL plugin for entity extraction]
+  EL_PLUGIN -->|Plain text| EL
+  
+  EL[Open Semantic Entity Search API]
+  EL -->|Extracted entities| EL_PLUGIN
+
+  THESAURUS[(Thesaurus)]
+  THESAURUS -->|SKOS| EL
+  ONTOLOGIES[(Ontologies)]
+  ONTOLOGIES -->|RDF| EL
+end
+EntitySearchAPI -->|Added extracted named entities by lists of names, thesaurus and ontologies| NER
+
+NER[ETL plugin for spaCy Named Entity Recognition by Machine Learning]
+NER -->|Added recognized named entities| ANNOTATIONS
+
+subgraph ANNOTATIONS [Annotations]
+  direction RL
+
+  ANNOTATIONS_DB[(DB with tags and annotations by humans)]
+  ANNOTATIONS_DB --> ANNOTATIONS_PLUGIN
+
+  ANNOTATIONS_PLUGIN[ETL enrichment plugin getting tags and annotations]
+end
+ANNOTATIONS -->|Added tags and annotations| ANALYSIS_PLUGIN
+
+ANALYSIS_PLUGIN[ETL data analysis plugin like extraction amounts of money]
+ANALYSIS_PLUGIN -->|Added extracted amounts of money| OTHER_PLUGINS
+
+OTHER_PLUGINS[Other configured ETL Plugins]
 OTHER_PLUGINS -->|Plain text and strucured data| EXPORTER
+
 EXPORTER[Exporter plugins]
-EXPORTER -->|Index data| SOLR
-EXPORTER -->|Index data| NEO4J
-SOLR[Apache Solr]
-NEO4J[Neo4J Graph Database]
+EXPORTER -->|Index data for full text search and faceting| SOLR
+EXPORTER -->|Index linked data for graph search| NEO4J
+
+NEO4J[(Neo4J Graph Database)]
+
+SOLR[(Apache Solr document index)]
+SOLR -->|Search results| UI
+UI[Web user interface]
+UI -->|Solr search query| SOLR
+
+
+
 ```
 
 # Components and Modules
