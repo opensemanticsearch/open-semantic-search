@@ -12,34 +12,108 @@ authors:
 
 ## Components and Modules
 
-* **[User Interface](../search/README.md)**: Client and user interface
-	+ **Search query forms**: Search query form for full text search
-	+ **Explorer and navigator**: Search with full text search and navigate (exploratory search) the index or search results with **interactive filters (facets)**
-	+ **Viewers**: Parts of the UI to show different views (i.e. analytics like wordlcouds or trend charts) and previews for special formats (i.e. photos, documents, email ...)
-	+ **Annotators**: Web Apps for tagging documents or CMS with forms and fields to manage meta data like tags or annotations
-	+ **Search Apps**: Applications and user interfaces for search like search with lists tool or named entities manager
-* **Index and search server (Solr or Elastic Search)**: Search server managing the index (indexer) and running search queries (query handler)
-* **[Open Semantic ETL](../../etl "Framework for data integration, data analysis and data enrichment")**: Framework for data integration, data analysis, data enrichment and ETL (Extract, transform, load) pipelines or chains
-	+ **[Connectors, importers, ingestors or crawlers](../admin/connectors)**: Import data from a data source (i.e. file system, file directory, file share, website or newsfeed)
-	+ **Parsers:** *Apache Tika* to extract text and metadata from different file formats and document formats
-	+ **[Data enrichment plugins and enhancer](../data_enrichment)**: Enhancing content with additional data like meta data (i.e. tagging or annotations) or analytics (i.e. OCR)
-	+ **ETL Exporter** or Loader for Solr or [Elastic Search](../../etl/elasticsearch): Indexing the data to search index
-* **Trigger**: Your CMS or your file system (file system monitoring) will notify the web service (API) when there is new data or when content changed, so you dont have to burn resources for recrawl often to be able to find new or changed content very soon
-* **[Web services (REST-API)](../admin/rest-api)**: Available via standard network protocol HTTP and waiting until you (i.e. using the web admin interface) or another service (i.e. using the REST-API) demands actions like crawling a directory or a webpage and starting this actions
-* **[Queue manager (Celery on RabbitMQ)](../admin/queue/README.md)**: Managing task queue and starting of text extraction, analysis, data enrichment and indexing jobs by the right balance of parallel workers
-* **[Scheduler](../admin/config/scheduler)**: Managing starting of scheduled indexing jobs. This can be crontab for Cron starting the command line tools. Or you schedule (re)crawl or data import jobs with the web interface of ManifoldCF which brings its own scheduler)
+- **[User Interface](../search/README.md)**: Client and user interface
+  - **Search query forms**: Search query form for full text search
+  - **Explorer and navigator**: Search with full text search and navigate (exploratory search) the index or search results with **interactive filters (facets)**
+    - **Viewers**: Parts of the UI to show different views (i.e. analytics like wordlcouds or trend charts) and previews for special formats (i.e. photos, documents, email ...)
+    - Code: /solr-php-ui/templates/
+  - **Annotators**: Web Apps for tagging documents or CMS with forms and fields to manage meta data like tags or annotations
+  - **Search Apps**: Applications and user interfaces for search like search with lists tool or named entities manager
+- **Index and search server (Solr or Elastic Search)**: Search server managing the index (indexer) and running search queries (query handler)
+  - Datamodel/Schema: src/solr.deb/var/solr/data/opensemanticsearch/conf/managed-schema
+  - Storage: /var/solr/data
+  - Log: /var/solr/logs/
+- **[Open Semantic ETL](../../etl "Framework for data integration, data analysis and data enrichment")**: Framework for data integration, data analysis, data enrichment and ETL (Extract, transform, load) pipelines or chains
+  - **[Connectors, importers, ingestors or crawlers](../admin/connectors)**: Import data from a data source (i.e. file system, file directory, file share, website or newsfeed)
+  - **Parsers:** *Apache Tika* to extract text and metadata from different file formats and document formats
+  - **Entity extraction and entity linking**: [Open Semantic Entity Search API](https://github.com/opensemanticsearch/open-semantic-entity-search-api/blob/master/README.md)
+  - **[Data enrichment plugins and enhancer](../data_enrichment)**: Enhancing content with additional data like meta data (i.e. tagging or annotations) or analytics (i.e. OCR)
+  - **ETL Exporter** or Loader for Solr or [Elastic Search](../../etl/elasticsearch): Indexing the data to search index
+- **Trigger**: Your CMS or your file system (file system monitoring) will notify the web service (API) when there is new data or when content changed, so you dont have to burn resources for recrawl often to be able to find new or changed content very soon
+- **[Web services (REST-API)](../admin/rest-api)**: Available via standard network protocol HTTP and waiting until you (i.e. using the web admin interface) or another service (i.e. using the REST-API) demands actions like crawling a directory or a webpage and starting this actions
+- **[Queue manager (Celery on RabbitMQ)](../admin/queue/README.md)**: Managing task queue and starting of text extraction, analysis, data enrichment and indexing jobs by the right balance of parallel workers
+- **[Scheduler](../admin/config/scheduler)**: Managing starting of scheduled indexing jobs. This can be crontab for Cron starting the command line tools.
+  Config: /etc/cron.d/open-semantic-search
+
+# Services and Microservices
+
+Linux services:
+
+tika
+  - Text extraction and OCR 
+
+tika-fake-ocr
+  - Text extraction without OCR
+
+solr
+  - Search index
+
+spacy-services
+  - spaCy NLP
+
+opensemanticetl
+  - ETL workers
+
+rabbitmq-server
+  - Task queue
+
+flower
+  - Task queue monitoring user interface
+
+apache2
+  - Search UI
+  - Search apps (f.e. thesaurus app or config UI)
+  - Entity Search API'
 
 
-# Workflow of document processing, extract, transform, load (ETL) and enhancing by data enrichment and data analysis
+# Document processing, extract, transform, load (ETL) and enhancing by data enrichment and data analysis
 
-How new data will be handled by this components and [ETL (extract, transform, load), document processing, data analysis and data enrichment](../../open-semantic-etl):
+How new data is handled by this components and [ETL (extract, transform, load), document processing, data analysis and data enrichment](../../open-semantic-etl):
+
+## Data flow
+```mermaid
+
+flowchart
+FILEMONITORING[Filesystem monitoring]
+FILEMONITORING-->|Immediatelly add task if changed or new file| TASK_QUEUE
+SCHEDULER[Cron scheduler]
+SCHEDULER -->|Regularly start crawler| FILECRAWLER
+FILECRAWLER[File directory crawler]
+FILECRAWLER -->|Add task for each new or changed file in crawled directory| TASK_QUEUE
+TASK_QUEUE[Celery task queue]
+TASK_QUEUE-->|Parallel processing| ETL_WORKER
+ETL_WORKER[Open Semantic ETL worker]
+ETL_WORKER --> TIKA_PLUGIN
+TIKA_PLUGIN[ETL Plugin for Apache Tika] -->|Text extraction| TIKA
+TIKA[Apache Tika Server]
+TIKA-->|Image files or images in documents|OCR
+OCR[Tesseract OCR]
+OCR-->|Recognized plain text| TIKA
+TIKA -->|Plain text| EPLUGINS
+EPLUGINS[Plugins for extraction of named entities]
+EPLUGINS -->|Entity extraction and entity linking| EL
+EPLUGINS -->|Named entity recognition by machine learning| NER
+EL[Open Semantic Entity Search API]
+EL -->|Extracted named entities| OTHER_PLUGINS
+NER[SpaCy NER]
+NER -->|Recognized named entities| OTHER_PLUGINS
+OTHER_PLUGINS[Enhancer plugins for data analysis and data enrichment f.e. extract amounts of money]
+OTHER_PLUGINS -->|Plain text and strucured data| EXPORTER
+EXPORTER[Exporter plugins]
+EXPORTER -->|Index data| SOLR
+EXPORTER -->|Index data| NEO4J
+SOLR[Apache Solr]
+NEO4J[Neo4J Graph Database]
+```
+
+
 * A user manually or a Cron daemon automatically from time to time starts a command
 * The command line tools or the web API getting this command starts a ETL (extract, transform, load), data analysis and data enrichment chain to import, analyze and index data
 * A input plugin or [connector](../admin/connectors) (i.e. the connector for the file system or the connector for a website) reads from its datasource
 * The connectors, an Apache Tika parser, or a file format based data converter or extractor extracts data from the given document or file format
 * The ETL framework calls all configured [enhancer plugins for data enrichment](../data_enrichment) to get additional analysis for the data or annotations to this data from a CMS.
 * The output storage plugin or indexer index the text and metadata to the Solr index or to the [Elastic Search index](../../etl/elastic_search), so all other tools can search this data
-* The user uses an user interface like the search user interface or some other tools to search based on the search API of this index
+* The user uses a user interface like the search user interface, the search apps or some other tools to search based on the search API of this index
 
 
 # User Interface and search applications
@@ -48,19 +122,14 @@ How new data will be handled by this components and [ETL (extract, transform, lo
 
 User Interface (supports responsive design for mobiles and tablets) for search, facetted search, preview, different views and visualizations.
 
-Based on Solr client *solr-php-client* (pure vanilla php) and standard User Interfaces (HTML5 and CSS with *Zurb Foundation*) and visualization libraries (*D3js*) so you can install and run it on standard PHP webspace without effort and wthout often not avaliable special PHP-modules)
+Based on Solr client *solr-php-client* (pure vanilla php) and standard User Interfaces (HTML5 and CSS with *Zurb Foundation*) and visualization libraries (*D3js*) so you can install and run it on standard PHP webspace without effort and without often not available special PHP-modules)
 
 [Learn more](../../solr-php-ui) ...
 
-
-## Alternate search clients and user interfaces
-
-* [Kibana](https://www.elastic.co/products/kibana)
-* [Velocity](https://cwiki.apache.org/confluence/display/solr/Velocity+Search+UI)
-* [Solarium](http://www.solarium-project.org/)
-* [Drupal Solr](https://drupal.org/project/apachesolr) or [Sarnia](https://drupal.org/project/sarnia)
-* [Hue Hadoop User Interface](http://www.gethue.com/)
-* [Blacklight](http://projectblacklight.org/)
+Documentation: [Howto seach](../search/README.md)
+Deployment /usr/share/solr-php-ui
+Log: /var/log/apache2/
+Sourcecode: src/solr-php-ui (Github...)
 
 
 # Index server
@@ -83,31 +152,7 @@ Preconfigured Solr Server running as daemon (so you have only to install the pac
 [Learn more](../../tagger) ...
 
 
-## Drupal CMS
-
-[Drupal](../../enhancer/rdf-drupal) provides collaborative editing, structure (taxonomies and semantic web technologies) and forms (Fields)
-
-[Learn more](../../enhancer/rdf-drupal) ...
-
-
-## Semantic Mediawiki
-
-
-[Semantic Mediawiki](http://www.semantic-mediawiki.org/) provides collaborative editing, structure (semantic web technologies), forms (Semantic Forms) and change-history
-
-
-## Alternate annotation tools for collaborative semantic annotations
-
-
-* [Neonion](http://neonion.org/)
-* [Pundit](http://www.thepund.it/)
-* [Hypothesis](http://hypothes.is/)
-* [AnnotatorJS](http://annotatorjs.org/)
-
-
-
 # Connectors
-
 
 *Crawler, connectors, data importer and converter:*
 ## [Connector Files (with OCR)](../../connector/files)
@@ -120,13 +165,12 @@ Crawl and index directories, files and documents into Solr. Including automatic 
 
 ## [Connector RSS (RSS-Feed)](../../connector/rss)
 
-
 Indexes Webpages from a RSS-Newsfeed
 
 [Learn more](../../connector/rss) ...
 
-## [Connector Web (HTTP)](../../connector/web)
 
+## [Connector Web (HTTP)](../../connector/web)
 
 Crawl and index Websites into Solr index.
 
@@ -135,148 +179,92 @@ Crawl and index Websites into Solr index.
 
 ## [Connector DB (SQL, MySQL, Postgresql)](../../connector/db)
 
-
 Index SQL databases like MySQL or PostgreSQL into Solr.
 
 [Learn more](../../connector/db) ...
 
 
-
-## [Connector Wiki (Mediawiki)](../../connector/wiki)
-
-
-Index Wikis like Mediawiki into Solr.
-
-[Learn more](../../connector/wiki) ...
-
-
-## [Connector E-Mail (IMAP)](../../connector/email)
-
-
-Index E-Mails into Solr.
-
-[Learn more](../../connector/email) ...
-
-
-
 ## [Connector Scraper (Scraping with Scrapy)](../../connector/scraper)
-
 
 ETL and webscraping framework to crawl, extract, transform and load structured data from websites (scraping).
 
 [Learn more](../../connector/scraper) ...
 
 
-## Connector Universal
-
-
-[Apache Manifold Connector Framework](http://manifoldcf.apache.org/) imports many different formats and datastructures into Solr or Elastic search.
-
-[Learn more](https://manifoldcf.apache.org/release/release-2.6/en_US/end-user-documentation.html) ...
-
-## Other ETL and data integration and transformation frameworks for data warehouses
-
-
-
-Ther are powerful [open source ETL-Frameworks for data integration, data enrichment, mapping and transformation](../../etl#frameworks).
-
-If there is an output plugin for Solr or for a format, which you can import with one of the connectors, you can use this frameworks to integrate, transform or enrich and load data to the search engine.
-
-
 # Scheduler
 
-
-
 If you use our connectors and want most flexibility use Cron and write a cronjob using our [command line tools](../admin/cmd) within a crontab or call our [REST-API](../admin/rest-api) within another webservice (i.e. webcron).
-
-If you use Apache ManifoldCF for imports, there is a scheduler built in there. Just set the time in the web admin interface.
 
 
 # Queue manager
 
-
 Reads and manages trigger signals for starting indexing queued files by batch mode (parallel processing but because of limited RAM resources with a maximum count of workers/processes at same time) with opensemanticsearch-etl-file.
 
-Filenames can be append to the queue by the REST API, Webinterface or command line tool.
+Filenames can be appended to the queue by the REST API, Webinterface or command line tool.
 
-[Learn more](../admin/config/queue) ...
+[Learn more](../admin/queue/README.md) ...
 
 
 # Data enrichment (Enhancer)
-
 
 Will enhance the indexed content with meta data or analytics
 
 [Learn more](../data_enrichment) ...
 
-## [Enhancer OCR](../../enhancer/ocr)
 
+## [Enhancer OCR](../../enhancer/ocr)
 
 Automatic textrecognition (OCR) for image files and images and graphics inside PDF (i.e. scans).
 [Learn more](../../solr-enhancer-ocr) ...
 
-## [Enhancer RDF](../../enhancer/rdf)
 
+## [Enhancer RDF](../../enhancer/rdf)
 
 Will enhance content with metadata in Resource Description Framework (RDF) format stored on a meta data server (i.e. tags and annotations in a Semantic Mediawiki or in [Drupal CMS](../../enhancer/rdf-drupal))
 
 [Learn more](../../enhancer/rdf) ...
 
-## [Enhancer XMP sidecar files](../../enhancer/xmp-sidecar-files)
 
+## [Enhancer XMP sidecar files](../../enhancer/xmp-sidecar-files)
 
 Metadata like tags or descriptions for photos are often saved in XMP (Extensible Metadata Plattform) sidecar files (i.e. by *Adobe Photoshop Lightroom*. This enhancer adds the metadata of this sidecar files to the index of the original document.
 
 [Learn more](../../enhancer/xmp-sidecar-files) ...
 
-## [Enhancer ZIP](../../enhancer/zip)
 
+## [Enhancer ZIP](../../enhancer/zip)
 
 This enhancer recognizes and unzips zip archives to index documents and files inside a zip files, too.
 
 [Learn more](../../enhancer/zip) ...
 
 
-
-## [Apache Stanbol Enhancement Engines](http://stanbol.apache.org/docs/trunk/components/enhancer/engines/list)
-
-
-[Apache Stanbol Framework](http://stanbol.apache.org/) integrates many different enhancers and connectors to external APIs for data enrichment.
-
-[Learn more](http://stanbol.apache.org/docs/trunk/components/enhancer/engines/list) ...
-
-
 # Web Services
-
 
 ## Web admin interface
 
-
 Admin interface to start actions like crawling a directory or a webpage via web interface without command line tools and starting this actions.
 
-[Learn more](../admin/rest-api) ...
+[Learn more](../admin/README.md) ...
+
 
 ## [REST-API](../admin/rest-api)
-
 
 Application programming interface (API) available via generic and standard network protocol HTTP and waiting until another (web) service or software demands for an action like crawling a directory or a webpage or indexing changed data (i.e. directly started after data change by a [trigger](#trigger) of the cms) and starting this actions.
 
 [Learn more](../admin/rest-api) ...
 
 
-
 # Trigger
 
+Using triggers you don't need to recrawl often to be able to find new or changed content within seconds:
 
-Using triggers you dont need to recrawl often to be able to find new or changed content within seconds:
-
-If there are hundrets of Gigabytes or some Terabytes of data and millions of files, standard recrawls can take hours in which your document can not be found and eat many resources.
+If there are hundreds of Gigabytes or some Terabytes of data and millions of files, standard recrawls can take hours in which your document can not be found and eat many resources.
 
 With triggers that works the other way: your CMS or file server will send a signal if there is new content or a litte part has changed and the queue manager will index only this file or page very soon.
 
 
 ## [Trigger Filemonitoring](../../trigger/filemonitoring)
-
 
 File system monitoring based on *itnotify*.
 
@@ -285,19 +273,13 @@ Monitors files and file folders and index them (again), so that new or changed d
 [Learn more](../../trigger/filemonitoring) ...
 
 
-## Trigger Mediawiki
-
-
-After saving a page the Semantic MediaWiki module notifies the search engine about changed or new content.
-
 ## Trigger Drupal
-
 
 After saving a page the [Drupal module](https://www.drupal.org/project/rules) notifies the search engine about changed or new content.
 
 [Learn more](https://www.drupal.org/project/rules) ...
 
-## Generic triggers
 
+## Generic triggers
 
 Like for Drupal (see before) there are generic trigger modules available for many other software projects, too. So install them and configure them to the URL of our [REST-API](../admin/rest-api) to recrawl changed data of the other software or webservices.
