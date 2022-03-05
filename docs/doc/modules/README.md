@@ -10,7 +10,7 @@ authors:
 
 # Architecture overview
 
-## Flowchart
+## Flowchart of document processing
 
 ```mermaid
 
@@ -22,7 +22,7 @@ SCHEDULER -->|Regularly start crawler| FILECRAWLER
 FILECRAWLER[File directory crawler]
 FILECRAWLER -->|Add task for each new or changed file in crawled directory| TASK_QUEUE
 TASK_QUEUE[Celery task queue]
-TASK_QUEUE-->|Parallel processing| ETL_WORKER
+TASK_QUEUE-->|Parallel processing of files by multiple ETL workers| ETL_WORKER
 ETL_WORKER[Open Semantic ETL worker]
 ETL_WORKER -->|Running configured plugins| TIKA_PLUGIN
 TIKA_PLUGIN[ETL Plugin for Apache Tika] -->|Text extraction| TIKA
