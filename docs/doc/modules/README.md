@@ -10,28 +10,32 @@ authors:
 
 # Architecture overview
 
-## Flowchart of dataflow and document processing
+## Flowchart of data flow and document processing
 
 ```mermaid
 
 flowchart TD
 
 FILEMONITORING[Filesystem monitoring]
-FILEMONITORING-->|Immediatelly add task if changed or new file| TASK_QUEUE
+FILEMONITORING-->|Immediatelly add task if changed or new file| CELERY
 
 SCHEDULER[Cron scheduler]
 SCHEDULER -->|Regularly start crawler| FILECRAWLER
 
 FILECRAWLER[File directory crawler]
-FILECRAWLER -->|Add task for each new or changed file in crawled directory| TASK_QUEUE
+FILECRAWLER -->|Add task for each new or changed file in crawled directory| CELERY
 
-TASK_QUEUE[(Celery task queue)]
-TASK_QUEUE-->|Parallel processing of files by multiple ETL workers| ETL_WORKER
+CELERY[Celery task manager]
+CELERY -->|Parallel processing of files by multiple ETL workers| ETL_WORKER
+CELERY --> RABBITMQ
+
+RABBITMQ[(RabbitMQ task queue)]
+RABBITMQ --> CELERY
 
 ETL_WORKER[Open Semantic ETL worker]
 ETL_WORKER -->|Running configured plugins one by one| TIKA
 
-subgraph TIKA [Apache Tika for metadata and text extraction]
+subgraph TIKA [Apache Tika for text extraction and metadata extraction]
   direction LR
 
   TIKA_PLUGIN[ETL plugin calling Tika]
@@ -68,10 +72,10 @@ EntitySearchAPI -->|Added extracted named entities by lists of names, thesaurus 
 NER[ETL plugin for spaCy Named Entity Recognition by Machine Learning]
 NER -->|Added recognized named entities| ANNOTATIONS
 
-subgraph ANNOTATIONS [Annotations]
+subgraph ANNOTATIONS [Get tags and annotations for this documents made by humans]
   direction RL
 
-  ANNOTATIONS_DB[(DB with tags and annotations by humans)]
+  ANNOTATIONS_DB[(DB with tags and annotations)]
   ANNOTATIONS_DB --> ANNOTATIONS_PLUGIN
 
   ANNOTATIONS_PLUGIN[ETL enrichment plugin getting tags and annotations]
@@ -86,15 +90,18 @@ OTHER_PLUGINS -->|Plain text and strucured data| EXPORTER
 
 EXPORTER[Exporter plugins]
 EXPORTER -->|Index data for full text search and faceting| SOLR
+EXPORTER -->|Index data for full text search and faceting| ELASTICSEARCH
 EXPORTER -->|Index linked data for graph search| NEO4J
 
-NEO4J[(Neo4J Graph Database)]
 
 SOLR[(Apache Solr document index)]
 SOLR -->|Search results| UI
-UI[Web user interface]
+UI[Web user interface for search]
 UI -->|Solr search query| SOLR
 
+ELASTICSEARCH[(Alternate Elastic Search)]
+
+NEO4J[(Neo4J Graph Database)]
 
 
 ```
