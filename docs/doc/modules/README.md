@@ -10,7 +10,44 @@ authors:
 
 # Architecture overview
 
-## Components and Modules
+## Flowchart
+
+```mermaid
+
+flowchart
+FILEMONITORING[Filesystem monitoring]
+FILEMONITORING-->|Immediatelly add task if changed or new file| TASK_QUEUE
+SCHEDULER[Cron scheduler]
+SCHEDULER -->|Regularly start crawler| FILECRAWLER
+FILECRAWLER[File directory crawler]
+FILECRAWLER -->|Add task for each new or changed file in crawled directory| TASK_QUEUE
+TASK_QUEUE[Celery task queue]
+TASK_QUEUE-->|Parallel processing| ETL_WORKER
+ETL_WORKER[Open Semantic ETL worker]
+ETL_WORKER -->|Running configured plugins| TIKA_PLUGIN
+TIKA_PLUGIN[ETL Plugin for Apache Tika] -->|Text extraction| TIKA
+TIKA[Apache Tika Server]
+TIKA-->|Image files or images in documents|OCR
+OCR[Tesseract OCR]
+OCR-->|Recognized plain text| TIKA
+TIKA -->|Plain text| EPLUGINS
+EPLUGINS[Plugins for extraction of named entities]
+EPLUGINS -->|Entity extraction and entity linking| EL
+EPLUGINS -->|Named entity recognition by machine learning| NER
+EL[Open Semantic Entity Search API]
+EL -->|Extracted named entities| OTHER_PLUGINS
+NER[SpaCy NER]
+NER -->|Recognized named entities| OTHER_PLUGINS
+OTHER_PLUGINS[Enhancer plugins for data analysis and data enrichment f.e. extract amounts of money]
+OTHER_PLUGINS -->|Plain text and strucured data| EXPORTER
+EXPORTER[Exporter plugins]
+EXPORTER -->|Index data| SOLR
+EXPORTER -->|Index data| NEO4J
+SOLR[Apache Solr]
+NEO4J[Neo4J Graph Database]
+```
+
+# Components and Modules
 
 - **[User Interface](../search/README.md)**: Client and user interface
   - **Search query forms**: Search query form for full text search
@@ -34,6 +71,20 @@ authors:
 - **[Queue manager (Celery on RabbitMQ)](../admin/queue/README.md)**: Managing task queue and starting of text extraction, analysis, data enrichment and indexing jobs by the right balance of parallel workers
 - **[Scheduler](../admin/config/scheduler)**: Managing starting of scheduled indexing jobs. This can be crontab for Cron starting the command line tools.
   Config: /etc/cron.d/open-semantic-search
+
+
+# Document processing, extract, transform, load (ETL) and enhancing by data enrichment and data analysis
+
+How (new) data is handled by this components and [ETL (extract, transform, load), document processing, data analysis and data enrichment](../../open-semantic-etl):
+
+* A user manually or a Cron daemon automatically from time to time starts a command
+* The command line tools or the web API getting this command starts a ETL (extract, transform, load), data analysis and data enrichment chain to import, analyze and index data
+* A input plugin or [connector](../admin/connectors) (i.e. the connector for the file system or the connector for a website) reads from its datasource
+* The connectors, an Apache Tika parser, or a file format based data converter or extractor extracts data from the given document or file format
+* The ETL framework calls all configured [enhancer plugins for data enrichment](../data_enrichment) to get additional analysis for the data or annotations to this data from a CMS.
+* The output storage plugin or indexer index the text and metadata to the Solr index or to the [Elastic Search index](../../etl/elastic_search), so all other tools can search this data
+* The user uses a user interface like the search user interface, the search apps or some other tools to search based on the search API of this index
+
 
 # Services and Microservices
 
@@ -63,58 +114,8 @@ flower
 apache2
   - Search UI
   - Search apps (f.e. thesaurus app or config UI)
-  - Entity Search API'
-
-
-# Document processing, extract, transform, load (ETL) and enhancing by data enrichment and data analysis
-
-How new data is handled by this components and [ETL (extract, transform, load), document processing, data analysis and data enrichment](../../open-semantic-etl):
-
-## Data flow
-```mermaid
-
-flowchart
-FILEMONITORING[Filesystem monitoring]
-FILEMONITORING-->|Immediatelly add task if changed or new file| TASK_QUEUE
-SCHEDULER[Cron scheduler]
-SCHEDULER -->|Regularly start crawler| FILECRAWLER
-FILECRAWLER[File directory crawler]
-FILECRAWLER -->|Add task for each new or changed file in crawled directory| TASK_QUEUE
-TASK_QUEUE[Celery task queue]
-TASK_QUEUE-->|Parallel processing| ETL_WORKER
-ETL_WORKER[Open Semantic ETL worker]
-ETL_WORKER --> TIKA_PLUGIN
-TIKA_PLUGIN[ETL Plugin for Apache Tika] -->|Text extraction| TIKA
-TIKA[Apache Tika Server]
-TIKA-->|Image files or images in documents|OCR
-OCR[Tesseract OCR]
-OCR-->|Recognized plain text| TIKA
-TIKA -->|Plain text| EPLUGINS
-EPLUGINS[Plugins for extraction of named entities]
-EPLUGINS -->|Entity extraction and entity linking| EL
-EPLUGINS -->|Named entity recognition by machine learning| NER
-EL[Open Semantic Entity Search API]
-EL -->|Extracted named entities| OTHER_PLUGINS
-NER[SpaCy NER]
-NER -->|Recognized named entities| OTHER_PLUGINS
-OTHER_PLUGINS[Enhancer plugins for data analysis and data enrichment f.e. extract amounts of money]
-OTHER_PLUGINS -->|Plain text and strucured data| EXPORTER
-EXPORTER[Exporter plugins]
-EXPORTER -->|Index data| SOLR
-EXPORTER -->|Index data| NEO4J
-SOLR[Apache Solr]
-NEO4J[Neo4J Graph Database]
-```
-
-
-* A user manually or a Cron daemon automatically from time to time starts a command
-* The command line tools or the web API getting this command starts a ETL (extract, transform, load), data analysis and data enrichment chain to import, analyze and index data
-* A input plugin or [connector](../admin/connectors) (i.e. the connector for the file system or the connector for a website) reads from its datasource
-* The connectors, an Apache Tika parser, or a file format based data converter or extractor extracts data from the given document or file format
-* The ETL framework calls all configured [enhancer plugins for data enrichment](../data_enrichment) to get additional analysis for the data or annotations to this data from a CMS.
-* The output storage plugin or indexer index the text and metadata to the Solr index or to the [Elastic Search index](../../etl/elastic_search), so all other tools can search this data
-* The user uses a user interface like the search user interface, the search apps or some other tools to search based on the search API of this index
-
+  - Entity Search API
+  
 
 # User Interface and search applications
 
