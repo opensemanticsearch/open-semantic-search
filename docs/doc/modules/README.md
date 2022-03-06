@@ -17,69 +17,102 @@ authors:
 flowchart TD
 
 FILEMONITORING[Filesystem monitoring]
+click FILEMONITORING "../../trigger/filemonitoring/"
+
 FILEMONITORING-->|Immediatelly add task if changed or new file| CELERY
 
 SCHEDULER[Cron scheduler]
+click SCHEDULER "https://github.com/opensemanticsearch/open-semantic-search-apps/blob/master/etc/cron.d/open-semantic-search"
+
 SCHEDULER -->|Regularly start crawler| FILECRAWLER
 
 FILECRAWLER[File directory crawler]
+click FILECRAWLER "https://github.com/opensemanticsearch/open-semantic-etl/blob/master/src/opensemanticetl/etl_filedirectory.py"
+
 FILECRAWLER -->|Add task for each new or changed file in crawled directory| CELERY
 
 CELERY[Celery task manager]
+click CELERY "../admin/queue/"
+
 CELERY -->|Parallel processing of files by multiple ETL workers| ETL_WORKER
 CELERY --> RABBITMQ
 
 RABBITMQ[(RabbitMQ task queue)]
+click RABBITMQ "../admin/queue/"
+
 RABBITMQ --> CELERY
 
 ETL_WORKER[Open Semantic ETL worker]
+click ETL_WORKER "https://github.com/opensemanticsearch/open-semantic-etl/blob/master/src/opensemanticetl/tasks.py"
+
 ETL_WORKER -->|Running configured plugins one by one| TIKA
 
 subgraph TIKA [Apache Tika for text extraction and metadata extraction]
   direction LR
 
   TIKA_PLUGIN[ETL plugin calling Tika]
+  click TIKA_PLUGIN "https://github.com/opensemanticsearch/open-semantic-etl/blob/master/src/opensemanticetl/enhance_extract_text_tika_server.py"
+  
   TIKA_PLUGIN -->|Document file| TIKA_SERVER
 
   TIKA_SERVER[Apache Tika Server]
+  click TIKA_SERVER "https://github.com/opensemanticsearch/tika-server.deb"
+  
   TIKA_SERVER -->|Image files or images in PDF|OCR
   TIKA_SERVER -->|Extracted text| TIKA_PLUGIN
   
   OCR[Tesseract OCR]
+  click OCR "https://github.com/opensemanticsearch/tesseract-ocr-cache"
+
   OCR-->|Recognized plain text| TIKA_SERVER
 
 end
 
 TIKA -->|Extracted text and metadata| EntitySearchAPI
 
-
 subgraph EntitySearchAPI [Named Entity Extraction by lists of names, thesaurus and ontologies]
   direction LR
   
   EL_PLUGIN[ETL plugin for entity extraction]
+  click EL_PLUGIN "https://github.com/opensemanticsearch/open-semantic-etl/blob/master/src/opensemanticetl/enhance_entity_linking.py"
+  
   EL_PLUGIN -->|Plain text| EL
   
   EL[Open Semantic Entity Search API]
+  click EL "https://github.com/opensemanticsearch/open-semantic-entity-search-api"
+
   EL -->|Extracted entities| EL_PLUGIN
 
   THESAURUS[(Thesaurus)]
+  click THESAURUS "https://github.com/opensemanticsearch/open-semantic-search-apps/blob/master/src/thesaurus/models.py"
+  
   THESAURUS -->|SKOS| EL
+
   ONTOLOGIES[(Ontologies)]
+  click ONTOLOGIES "https://github.com/opensemanticsearch/open-semantic-search-apps/blob/master/src/ontologies/models.py"
+  
   ONTOLOGIES -->|RDF| EL
 end
+
 EntitySearchAPI -->|Added extracted named entities by lists of names, thesaurus and ontologies| NER
 
 NER[ETL plugin for spaCy Named Entity Recognition by Machine Learning]
+click NER "https://github.com/opensemanticsearch/open-semantic-etl/blob/master/src/opensemanticetl/enhance_ner_spacy.py"
+
 NER -->|Added recognized named entities| ANNOTATIONS
 
 subgraph ANNOTATIONS [Get tags and annotations for this documents made by humans]
   direction RL
 
   ANNOTATIONS_DB[(DB with tags and annotations)]
+  click ANNOTATIONS_DB "https://github.com/opensemanticsearch/open-semantic-search-apps/blob/master/src/annotate/models.py"
+  
   ANNOTATIONS_DB --> ANNOTATIONS_PLUGIN
 
   ANNOTATIONS_PLUGIN[ETL enrichment plugin getting tags and annotations]
+  click ANNOTATIONS_PLUGIN "https://github.com/opensemanticsearch/open-semantic-etl/blob/master/src/opensemanticetl/enhance_annotations.py"
 end
+
 ANNOTATIONS -->|Added tags and annotations| ANALYSIS_PLUGIN
 
 ANALYSIS_PLUGIN[ETL data analysis plugin like extraction amounts of money]
@@ -93,16 +126,19 @@ EXPORTER -->|Index data for full text search and faceting| SOLR
 EXPORTER -->|Index data for full text search and faceting| ELASTICSEARCH
 EXPORTER -->|Index linked data for graph search| NEO4J
 
-
 SOLR[(Apache Solr document index)]
+click SOLR "../../solr"
+
 SOLR -->|Search results| UI
+
 UI[Web user interface for search]
 UI -->|Solr search query| SOLR
 
 ELASTICSEARCH[(Alternate Elastic Search)]
+click ELASTICSEARCH "https://github.com/opensemanticsearch/open-semantic-etl/blob/master/src/opensemanticetl/export_elasticsearch.py"
 
 NEO4J[(Neo4J Graph Database)]
-
+click NEO4J "https://github.com/opensemanticsearch/open-semantic-etl/blob/master/src/opensemanticetl/export_neo4j.py"
 
 ```
 
@@ -150,7 +186,7 @@ How (new) data is handled by this components and [ETL (extract, transform, load)
 Linux services:
 
 tika
-  - Text extraction and OCR 
+  - Text extraction and OCR
 
 tika-fake-ocr
   - Text extraction without OCR
@@ -194,7 +230,7 @@ Sourcecode: src/solr-php-ui (Github...)
 
 # Index server
 
-## [Solr search server (daemon)](../../solr)
+## Solr search server
 
 Preconfigured Solr Server running as daemon (so you have only to install the package and no further configuration needed)
 
