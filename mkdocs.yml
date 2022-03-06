@@ -32,4 +32,5 @@ theme:
 
 plugins:
     - search
-    - mermaid2
+    - mermaid2:
+        version: 8.14.0
