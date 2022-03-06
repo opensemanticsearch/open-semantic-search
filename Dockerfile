@@ -11,7 +11,6 @@ RUN apt-get update && apt-get install --no-install-recommends --yes \
     php-xml \
     php-bcmath \
     librabbitmq4 \
-    mkdocs \
     python3-django \
     python3-pycurl \
     python3-rdflib \
@@ -32,7 +31,9 @@ RUN apt-get update && apt-get install --no-install-recommends --yes \
 # install django-import-export
 RUN pip3 install --no-cache-dir django-import-export && \
     pip3 install --no-cache-dir py2neo && \
-    pip3 install --no-cache-dir warcio
+    pip3 install --no-cache-dir warcio && \
+    pip3 install --no-cache-dir mkdocs && \
+    pip3 install --no-cache-dir mkdocs-mermaid2-plugin
 
 COPY ./src/tika-python/tika /usr/lib/python3/dist-packages/tika
 COPY ./src/open-semantic-etl/src /usr/lib/python3/dist-packages/
