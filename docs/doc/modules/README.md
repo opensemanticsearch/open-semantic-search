@@ -10,7 +10,154 @@ authors:
 
 # Architecture overview
 
-## Flowchart of data flow and document processing
+## Overview of services and main components
+
+The relations in this chart show dependencies and connections between services and main components witch show different directions than the data flow (see another [flowchart of document processing and data flow](#flowchart-of-document-processing-and-data-flow)).
+
+```mermaid
+
+flowchart TB
+
+
+subgraph CONTAINER_UI [User interface]
+
+  direction TB
+
+  subgraph COMPONENT_WEBSERVER [Apache webserver]
+
+    direction TB
+
+  
+    subgraph COMPONENT_DJANGO[Python Django]
+
+      COMPONENT_APPS[Web apps]
+
+      COMPONENT_DJANGO_DB[(Django DB)]
+      COMPONENT_APPS ----> COMPONENT_DJANGO_DB
+    end
+
+    subgraph COMPONENT_PHP[PHP]
+      COMPONENT_SEARCH_UI[Solr-PHP-UI]
+    end
+  
+  end
+end
+
+
+subgraph CONTAINER_SOLR [Apache Solr]
+  direction TB
+
+  COMPONENT_SOLR[Solr Server]
+  click COMPONENT_SOLR "../../solr"
+  COMPONENT_SOLR --> COMPONENT_SOLR_DOCUMENT_INDEX
+  COMPONENT_SOLR --> COMPONENT_SOLR_ENTITIES_INDEX
+
+  COMPONENT_SOLR_DOCUMENT_INDEX[(Document index)]
+  COMPONENT_SOLR_ENTITIES_INDEX[(Entities index)]
+
+end
+
+subgraph CONTAINER_ETL [Open Semantic ETL]
+
+  direction TB
+
+  COMPONENT_OPENSEMANTICETL_FILECRAWLER[File crawler]
+  COMPONENT_OPENSEMANTICETL_FILECRAWLER --> COMPONENT_CELERY
+
+  COMPONENT_OPENSEMANTICETL_WORKER[Open Semantic ETL worker]
+
+  COMPONENT_OPENSEMANTICETL_PLUGINS[ETL plugins]
+  COMPONENT_OPENSEMANTICETL_WORKER --> COMPONENT_OPENSEMANTICETL_PLUGINS
+  
+
+  COMPONENT_CELERY[Celery task manager]
+  click COMPONENT_CELERY "../admin/queue/"
+
+  COMPONENT_OPENSEMANTICETL_WORKER --> COMPONENT_CELERY
+
+end
+
+
+subgraph CONTAINER_QUEUE [RabbitMQ]
+
+  direction TB
+
+  COMPONENT_RABBITMQ[RabbitMQ]
+  click COMPONENT_RABBITMQ "../admin/queue/"
+  COMPONENT_RABBITMQ --> COMPONENT_RABBITMQ_DATA
+
+  COMPONENT_RABBITMQ_DATA[(Task queue)]
+  click COMPONENT_RABBITMQ "../admin/queue/"
+
+end
+
+
+subgraph CONTAINER_TIKA [Apache Tika]
+
+  direction TB
+
+  COMPONENT_TIKA_SERVER[Tika Server]
+  click COMPONENT_TIKA_SERVER "https://github.com/opensemanticsearch/tika-server.deb"
+  
+  COMPONENT_TIKA_SERVER --> COMPONENT_OCR_CACHE
+  
+  COMPONENT_OCR_CACHE[Tesseract OCR Cache]
+  COMPONENT_OCR_CACHE --> COMPONENT_OCR
+  COMPONENT_OCR_CACHE_DATA[(OCR cache)]
+  COMPONENT_OCR_CACHE ----> COMPONENT_OCR_CACHE_DATA
+  
+  COMPONENT_OCR[Tesseract]
+  click COMPONENT_OCR "https://github.com/opensemanticsearch/tesseract-ocr-cache"
+
+
+end
+
+subgraph CONTAINER_NEO4J [Neo4j]
+  direction TB
+
+  COMPONENT_NEO4J[Neo4J]
+  click COMPONENT_NEO4J "https://github.com/opensemanticsearch/open-semantic-etl/blob/master/src/opensemanticetl/export_neo4j.py"
+  COMPONENT_NEO4J --> COMPONENT_NEO4J_DATA
+  COMPONENT_NEO4J_DATA[(Graph Database)]
+  
+end
+
+subgraph CONTAINER_NER [SpaCy NLP]
+
+  direction TB
+  
+  COMPONENT_NER[spacy-services]
+
+  COMPONENT_NER_MODELS[(ML models)]
+  COMPONENT_NER --> COMPONENT_NER_MODELS
+
+end
+
+  COMPONENT_EL[Open Semantic Entity Search API]
+  click COMPONENT_EL "https://github.com/opensemanticsearch/open-semantic-entity-search-api"
+
+COMPONENT_OPENSEMANTICETL_PLUGINS -->|Get tags and annotations| COMPONENT_APPS
+COMPONENT_OPENSEMANTICETL_PLUGINS -->|Entity extraction by thesaurus and ontologies| COMPONENT_EL
+COMPONENT_OPENSEMANTICETL_PLUGINS ---->|Metadata and text extraction| COMPONENT_TIKA_SERVER
+COMPONENT_OPENSEMANTICETL_PLUGINS ---->|Named entity recognition| COMPONENT_NER
+COMPONENT_OPENSEMANTICETL_PLUGINS ------>|Index data| COMPONENT_SOLR
+COMPONENT_CELERY ------>|Read and write task queue| COMPONENT_RABBITMQ
+COMPONENT_OPENSEMANTICETL_PLUGINS ------>|Index data| COMPONENT_NEO4J
+
+
+
+COMPONENT_EL -->|Extract entities in entities index from full text| COMPONENT_SOLR
+COMPONENT_SEARCH_UI -->|Search queries| COMPONENT_SOLR
+COMPONENT_APPS -->|Read search queries| COMPONENT_SOLR
+COMPONENT_APPS -->|Write entities managed by thesaurus or ontologies| COMPONENT_SOLR
+
+```
+
+
+
+
+
+## Flowchart of document processing and data flow
 
 ```mermaid
 
