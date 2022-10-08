@@ -162,6 +162,7 @@
         name: user
         comment: User
         group: user
+        shell: /bin/bash
         # Add to group sudo for root access
         # Add to group vboxsf for access to shared folders of the VM
         groups: sudo, vboxsf
