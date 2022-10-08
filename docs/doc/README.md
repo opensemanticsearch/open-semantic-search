@@ -40,7 +40,7 @@ Quick start tutorial:
 
 ### Configuration
 
-[Configuration of the search engine](admin/install/README.md)
+[Configuration of the search engine](admin/config/README.md)
 
 ### Administration
 
