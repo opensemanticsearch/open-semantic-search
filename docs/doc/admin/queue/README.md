@@ -30,3 +30,10 @@ You can monitor and manage the ETL task queue for document processing by [*Celer
 A link to the *Flower* instance on your host (f.e. `http://localhost/flower`) is available in the search user interface in the menu "*Datasources*" as "*Show running and open imports and analysis tasks (ETL tasks)*".
 
 ![](../../../screenshots/flower.png)
+
+
+## Priorities
+
+By the config file `/etc/opensemanticsearch/task_priorities` you can set priorities by file extension types like `.pdf`.
+
+As default this option is set to process documents like PDF or DOC before images like JPG and files like `.exe` last.
