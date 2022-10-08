@@ -29,8 +29,7 @@ RUN apt-get update && apt-get install --no-install-recommends --yes \
     && apt-get clean -y && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # install django-import-export
-RUN pip3 install --no-cache-dir django-import-export && \
-    pip3 install --no-cache-dir py2neo && \
+RUN pip3 install --no-cache-dir py2neo && \
     pip3 install --no-cache-dir warcio && \
     pip3 install --no-cache-dir mkdocs && \
     pip3 install --no-cache-dir mkdocs-mermaid2-plugin
