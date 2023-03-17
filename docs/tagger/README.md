@@ -1,6 +1,6 @@
 ---
-title: Open Semantic Tagger
-authors:
+title: Open Semantic Tagger  
+authors:  
     - Markus Mandalka
 ---
 

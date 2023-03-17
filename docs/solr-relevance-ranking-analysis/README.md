@@ -1,6 +1,6 @@
 ---
-title: Solr Relevance Ranking Analysis and Visualization Tool
-authors:
+title: Solr Relevance Ranking Analysis and Visualization Tool  
+authors:  
     - Markus Mandalka
 ---
 
@@ -11,9 +11,9 @@ authors:
 
 
 
-This Python Django based Open Source tool and web user interface (UI) for easier [Solr Relevancy](https://wiki.apache.org/solr/SolrRelevancyFAQ) analysis helps while search relevance tuning and relevancy ranking debugging.
+This Python Django based Open Source tool and web user interface (UI) allows for easier [Solr Relevancy](https://wiki.apache.org/solr/SolrRelevancyFAQ) analysis and is helpful while one is performing search relevance tuning and relevancy ranking debugging.
 
-Therefore the tool summarize and visualize the relevance ranking and scoring by [field boosts](https://lucene.apache.org/solr/guide/7_6/the-dismax-query-parser.html#qf-query-fields-parameter) (qf), term weights (TF/IDF) and [boost function](https://lucene.apache.org/solr/guide/7_6/the-dismax-query-parser.html#bf-boost-functions-parameter) (bf) score of documents found by an Apache Solr search query.
+The tool summarizes and visualizes the relevance ranking and scoring by [field boosts](https://lucene.apache.org/solr/guide/7_6/the-dismax-query-parser.html#qf-query-fields-parameter) (qf), term weights (TF/IDF) and the [boost function](https://lucene.apache.org/solr/guide/7_6/the-dismax-query-parser.html#bf-boost-functions-parameter) (bf) score of documents found by an Apache Solr search query.
 
 ## Usage
 
@@ -29,7 +29,7 @@ Click the button "Analyze relevance ranking"
 
 
 
-So you get an visual summary of the relevance ranking of the found documents:
+So you get a visual summary of the relevance ranking of the found documents:
 
 
 ![](../screenshots/solr-relevance-ranking-analysis.png)
@@ -57,9 +57,9 @@ The button "Chart" in the top bar shows a more compact visualization:
 
 The tool can be used with other [Apache Solr](http://lucene.apache.org/solr/) environments than Open Semantic Search.
 
-You find the documentation of the installation and configuration in the [README.md](https://github.com/opensemanticsearch/solr-relevance-ranking-analysis).
+You can find the documentation on installation and configuration in the [README.md](https://github.com/opensemanticsearch/solr-relevance-ranking-analysis).
 
 ## Free Open Source Software
 
 
-The tool is Free Software. You find the full [Source Code on GitHub](https://github.com/opensemanticsearch/solr-relevance-ranking-analysis)
+The tool is Free Software. You can find the full [Source Code on GitHub](https://github.com/opensemanticsearch/solr-relevance-ranking-analysis)
