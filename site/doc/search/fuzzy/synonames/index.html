@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://opensemanticsearch.org/doc/search/fuzzy/synonames/" />
+      <link rel="shortcut icon" href="../../../../img/favicon.ico" />
+    <title>Find documents with different first name variants (Synonames) - Open Semantic Search</title>
+    <link rel="stylesheet" href="../../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Find documents with different first name variants (Synonames)";
+        var mkdocs_page_input_path = "doc/search/fuzzy/synonames/README.md";
+        var mkdocs_page_url = "/doc/search/fuzzy/synonames/";
+      </script>
+    
+    <script src="../../../../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../../.." class="icon icon-home"> Open Semantic Search
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../..">About</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Usage</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../operators/">Search operators</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../#overview-and-exploration-with-facets">Interactive filters (Faceted search)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../">Fuzzy search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../datamanagement/annotation/">Tagging and annotation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="#">Structuring data and documents (Metadata management)</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../../datamanagement/thesaurus/">Vocabulary and thesaurus (dictionary of names or concepts)</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../datamanagement/ontologies/">Lists, Dictionaries, Vocabularies and Thesauri (Ontologies)</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="#">Analyze and explore (Analytics)</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../../../investigative_journalism/howto-analyze-leaks/">Investigate massive leaks for investigative reporting</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../analytics/law/">Legal codes and law clauses</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../list/">Search by list of names (batch searches)</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Administration</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../tutorial/">Getting started</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../admin/install/">Installation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../admin/config/">Configuration</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../admin/queue/">Task queue</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../admin/config/log/">Logs</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Additional Applications</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="/solr-search-csv-python-django/README.md">CSV Manager</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/graph-explorer/README.md">Graph Explorer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/lexememes/README.md">Lexememes</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/solr-ontology-tagger/README.md">Ontology Tagger</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/solr-relevance-ranking-analysis/README.md">Relevance Ranking Analysis</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/rdf2ocr/README.md">RDF or SKOS to OCR</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/rss-feed-manager-python-django/README.md">RSS-Feed Manager</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/search-list/README.md">Search Lists</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/skos2solr/README.md">SKOS to Solr</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/solr/README.md">Solr Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/tagger/README.md">Tagger</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/solr-search-querytagger-python-django/README.md">QueryTagger</a>
+                  </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../download/">Download</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="https://github.com/opensemanticsearch/open-semantic-search/">Development</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../../../donate/README.md">Donate</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../..">Open Semantic Search</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
+      <li>Find documents with different first name variants (Synonames)</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/opensemanticsearch/open-semantic-search/edit/master/docs/doc/search/fuzzy/synonames/README.md" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="find-documents-with-different-first-name-variants-synonames">Find documents with different first name variants (Synonames)</h1>
+<p>To quote an article about how <a href="https://medium.com/occrp-unreported/an-%D0%B0%D0%BB%D0%B5%D0%BA%D1%81%D0%B0%D0%BD%D0%B4%D1%80-by-any-other-name-819525c82d8">Synonames helps OCCRP investigate people across languages and alphabets</a> "<em>A single name can have many equivalents when transliterated across writing systems or represented across cultures. A Russian named Александр might open a U.K. bank account as Aleksandr, while a German Friedrich might introduce himself to Americans as “Fred”.
+These variations arise naturally with cross-cultural exchange, without any malicious intent, and the human brain can usually toggle between them effortlessly. But they pose a bigger problem in data-driven research.</em>"</p>
+<p>To find documents that contain only such alternate first name variants, the full text search engine of Open Semantic Search integrates the multilingual open data knowledge of name variants from Wikidata extracted by the Open Source tool <a href="https://github.com/alephdata/synonames">Synonames</a> as synonyms out of the box.</p>
+<p>So if you do not disable the search option "Find other word forms, too" and search for the German first name "Markus", you will find documents which contain only the English variant "Mark", too.</p>
+<h2 id="full-names-and-aliases">Full names and aliases</h2>
+<p>Synonames only "translates" single name parts (forename) for many names for all searches.</p>
+<p>The advantage is, that this general forename synonyms often works for yet unknown people which are not part of your database, thesaurus or ontology, too.</p>
+<p>But it does not know about full name aliases, fake names, former names and pseudonyms of concrete people or their aliases.</p>
+<p>If you want to be able to find full name aliases with different forenames and different last names, too, you can <a href="https://opensemanticsearch.org/doc/datamanagement/thesaurus">add aliases to your thesaurus</a> or <a href="../../../datamanagement/ontologies">import some open data ontologies</a> like for example <a href="https://opensemanticsearch.org/doc/datamanagement/opendata/wikidata">lists of politicians of your parliament</a> by the <a href="../../../datamanagement/ontologies">ontologies manager</a> which suports multi word synonyms like full names or aliases, too.</p>
+<p>So you can find work from Kurt Tucholsky published with his alias "Peter Panter" or documents about Angela Merkel containing "only" the variant "Angela Merkelova" or her former name "Angela Kasner", too.</p>
+<h2 id="open-source-code-and-open-data">Open Source code and Open Data</h2>
+<p>The open source code to extract the open data knowledge on first name variants from Wikidata: <a href="https://github.com/alephdata/synonames">Source code repository of Synonymes</a></p>
+<p>Our open source integration with the Solr Synonym Graph: <a href="https://github.com/opensemanticsearch/solr-synonames">Source code repository of Synonames to Solr</a></p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/opensemanticsearch/open-semantic-search/" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+    
+  </span>
+</div>
+    <script>var base_url = '../../../..';</script>
+    <script src="../../../../js/theme_extra.js" defer></script>
+    <script src="../../../../js/theme.js" defer></script>
+      <script src="../../../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

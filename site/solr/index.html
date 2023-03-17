@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://opensemanticsearch.org/solr/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Solr Server (Daemon) - Open Semantic Search</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Solr Server (Daemon)";
+        var mkdocs_page_input_path = "solr/README.md";
+        var mkdocs_page_url = "/solr/";
+      </script>
+    
+    <script src="../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> Open Semantic Search
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">About</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Usage</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../doc/search/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../doc/search/operators/">Search operators</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../doc/search/#overview-and-exploration-with-facets">Interactive filters (Faceted search)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../doc/search/fuzzy/">Fuzzy search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../doc/datamanagement/annotation/">Tagging and annotation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="#">Structuring data and documents (Metadata management)</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../doc/datamanagement/thesaurus/">Vocabulary and thesaurus (dictionary of names or concepts)</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../doc/datamanagement/ontologies/">Lists, Dictionaries, Vocabularies and Thesauri (Ontologies)</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="#">Analyze and explore (Analytics)</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../investigative_journalism/howto-analyze-leaks/">Investigate massive leaks for investigative reporting</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../doc/analytics/law/">Legal codes and law clauses</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../doc/search/list/">Search by list of names (batch searches)</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Administration</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../doc/tutorial/">Getting started</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../doc/admin/install/">Installation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../doc/admin/config/">Configuration</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../doc/admin/queue/">Task queue</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../doc/admin/config/log/">Logs</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Additional Applications</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="/solr-search-csv-python-django/README.md">CSV Manager</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/graph-explorer/README.md">Graph Explorer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/lexememes/README.md">Lexememes</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/solr-ontology-tagger/README.md">Ontology Tagger</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/solr-relevance-ranking-analysis/README.md">Relevance Ranking Analysis</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/rdf2ocr/README.md">RDF or SKOS to OCR</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/rss-feed-manager-python-django/README.md">RSS-Feed Manager</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/search-list/README.md">Search Lists</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/skos2solr/README.md">SKOS to Solr</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/solr/README.md">Solr Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/tagger/README.md">Tagger</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/solr-search-querytagger-python-django/README.md">QueryTagger</a>
+                  </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../download/">Download</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="https://github.com/opensemanticsearch/open-semantic-search/">Development</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../donate/README.md">Donate</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Open Semantic Search</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li>
+      <li>Solr Server (Daemon)</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/opensemanticsearch/open-semantic-search/edit/master/docs/solr/README.md" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="solr-server-daemon">Solr Server (Daemon)</h1>
+<h2 id="solr-package-for-debian-and-ubuntu">Solr package for Debian and Ubuntu</h2>
+<p>This Debian package and Ubuntu package is a preconfigurated <a href="http://lucene.apache.org/solr">Apache Solr</a> server running as a daemon providing important settings like the integration of the <a href="../doc/datamanagement/thesaurus">thesaurus editor</a> and ontologies manager, settings for better performance, disabled logging and security settings and a more current Solr version than the <a href="https://packages.debian.org/search?suite=stable§ion=all&amp;arch=any&amp;searchon=sourcenames&amp;keywords=lucene-solr">packages of the Debian</a> or Ubuntu standard repositories.</p>
+<h1 id="settings-of-preconfigured-solr-package">Settings of preconfigured Solr package</h1>
+<h2 id="disabled-logfiles">Disabled Logfiles</h2>
+<p><strong>Disabled logfiles</strong>: we don't want to write each search query to Solr logs. If you want to switch on logging for debugging purposes, switch on <code>file</code> and <code>console</code> in the config file <code>/var/solr/log4j.properties</code></p>
+<h2 id="autocommits">Autocommits</h2>
+<p><strong>Automatic commits</strong> to the index after 15 seconds after adding or update of documents (autocommit=15000)</p>
+<h2 id="running-as-daemon">Running as daemon</h2>
+<p><strong>Automatic start on booting</strong> running as a daemon in Debian GNU/Linux or Ubuntu Linux.</p>
+<h2 id="increase-maximum-ram-settings-of-the-java-virtual-machine-jvm">Increase maximum RAM settings of the Java Virtual Machine (JVM)</h2>
+<p><strong>Automatic memory settings</strong>: In most cases no manual setting of Java virtual machine options is needed anymore. Allows the Java VM to use as much RAM as possible on this server, so you won't have problems because of default Java Virtual Machine (JVM) maximal RAM settings (option <em>-Xmx</em>) if indexing large amounts of data or large documents.</p>
+<h2 id="swappiness">Swappiness</h2>
+<p><strong>Disabled swappiness</strong>, so the system will only swap if necessary. So it doesn't do so to optimize RAM for running software swapping the Solr index and search caches automatically after some time because they are not used for some time. Why? Even if some parts of the Solr index and caches in RAM are not used for a long time (i.e. if search isn't used for the night or some days) and that RAM could be used by other software meanwhile to read hundrets of MB or some GB from Swap on slower harddisks to RAM again because of using again while the first search after long time would lead to timeouts and errors on maybe important searches, which then could take tens of seconds longer.</p>
+<h2 id="access-only-from-localhost">Access only from localhost</h2>
+<p>For security reasons access to the Solr search server is only possible from the same computer.
+So <strong><a href="#localhost">access is only possible from localhost</a></strong>, so that if you set a password to the User Interfaces module <em>solr-php-ui</em> and the search apps nobody without an account on your computer or an account for a service on your computer can read all the data from Solr.</p>
+<p>To enable Solr remote admin access from other computers than localhost you have to edit <code>jetty-http.xml</code> and delete the <code>default="127.0.0.1"</code> from the config option <code>"host"</code>. Then restart Solr by <code>service solr restart</code>.</p>
+<p>Warning: You don't want to enable access to an unprotected Solr server with the possibility to read, add, change or delete all indexed data for everybody on the intranet or internet! So if the computers are part of a network you can not fully trust, you have to protect the IP of the Solr server or the Solr port for example by a firewall.</p>
+<h2 id="solr-schema">Solr schema</h2>
+<p>There are additional fields and stemming configured in the Solr schema. You can read the XML schema config in <code>/var/solr/data/core1/conf/managed-schema</code> which is based on the Solr example config set <code>/opt/solr/server/solr/configsets</code>, so you can use a diff tool to compare and see the config additions.</p>
+<p>Additionally the ETL and search tool adds &amp; uses some additional fields which are created automatically using the Solr dynamic fields feature configured for the schema because of type endings like _b _s or _tt. You can see such additional fields using the table view.</p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/opensemanticsearch/open-semantic-search/" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+    
+  </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme_extra.js" defer></script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://opensemanticsearch.org/doc/datamanagement/ocr/" />
+      <link rel="shortcut icon" href="../../../img/favicon.ico" />
+    <title>How to optimize and improve Optical Character Recognition results (OCR) - Open Semantic Search</title>
+    <link rel="stylesheet" href="../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "How to optimize and improve Optical Character Recognition results (OCR)";
+        var mkdocs_page_input_path = "doc/datamanagement/ocr/README.md";
+        var mkdocs_page_url = "/doc/datamanagement/ocr/";
+      </script>
+    
+    <script src="../../../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../.." class="icon icon-home"> Open Semantic Search
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../..">About</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Usage</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../search/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../search/operators/">Search operators</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../search/#overview-and-exploration-with-facets">Interactive filters (Faceted search)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../search/fuzzy/">Fuzzy search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../annotation/">Tagging and annotation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="#">Structuring data and documents (Metadata management)</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../thesaurus/">Vocabulary and thesaurus (dictionary of names or concepts)</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../ontologies/">Lists, Dictionaries, Vocabularies and Thesauri (Ontologies)</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="#">Analyze and explore (Analytics)</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../../investigative_journalism/howto-analyze-leaks/">Investigate massive leaks for investigative reporting</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../analytics/law/">Legal codes and law clauses</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../search/list/">Search by list of names (batch searches)</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Administration</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tutorial/">Getting started</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../admin/install/">Installation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../admin/config/">Configuration</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../admin/queue/">Task queue</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../admin/config/log/">Logs</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Additional Applications</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="/solr-search-csv-python-django/README.md">CSV Manager</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/graph-explorer/README.md">Graph Explorer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/lexememes/README.md">Lexememes</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/solr-ontology-tagger/README.md">Ontology Tagger</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/solr-relevance-ranking-analysis/README.md">Relevance Ranking Analysis</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/rdf2ocr/README.md">RDF or SKOS to OCR</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/rss-feed-manager-python-django/README.md">RSS-Feed Manager</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/search-list/README.md">Search Lists</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/skos2solr/README.md">SKOS to Solr</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/solr/README.md">Solr Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/tagger/README.md">Tagger</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/solr-search-querytagger-python-django/README.md">QueryTagger</a>
+                  </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../download/">Download</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="https://github.com/opensemanticsearch/open-semantic-search/">Development</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../../donate/README.md">Donate</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../..">Open Semantic Search</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
+      <li>How to optimize and improve Optical Character Recognition results (OCR)</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/opensemanticsearch/open-semantic-search/edit/master/docs/doc/datamanagement/ocr/README.md" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="how-to-optimize-and-improve-optical-character-recognition-results-ocr">How to optimize and improve Optical Character Recognition results (OCR)</h1>
+<h2 id="automatic-text-recognition-in-images-or-scanned-documents-by-optical-character-recognition-ocr">Automatic text recognition in images or scanned documents by Optical Character Recognition (OCR)</h2>
+<p>Text stored in image formats like JPG, PNG, TIFF or GIF (i.e. scans, photos or screenshots) can not be found by standard full text search. So this enhancer enriches meta data of images like filename, format and size with results from automatic text recognition or optical character recognition (OCR) by free open source OCR software like <a href="https://github.com/tesseract-ocr">Tesseract</a>.</p>
+<p>Since many information is not searchable by full text search because its in graphical formats embedded in PDF documents or Powerpoint presentations (i.e. screenshots instead of text format), the enhancer extracts images from PDF files for automatic text recognition (OCR), too.</p>
+<h2 id="enable-ocr">Enable OCR</h2>
+<p>OCR is enabled by default in the Debian and Ubuntu packages and the virtual machine packages like Open Semantic Desktop Search or Open Semantic Search Appliance. If you build your search engine from the open source code <a href="../../admin/config/ocr#tesseract">enable OCR by installing the open source software Tesseract OCR</a>.</p>
+<p>If you disabled/enabled OCR, you should disable/enable OCR for images within PDF files, too, since many PDF files are scans and do contain much text data only as graphics.</p>
+<h2 id="how-to-optimize-ocr-settings-to-improve-ocr-results">How to optimize OCR settings to improve OCR results</h2>
+<p>You can optimize OCR to find more by different ways, which you can combine for optimal OCR results with fewer OCR failures:</p>
+<h2 id="scanning-resolution">Scanning resolution</h2>
+<p>If scanning documents yourself, scan or store the images with a higher resolution, so the OCR can analyse more details of the characters.</p>
+<h2 id="language-of-dictionary">Language of dictionary</h2>
+<p>Since OCR uses a language specific dictionary, <a href="../../admin/config/ocr#lang">set the OCR language to your language or to multiple languages</a>, which are used in your documents.</p>
+<h2 id="additional-custom-ocr-dictionary-entries-from-thesaurus-and-ontologies">Additional custom OCR dictionary entries from Thesaurus and Ontologies</h2>
+<p>Fully integrated out of the box in next open source release:</p>
+<p>Concepts, words and names of named entities like organizations, places, locations or persons that are important for you so you added them to your <a href="../thesaurus">thesaurus</a> or which are included in <a href="../ontologies">lists of names or ontologies</a> (for example lists of names of relevant persons from internal meta data sources or from open data sources like <a href="../opendata#wikidata">Wikidata</a>) you defined for faceted search/interactive filters and/or analytics/aggregated overviews are recognized better by OCR of scanned documents, too.</p>
+<p>Therefore your additional domain knowledge / vocabulary from thesaurus, lists and ontologies is used additional to the OCR language specific dictionary of Tesseract OCR.</p>
+<p>Since in many scanned legacy files on paper names are fully written in uppercase, this autogenerated custom OCR dictionary / OCR wordlist includes the uppercase variant of each word, too.</p>
+<p>So you should consider to rebuild your index / reindex important files by force (so they are analyzed again &amp; reindexed, even if yet in index) after adding very important words or names to the thesaurus or provided by (new or changed) ontologies.</p>
+<h2 id="disable-usage-of-dictionaries-and-word-lists">Disable usage of dictionaries and word lists</h2>
+<p>OCR results for unknown names which are not in such managed lists or dictionaries are better, if using dictionaries and lists is switched off.</p>
+<p>If you have enough CPU resources while indexing, you can combine results of both settings to index more names or words from scanned documents in correct spelling, since the search engine will find all results of both different and technically opponent OCR strategies.</p>
+<h2 id="automatic-deskewing-and-rotation-of-low-quality-scans-before-ocr">Automatic deskewing and rotation of low quality scans before OCR</h2>
+<p>Many documents are scanned skew.</p>
+<p>Automatic deskewing of such low quality scans by <a href="http://scantailor.org">Scantailor</a> before OCR can improve the OCR results.</p>
+<p>Therefore the <a href="../../admin/config/ocr#scantailor">Scantailor plugin</a> is enabled, if not disabled because of performance isssues.</p>
+<h2 id="training-characters-and-fonts">Training characters and fonts</h2>
+<p>You can train the OCR engine with the special fonts used in your documents to improve the machine learning model for recognition of characters of this fonts.</p>
+<h2 id="how-to-manage-ocr-errors-and-fails">How to manage OCR errors and fails</h2>
+<p>Despite all that optimization, automatic character recognition can fail and OCR errors like wrong recognized words or names occur.</p>
+<p>Therefore there are integrated tools for manual handling and management of OCR failures on document level for single documents or on meta level for all documents:</p>
+<h3 id="handle-ocr-failures-by-collaborative-tagging-and-annotation">Handle OCR failures by collaborative tagging and annotation</h3>
+<p>For single documents with OCR failures you can add <a href="../annotation">annotations or tags</a> with the words that were recognized wrong by the OCR engine, so the search engine can find them despite this OCR errors because of the tags or annotations written correct.</p>
+<h3 id="manage-ocr-failures-by-thesaurus-hidden-labels">Manage OCR failures by thesaurus (Hidden labels)</h3>
+<p>Manage common OCR failures for all documents by <a href="../thesaurus#hiddenlabel">Thesaurus entries for management of OCR errors (Hidden labels)</a></p>
+<p>Since you handle this OCR failure on meta level, the correction can be applied automatically to new documents with the same wrong recognized words or names.</p>
+<p>The <a href="../thesaurus/recommender">recommender can analyse the corpus for typos/OCR errors</a> of a thesaurus entry and recommends such misspellings for adding to the thesaurus as hidden label by one click.</p>
+<h2 id="combining-ocr-results-of-multiple-ocr-tools">Combining OCR results of multiple OCR tools</h2>
+<p>No OCR engine is perfect.</p>
+<p>So in some projects we used for example Abby Finereader to OCR the images in PDFs and additionally to the integrated Tesseract OCR. Each of them recognized words or names, on which the other OCR software failed. Because that combined and indexed both OCR results for the same document, we could find many documents more.</p>
+<p>The Open Semantic ETL framework is able to combine or unify and index analysis results of multiple analysis or OCR tools or OCR parameters for the same document or image.</p>
+<h2 id="more-information-about-improving-ocr-quality">More information about improving OCR quality</h2>
+<ul>
+<li><a href="https://github.com/tesseract-ocr/tesseract/wiki/ImproveQuality">Improving the quality of the output of Tesseract OCR</a></li>
+<li><a href="http://ocr-d.de/">Koordinierungsprojekt zur Weiterentwicklung von OCR Verfahren</a></li>
+</ul>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/opensemanticsearch/open-semantic-search/" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+    
+  </span>
+</div>
+    <script>var base_url = '../../..';</script>
+    <script src="../../../js/theme_extra.js" defer></script>
+    <script src="../../../js/theme.js" defer></script>
+      <script src="../../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

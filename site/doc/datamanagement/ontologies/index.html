@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://opensemanticsearch.org/doc/datamanagement/ontologies/" />
+      <link rel="shortcut icon" href="../../../img/favicon.ico" />
+    <title>Lists, Dictionaries, Vocabularies and Thesauri (Ontologies) - Open Semantic Search</title>
+    <link rel="stylesheet" href="../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Lists, Dictionaries, Vocabularies and Thesauri (Ontologies)";
+        var mkdocs_page_input_path = "doc/datamanagement/ontologies/README.md";
+        var mkdocs_page_url = "/doc/datamanagement/ontologies/";
+      </script>
+    
+    <script src="../../../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../.." class="icon icon-home"> Open Semantic Search
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../..">About</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Usage</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../../search/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../search/operators/">Search operators</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../search/#overview-and-exploration-with-facets">Interactive filters (Faceted search)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../search/fuzzy/">Fuzzy search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../annotation/">Tagging and annotation</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Structuring data and documents (Metadata management)</a>
+    <ul class="current">
+                <li class="toctree-l2"><a class="reference internal" href="../thesaurus/">Vocabulary and thesaurus (dictionary of names or concepts)</a>
+                </li>
+                <li class="toctree-l2 current"><a class="reference internal current" href="./">Lists, Dictionaries, Vocabularies and Thesauri (Ontologies)</a>
+    <ul class="current">
+    <li class="toctree-l3"><a class="reference internal" href="#management-of-lists-of-names-or-concepts-dictionaries-vocabularies-thesauri-or-ontologies-for-faceted-search-and-ontology-based-text-mining-document-analysis">Management of Lists of names or concepts, dictionaries, vocabularies, thesauri or ontologies for faceted search and ontology based text mining &amp; document analysis</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#import-external-lists-of-names-thesaurus-or-ontologies">Import external lists of names, thesaurus or ontologies</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#interactive-filters-and-analytics-by-aggregated-overview-faceted-search">Interactive filters and analytics by aggregated overview (Faceted search)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#formats">Formats</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#plain-text-lists">Plain text lists</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#ontologies-and-thesauri">Ontologies and Thesauri</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#spreadsheets-and-tables-excel-or-open-office-or-libreoffice-calc">Spreadsheets and Tables (Excel or Open Office or Libreoffice Calc)</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="#">Analyze and explore (Analytics)</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../../investigative_journalism/howto-analyze-leaks/">Investigate massive leaks for investigative reporting</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../analytics/law/">Legal codes and law clauses</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../search/list/">Search by list of names (batch searches)</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Administration</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tutorial/">Getting started</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../admin/install/">Installation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../admin/config/">Configuration</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../admin/queue/">Task queue</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../admin/config/log/">Logs</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Additional Applications</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="/solr-search-csv-python-django/README.md">CSV Manager</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/graph-explorer/README.md">Graph Explorer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/lexememes/README.md">Lexememes</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/solr-ontology-tagger/README.md">Ontology Tagger</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/solr-relevance-ranking-analysis/README.md">Relevance Ranking Analysis</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/rdf2ocr/README.md">RDF or SKOS to OCR</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/rss-feed-manager-python-django/README.md">RSS-Feed Manager</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/search-list/README.md">Search Lists</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/skos2solr/README.md">SKOS to Solr</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/solr/README.md">Solr Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/tagger/README.md">Tagger</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/solr-search-querytagger-python-django/README.md">QueryTagger</a>
+                  </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../download/">Download</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="https://github.com/opensemanticsearch/open-semantic-search/">Development</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../../donate/README.md">Donate</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../..">Open Semantic Search</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
+          <li>Usage &raquo;</li>
+          <li>Structuring data and documents (Metadata management) &raquo;</li>
+      <li>Lists, Dictionaries, Vocabularies and Thesauri (Ontologies)</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/opensemanticsearch/open-semantic-search/edit/master/docs/doc/datamanagement/ontologies/README.md" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="manage-lists-dictionaries-vocabularies-thesauri-ontologies">Manage Lists, Dictionaries, Vocabularies &amp; Thesauri (Ontologies)</h1>
+<h2 id="management-of-lists-of-names-or-concepts-dictionaries-vocabularies-thesauri-or-ontologies-for-faceted-search-and-ontology-based-text-mining-document-analysis">Management of Lists of names or concepts, dictionaries, vocabularies, thesauri or ontologies for faceted search and ontology based text mining &amp; document analysis</h2>
+<p>If there is an existing list, dictionary, vocabulary or thesaurus or if the entries are available in other structured format like an semantic web ontology yet i.e. from other tools or some <a href="../opendata">open data sources</a>, you don't need to <a href="../thesaurus">enter or manage manually each named entity like persons, organizations, locations or important words or concepts to your own thesaurus</a> to be able to use them for <a href="../../search#faceted_search">analytics, navigation, aggregated overview and interactive filters</a>.</p>
+<p>You can integrate or import additional, existing, shared or external list of names, thesauri, dictionaries, vocabularies or ontologies:</p>
+<h2 id="import-external-lists-of-names-thesaurus-or-ontologies">Import external lists of names, thesaurus or ontologies</h2>
+<p>Just click on "Import List of Names, Thesaurus or Ontology" and upload an file or reference to an file or web resource.</p>
+<p><img alt="" src="../../../screenshots/import_ontology.png" /></p>
+<p>After klicking on "save" new documents will be analyzed by this thesaurus, ontology or list.</p>
+<p>After klicking on "Apply" all old documents will be tagged with this ontology, too.</p>
+<h2 id="interactive-filters-and-analytics-by-aggregated-overview-faceted-search">Interactive filters and analytics by aggregated overview (Faceted search)</h2>
+<p>Use the search user interface and see the new search facet with the ontology or list name where you can see which names or concepts occur in how much documents and click on the name or concept to filter the results to documents where this name or concept occurs.</p>
+<p><a href="../../search#faceted_search">Learn more about faceted search.</a></p>
+<h2 id="formats">Formats</h2>
+<p>The formats will be autodetected:</p>
+<h3 id="plain-text-lists">Plain text lists</h3>
+<p>This list can be a plain text file with one name in each line.</p>
+<p>The charset / encoding should be autodetected.</p>
+<p>In cases the autodetection doesn't work correct for some old standards or local charsets, convert/export your data with the universal charset <code>UTF-8</code> first.</p>
+<h3 id="ontologies-and-thesauri">Ontologies and Thesauri</h3>
+<p>Or it can be an ontology in the open standards Resource Description Format (RDF), Simple Knowledge Organisation System (SKOS) or OWL.</p>
+<p>Turtle format will follow (until then you can convert that to RDF format using a standard triplestore).</p>
+<p>If you want only to import one language of a multilingual thesaurus or ontology, you can use a standard triplestore to filter the thesaurus using a SPARQL query to select only labels in your favorite language and use/import only that part of the graph.</p>
+<h3 id="spreadsheets-and-tables-excel-or-open-office-or-libreoffice-calc">Spreadsheets and Tables (Excel or Open Office or Libreoffice Calc)</h3>
+<p>You can use data from tables or spreadsheets like Excel or Open Office Calc or Libre Office Calc or even columns from databases, too when there maybe will be an automatic import plugin for lists in this format, too (please donate).</p>
+<p>Meanwhile you have to convert tables or databases which are not in RDF format or plain text format yet to plain text lists manually:
+* Open the data with Excel or OpenOffice or Libreoffice Calc.
+* Select the column with the names
+* Copy the column with the names (click Edit &gt; Copy in the main menu or press CTRL &amp; c)
+* Open a new table
+* Paste that column with the names (click Edit &gt; Paste in the main menu or press CTRL &amp; v)
+* Save the new table with only this column in CSV format. Since the table has only one column, you will get a plain text list file.
+* Upload or reference this export file like described for open semantic web formats or plaintext lists.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../thesaurus/" class="btn btn-neutral float-left" title="Vocabulary and thesaurus (dictionary of names or concepts)"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../../investigative_journalism/howto-analyze-leaks/" class="btn btn-neutral float-right" title="Investigate massive leaks for investigative reporting">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/opensemanticsearch/open-semantic-search/" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href="../thesaurus/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../../../investigative_journalism/howto-analyze-leaks/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '../../..';</script>
+    <script src="../../../js/theme_extra.js" defer></script>
+    <script src="../../../js/theme.js" defer></script>
+      <script src="../../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

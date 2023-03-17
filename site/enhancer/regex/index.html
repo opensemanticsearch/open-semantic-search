@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://opensemanticsearch.org/enhancer/regex/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Extract structured data from text by text patterns (Regular Expressions) - Open Semantic Search</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Extract structured data from text by text patterns (Regular Expressions)";
+        var mkdocs_page_input_path = "enhancer/regex/README.md";
+        var mkdocs_page_url = "/enhancer/regex/";
+      </script>
+    
+    <script src="../../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Open Semantic Search
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">About</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Usage</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../doc/search/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../doc/search/operators/">Search operators</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../doc/search/#overview-and-exploration-with-facets">Interactive filters (Faceted search)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../doc/search/fuzzy/">Fuzzy search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../doc/datamanagement/annotation/">Tagging and annotation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="#">Structuring data and documents (Metadata management)</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../doc/datamanagement/thesaurus/">Vocabulary and thesaurus (dictionary of names or concepts)</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../doc/datamanagement/ontologies/">Lists, Dictionaries, Vocabularies and Thesauri (Ontologies)</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="#">Analyze and explore (Analytics)</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../investigative_journalism/howto-analyze-leaks/">Investigate massive leaks for investigative reporting</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../doc/analytics/law/">Legal codes and law clauses</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../doc/search/list/">Search by list of names (batch searches)</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Administration</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../doc/tutorial/">Getting started</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../doc/admin/install/">Installation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../doc/admin/config/">Configuration</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../doc/admin/queue/">Task queue</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../doc/admin/config/log/">Logs</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Additional Applications</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="/solr-search-csv-python-django/README.md">CSV Manager</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/graph-explorer/README.md">Graph Explorer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/lexememes/README.md">Lexememes</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/solr-ontology-tagger/README.md">Ontology Tagger</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/solr-relevance-ranking-analysis/README.md">Relevance Ranking Analysis</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/rdf2ocr/README.md">RDF or SKOS to OCR</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/rss-feed-manager-python-django/README.md">RSS-Feed Manager</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/search-list/README.md">Search Lists</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/skos2solr/README.md">SKOS to Solr</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/solr/README.md">Solr Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/tagger/README.md">Tagger</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/solr-search-querytagger-python-django/README.md">QueryTagger</a>
+                  </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../download/">Download</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="https://github.com/opensemanticsearch/open-semantic-search/">Development</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../donate/README.md">Donate</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Open Semantic Search</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
+      <li>Extract structured data from text by text patterns (Regular Expressions)</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/opensemanticsearch/open-semantic-search/edit/master/docs/enhancer/regex/README.md" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="extract-structured-data-from-text-by-text-patterns-regular-expressions">Extract structured data from text by text patterns (Regular Expressions)</h1>
+<p>You can extract some structured data for aggregated overviews, interactive navigation and interactive filters (faceted search), data analysis and data visualization from unstructured text with regular expressions (RegEx).</p>
+<p>You can extract some structured data i.e. for aggregated overviews, interactive navigation and interactive filters (faceted search), data analysis and data visualization from unstructured text by extraction of the interesting text parts to structured fields, properties or facets by defining text patterns with regular expressions (RegEx).</p>
+<h2 id="named-entities-like-persons-organizations-locations-or-concepts">Named entities like persons, organizations, locations or concepts</h2>
+<p>Regular expressions doesn't mean Named Entities with names that are strings that do not change.
+If you want to <a href="../../doc/datamanagement/named_entities">identify named entities like known persons, organizations, location or concepts, you should use the Named Entities Manager</a> with a comfortable user interface and which needs less resources.</p>
+<h2 id="regular-expressions-for-defining-text-patterns">Regular expressions for defining text patterns</h2>
+<p>Usage of the regular expression plugin is for text patterns with dynamic parts or variables.</p>
+<h2 id="preconfigured-regular-expressions">Preconfigured regular expressions</h2>
+<p>There are some preconfigurated config files in <code>/etc/opensemanticsearch/regex</code> like <em>regex-email.tsv</em> extracting email-addresses or <em>regex-money.tsv</em> for extraction of amounts of money.</p>
+<h2 id="custom-regular-expressions">Custom regular expressions</h2>
+<p>If you want to add custom regular expressions, you should use the custom regex config file
+<code>/etc/opensemanticsearch/regex/regex-custom.tsv</code>
+so you can updates the preconfigurated lists automatically without overwriting your own config.</p>
+<h2 id="custom-regular-expressions-lists">Custom regular expressions lists</h2>
+<p>Sometimes you might want not only to add some custom regular expressions, but a whole list or more than one.</p>
+<p>For example if you want to exchange such configs or lists with partners, so you should seperate such configs for special topics from your custom regular expressions.</p>
+<p>To add another regex list just add to the config in <em>/etc/opensemanticsearch/etl</em>
+<code>config['regex_lists'].append('/etc/opensemanticsearch/regex/regex-anOwnList.tsv')</code></p>
+<h2 id="config-format-for-extraction-of-text-patterns">Config format for extraction of text patterns</h2>
+<p>The text patterns are configured in a textfile config in TSV format (tab seperated values).</p>
+<p>For a new pattern just add a new line to the config.</p>
+<p>Begin with the text patterns you search for as a <a href="https://docs.python.org/3.5/library/re.html">regular expression</a>.</p>
+<p>Optionally you can add a tab and the name of a facet/field where to write the matches. If no facet / field added, the default facet/field "Tags" will be used.</p>
+<p>Lines with # as first char of the line are ignored.</p>
+<p>Example:
+<code># Write text like *1000.00 $* or *100$* to the facet *dollar\_ss*
+[0-9]+[\.\,]?[0-9]*[:blank:]*\$ dollar_ss</code></p>
+<h2 id="extract-only-parts-of-a-pattern-regex-groups">Extract only parts of a pattern (RegEx groups)</h2>
+<p>Sometimes you don't want to extract the whole matching pattern like <code>size of 1000 m</code>, but only a part of it like only the number.</p>
+<p>Regular expressions can group part of the pattern with <code>()</code></p>
+<p>If your pattern defines RegEx groups you can configure with an additional tab and a following number which groups result will be used.</p>
+<p>If you set the group to 0, the whole matching pattern will be extracted, if you set the group to <code>1</code> the (first) group of the regular expression will be extracted to the configured facet/field. If you set <code>2</code> the second group (if more than one group defined) or the regular expression will be extracted and so on...</p>
+<p>Example:
+<code>Size of ([0-9]+)[:blank:]?m size_ss 1</code></p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/opensemanticsearch/open-semantic-search/" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+    
+  </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme_extra.js" defer></script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

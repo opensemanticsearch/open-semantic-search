@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://opensemanticsearch.org/solr-ranking-analysis/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Solr Relevance Ranking Analysis and Visualization Tool - Open Semantic Search</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Solr Relevance Ranking Analysis and Visualization Tool";
+        var mkdocs_page_input_path = "solr-ranking-analysis/README.md";
+        var mkdocs_page_url = "/solr-ranking-analysis/";
+      </script>
+    
+    <script src="../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> Open Semantic Search
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">About</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Usage</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../doc/search/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../doc/search/operators/">Search operators</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../doc/search/#overview-and-exploration-with-facets">Interactive filters (Faceted search)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../doc/search/fuzzy/">Fuzzy search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../doc/datamanagement/annotation/">Tagging and annotation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="#">Structuring data and documents (Metadata management)</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../doc/datamanagement/thesaurus/">Vocabulary and thesaurus (dictionary of names or concepts)</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../doc/datamanagement/ontologies/">Lists, Dictionaries, Vocabularies and Thesauri (Ontologies)</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="#">Analyze and explore (Analytics)</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../investigative_journalism/howto-analyze-leaks/">Investigate massive leaks for investigative reporting</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../doc/analytics/law/">Legal codes and law clauses</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../doc/search/list/">Search by list of names (batch searches)</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Administration</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../doc/tutorial/">Getting started</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../doc/admin/install/">Installation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../doc/admin/config/">Configuration</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../doc/admin/queue/">Task queue</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../doc/admin/config/log/">Logs</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Additional Applications</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="/solr-search-csv-python-django/README.md">CSV Manager</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/graph-explorer/README.md">Graph Explorer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/lexememes/README.md">Lexememes</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/solr-ontology-tagger/README.md">Ontology Tagger</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/solr-relevance-ranking-analysis/README.md">Relevance Ranking Analysis</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/rdf2ocr/README.md">RDF or SKOS to OCR</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/rss-feed-manager-python-django/README.md">RSS-Feed Manager</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/search-list/README.md">Search Lists</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/skos2solr/README.md">SKOS to Solr</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/solr/README.md">Solr Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/tagger/README.md">Tagger</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/solr-search-querytagger-python-django/README.md">QueryTagger</a>
+                  </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../download/">Download</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="https://github.com/opensemanticsearch/open-semantic-search/">Development</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../donate/README.md">Donate</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Open Semantic Search</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li>
+      <li>Solr Relevance Ranking Analysis and Visualization Tool</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/opensemanticsearch/open-semantic-search/edit/master/docs/solr-ranking-analysis/README.md" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="solr-relevance-ranking-analysis-and-visualization-tool">Solr Relevance Ranking Analysis and Visualization Tool</h1>
+<h2 id="relevance-ranking-analysis-and-visualization-for-easier-solr-relevancy-tuning">Relevance Ranking Analysis and Visualization for easier Solr relevancy tuning</h2>
+<p>This Python Django based Open Source tool and web user interface (UI) for easier <a href="https://wiki.apache.org/solr/SolrRelevancyFAQ">Solr Relevancy</a> analysis helps while one is performing search relevance tuning and relevancy ranking debugging.</p>
+<p>Therefore the tool summarize and visualizes the relevance ranking and scoring by <a href="https://lucene.apache.org/solr/guide/7_6/the-dismax-query-parser.html#qf-query-fields-parameter">field boosts</a> (qf), term weights (TF/IDF) and <a href="https://lucene.apache.org/solr/guide/7_6/the-dismax-query-parser.html#bf-boost-functions-parameter">boost function</a> (bf) score of documents found by an Apache Solr search query.</p>
+<h2 id="usage">Usage</h2>
+<p>Open the web user interface (UI) on the server/port/path you run this Django web app (see section "Installation").</p>
+<p>Copy the full Solr query (URL) to the field "Query" of the form in the web user interface (UI)</p>
+<p>Click the button "Analyze relevance ranking"</p>
+<h2 id="visual-summary">Visual summary</h2>
+<p>So you get an visual summary of the relevance ranking of the found documents:</p>
+<p><img alt="" src="../screenshots/solr-relevance-ranking-analysis.png" /></p>
+<h2 id="ranking-details">Ranking details</h2>
+<p>By clicking the button "Show details" you get the full details of the scoring calculation for each document:</p>
+<p><img alt="" src="../screenshots/solr-relevance-ranking-analysis-details.png" /></p>
+<h2 id="visualization">Visualization</h2>
+<p>The button "Chart" in the top bar shows a more compact visualization:</p>
+<p><img alt="" src="../screenshots/solr-relevance-ranking-analysis-visualization.png" /></p>
+<h2 id="installation-and-configuration">Installation and configuration</h2>
+<p>The tool can be used with other <a href="http://lucene.apache.org/solr/">Apache Solr</a> environments than Open Semantic Search.</p>
+<p>You find the documentation of the installation and configuration in the <a href="https://github.com/opensemanticsearch/solr-relevance-ranking-analysis">README.md</a>.</p>
+<h2 id="free-open-source-software">Free Open Source Software</h2>
+<p>The tool is Free Software. You find the full <a href="https://github.com/opensemanticsearch/solr-relevance-ranking-analysis">Source Code on GitHub</a></p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/opensemanticsearch/open-semantic-search/" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+    
+  </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme_extra.js" defer></script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

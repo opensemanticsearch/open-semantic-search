@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://opensemanticsearch.org/enhancer/named_entitiy_recognition/stanford_named_entity_recognizer/" />
+      <link rel="shortcut icon" href="../../../img/favicon.ico" />
+    <title>Named Entity Recognition by Stanford Named Entity Recognizer (NER) - Open Semantic Search</title>
+    <link rel="stylesheet" href="../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Named Entity Recognition by Stanford Named Entity Recognizer (NER)";
+        var mkdocs_page_input_path = "enhancer/named_entitiy_recognition/stanford_named_entity_recognizer/README.md";
+        var mkdocs_page_url = "/enhancer/named_entitiy_recognition/stanford_named_entity_recognizer/";
+      </script>
+    
+    <script src="../../../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../.." class="icon icon-home"> Open Semantic Search
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../..">About</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Usage</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../doc/search/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../doc/search/operators/">Search operators</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../../doc/search/#overview-and-exploration-with-facets">Interactive filters (Faceted search)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../doc/search/fuzzy/">Fuzzy search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../doc/datamanagement/annotation/">Tagging and annotation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="#">Structuring data and documents (Metadata management)</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../../doc/datamanagement/thesaurus/">Vocabulary and thesaurus (dictionary of names or concepts)</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../doc/datamanagement/ontologies/">Lists, Dictionaries, Vocabularies and Thesauri (Ontologies)</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="#">Analyze and explore (Analytics)</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../../investigative_journalism/howto-analyze-leaks/">Investigate massive leaks for investigative reporting</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../doc/analytics/law/">Legal codes and law clauses</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../doc/search/list/">Search by list of names (batch searches)</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Administration</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../doc/tutorial/">Getting started</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../doc/admin/install/">Installation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../doc/admin/config/">Configuration</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../doc/admin/queue/">Task queue</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../doc/admin/config/log/">Logs</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Additional Applications</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="/solr-search-csv-python-django/README.md">CSV Manager</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/graph-explorer/README.md">Graph Explorer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/lexememes/README.md">Lexememes</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/solr-ontology-tagger/README.md">Ontology Tagger</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/solr-relevance-ranking-analysis/README.md">Relevance Ranking Analysis</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/rdf2ocr/README.md">RDF or SKOS to OCR</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/rss-feed-manager-python-django/README.md">RSS-Feed Manager</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/search-list/README.md">Search Lists</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/skos2solr/README.md">SKOS to Solr</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/solr/README.md">Solr Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/tagger/README.md">Tagger</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/solr-search-querytagger-python-django/README.md">QueryTagger</a>
+                  </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../download/">Download</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="https://github.com/opensemanticsearch/open-semantic-search/">Development</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../../donate/README.md">Donate</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../..">Open Semantic Search</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
+      <li>Named Entity Recognition by Stanford Named Entity Recognizer (NER)</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/opensemanticsearch/open-semantic-search/edit/master/docs/enhancer/named_entitiy_recognition/stanford_named_entity_recognizer/README.md" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="named-entity-recognition-by-stanford-named-entity-recognizer-ner">Named Entity Recognition by Stanford Named Entity Recognizer (NER)</h1>
+<h2 id="automatic-named-entity-recognition-by-machine-learning-ml-for-automatic-classification-and-annotation-of-text-parts">Automatic Named Entity Recognition by machine learning (ML) for automatic classification and annotation of text parts</h2>
+<p><a href="../../../doc/datamanagement/named_entity_recognition">Extracted named entities like Persons, Organizations or Locations (Named entity extraction) are used for structured navigation, aggregated overviews and interactive filters (faceted search)</a>.</p>
+<p>Additionally to known <a href="../../../doc/datamanagement/thesaurus">named entities in a thesaurus</a> or <a href="../../../doc/datamanagement/ontologies">imported ontologies</a> this data analysis plugin integrates <a href="../../../doc/admin/config/named_entity_recognition">Named Entity Recognition (NER)</a> by <a href="http://nlp.stanford.edu/software/CRF-NER.shtml">Stanford Named Entity Recognizer (Stanford NER)</a>.</p>
+<h2 id="named-entity-extraction-of-yet-unknown-entities-or-names">Named Entity Extraction of yet unknown entities or names</h2>
+<p>So by integration of machine learning for analysing the structure of the text and classifying parts/words of the sentences to categories like person, location or organization, many yet unknown named entities can be extracted, which aren't configured or listed yet in the thesaurus Named entities Manager or a list or ontology.</p>
+<p>Therefore it uses models trained with existing annotations of a large text corpus, so after that they can predict / guess if a part of a sentence is a name of a person, a name of an organization, a verb or a place.</p>
+<h2 id="configuration-of-the-stanford-ner-plugin">Configuration of the Stanford NER plugin</h2>
+<p>To enable the automatic named entity recognition with Stanford Named Entitiy Recognizer (NER), enable this plugin to your document processing chain in your ETL config <code>/etc/opensemanticsearch/etl</code> or a connector config:
+<code>config['plugins'].append('enhance_ner_stanford')</code></p>
+<h3 id="config-language-machine-learning-model">Config language (machine learning model)</h3>
+<p>You can config alternate classifiers, i.e. for a machine learning model for another language than english or for your own domain knowledge model by the config option <code>config['stanford_ner_classifier']</code> or dependent on autodetected document language in the config option <code>config['stanford_ner_classifiers']</code> in the same config file, where you find additional information on this options.</p>
+<h2 id="how-to-improve-performance">How to improve performance</h2>
+<p>Named Entity Extraction of <a href="../../../doc/datamanagement/named_entities">named entities managed by the Named Entities Manager</a> or lists of names works very fast for (not complex queries) like static names or strings. So if you know many names yet, you should setup them by the Lists and Ontologies Manager, since that works more precise and so you get faster and more complete results for known names.</p>
+<p>In comparison to the integration of lists of entitiy names while indexing process the machine learning plugin for Stanford NER works very slow. Not only because Named Entities Recognition of unknown entities by machine learning needs much more CPU power and RAM than <a href="../../../doc/datamanagement/named_entities">Entity Linking of known entities</a> by Solr standard text analysis methods using limited well known names/words instead of much more complex probability and cluster based classification models.</p>
+<p>The architecture of calling Stanford Named Entitiy Recognizer (NER) from the used Python library Natural Language Toolkit (NLTK) is not optimized for speed if you want to analyse many texts, since it loads the JAR and the whole classification model for each text analysis,.</p>
+<p>For more performance for faster analysis of many documents you should setup an Stanford Stanford Named Entitiy Recognizer server instead of using this default NER plugin using NLTK which uses the Stanford Named Entitiy Recognizer command line tool. So the analysis of each document would take a few seconds less time (the time the Java based command line tool need to load and to load and initialize the machine learning model).</p>
+<p>Or wait, until the existing Stanford NER integration with Apache Tika will be default feature working out of the box, since our Apache Tika is running as server that has to load only once.</p>
+<h2 id="dependencies-and-used-libraries">Dependencies and used libraries</h2>
+<ul>
+<li><a href="http://nlp.stanford.edu/software/CRF-NER.shtml">Stanford Named Entity Recognizer (NER)</a></li>
+<li><a href="http://www.nltk.org/api/nltk.tag.html#module-nltk.tag.stanford">Stanford Tagger Module</a> from the Python natural language processing library <a href="http://www.nltk.org">Natural Language Toolkit (NLTK)</a>
+Debian package: <a href="https://packages.debian.org/stable/python-nltk">python-nltk</a></li>
+</ul>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/opensemanticsearch/open-semantic-search/" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+    
+  </span>
+</div>
+    <script>var base_url = '../../..';</script>
+    <script src="../../../js/theme_extra.js" defer></script>
+    <script src="../../../js/theme.js" defer></script>
+      <script src="../../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

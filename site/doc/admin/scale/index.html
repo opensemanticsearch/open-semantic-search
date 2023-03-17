@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://opensemanticsearch.org/doc/admin/scale/" />
+      <link rel="shortcut icon" href="../../../img/favicon.ico" />
+    <title>Scaling and increasing performance by parallel processing, server clusters & buffers for writing - Open Semantic Search</title>
+    <link rel="stylesheet" href="../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Scaling and increasing performance by parallel processing, server clusters \u0026 buffers for writing";
+        var mkdocs_page_input_path = "doc/admin/scale/README.md";
+        var mkdocs_page_url = "/doc/admin/scale/";
+      </script>
+    
+    <script src="../../../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../.." class="icon icon-home"> Open Semantic Search
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../..">About</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Usage</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../search/">Search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../search/operators/">Search operators</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../search/#overview-and-exploration-with-facets">Interactive filters (Faceted search)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../search/fuzzy/">Fuzzy search</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../datamanagement/annotation/">Tagging and annotation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="#">Structuring data and documents (Metadata management)</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../datamanagement/thesaurus/">Vocabulary and thesaurus (dictionary of names or concepts)</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../datamanagement/ontologies/">Lists, Dictionaries, Vocabularies and Thesauri (Ontologies)</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="#">Analyze and explore (Analytics)</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../../investigative_journalism/howto-analyze-leaks/">Investigate massive leaks for investigative reporting</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../analytics/law/">Legal codes and law clauses</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../search/list/">Search by list of names (batch searches)</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Administration</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../tutorial/">Getting started</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../install/">Installation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../config/">Configuration</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../queue/">Task queue</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../config/log/">Logs</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Additional Applications</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="" href="/solr-search-csv-python-django/README.md">CSV Manager</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/graph-explorer/README.md">Graph Explorer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/lexememes/README.md">Lexememes</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/solr-ontology-tagger/README.md">Ontology Tagger</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/solr-relevance-ranking-analysis/README.md">Relevance Ranking Analysis</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/rdf2ocr/README.md">RDF or SKOS to OCR</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/rss-feed-manager-python-django/README.md">RSS-Feed Manager</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/search-list/README.md">Search Lists</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/skos2solr/README.md">SKOS to Solr</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/solr/README.md">Solr Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/tagger/README.md">Tagger</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="/solr-search-querytagger-python-django/README.md">QueryTagger</a>
+                  </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../download/">Download</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="https://github.com/opensemanticsearch/open-semantic-search/">Development</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../../donate/README.md">Donate</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../..">Open Semantic Search</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
+      <li>Scaling and increasing performance by parallel processing, server clusters & buffers for writing</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/opensemanticsearch/open-semantic-search/edit/master/docs/doc/admin/scale/README.md" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="scaling-and-increasing-performance-by-parallel-processing-server-clusters-buffers-for-writing">Scaling and increasing performance by parallel processing, server clusters &amp; buffers for writing</h1>
+<h2 id="how-to-index-search-and-explore-big-data-faster-by-scaling-and-optimizing-data-processing">How to index, search and explore big data faster by scaling and optimizing data processing</h2>
+<p>This is a tutorial how to index very large document sets faster technically to enable faster search or analysis. So this tutorial is not about <a href="../../search">how to analyse, search, explore &amp; filter big document collections</a>.</p>
+<h2 id="indexing-only-filenames-for-very-fast-exploration-and-filtering-by-filenames">Indexing only filenames for (very fast) exploration and filtering by filenames</h2>
+<p>First index only the filenames, which doesn't need much time. So you can explore, filter and find the most interesting paths or filenames without wating for completition of a full run maybe indexing long time many directories and files, that are not so interesting and for example start first processing of very interesting parts.</p>
+<p>Therefore first run indexing using only with the <code>enhance_path</code> plugin:
+`opensemanticsearch-index-file --plugins enhance_path <em>dirname</em></p>
+<p>This will be very fast, because only indexing the paths and file names without extraction of other metadata or content.</p>
+<p>After you are able to search all existing filenames you can first or additionally (parallel) index very interesting paths or files.</p>
+<h2 id="doing-expensive-tasks-like-optical-character-recognition-ocr-later-by-disable-expensive-data-enrichment-plugins-for-first-indexing-run">Doing expensive tasks like optical character recognition (OCR) later by disable expensive data enrichment plugins for first indexing run)</h2>
+<p>Data enrichment with OCR needs very much time and CPU ressources for only some percent of additional content.</p>
+<p>So you might want to disable OCR and do a first full indexing without OCR to be able to search &amp; analyze most parts of your data much earlier and meanwhile running a second forced indexing with OCR in the backround (after activating OCR again or based on an additional config file), later or at night.</p>
+<p>So you can do a first run or standard runs without OCR:</p>
+<p>Therefore disable OCR in /etc/opensemanticsearch/etl and in your Tika config (inside /usr/share/java/tika-server.jar) or just temporary deinstall tesseract-ocr.</p>
+<h3 id="second-run-with-enabled-ocr">Second run with enabled OCR</h3>
+<p>Enable OCR in your configs again.</p>
+<p>If you just deinstalled tesseract-ocr, dont forget to install this package and your additional OCR language packages (for example tesseract-ocr-deu for german) again.</p>
+<p>Force a second run with
+<code>opensemanticsearch-index-dir --force *dirname*</code></p>
+<p>Or enrich yet indexed data with the OCR plugin from time to time or after indexing by running the data enrichment tool for only the OCR plugin, so other plugins have not to run again.</p>
+<h2 id="parallel-processing-of-data-extraction-and-data-enrichment">Parallel processing of data extraction and data enrichment</h2>
+<p>If there is more than one processor available, tasks like extracting text from documents and OCR will be calculated by parallel processing for multiple files simultanously so that all available processors will be used.</p>
+<p>So if working within a virtual machine (like for example Open Semantic Desktop Search), don't forget to set up more or all processors for the virtual machine settings (in the vertical tab <em>System</em> and horizontal tab <em>Processor</em>)</p>
+<p>You can even use additional computers to a machine cluster, so multiple processors on multiple computers will be used.</p>
+<h2 id="parallel-processing-of-indexing-and-search-with-server-cluster-for-the-index-solr-cluster">Parallel processing of indexing and search with server cluster for the index (Solr cluster)</h2>
+<p>Too many or too slow searches?</p>
+<p>You can scale the Solr index from a single Solr index server and search server to a search cluster (Solr cloud) on multiple servers to share the load of many searches.</p>
+<h2 id="etl-cluster-for-extracting-text-and-ocr">ETL cluster for extracting text and OCR</h2>
+<p>Too slow while indexing too many documents?</p>
+<p>With additional servers with installations of Open Semantic ETL for time intensive data processing or document processing like text extraction or OCR, if you give them access to the files and to your index server.</p>
+<p>Hint: preconfigurated Solr is open only from localhost, so open the Port for the other workers of your ETL cluster.</p>
+<p>Or if you use Hadoop, you can index files parallel using the whole Hadoop cluster with <a href="http://www.cloudera.com/content/cloudera/en/documentation/core/latest/topics/search_mapreduceindexertool.html#csug_topic_6_1">Map Reduce Indexer Tool</a>.</p>
+<h2 id="donate">Donate</h2>
+<p>You can <a href="../../../donate">donate to the open source project</a> to get an optimized version and simple user interfaces for indexing faster (for example fast indexing without OCR with one click and doing OCR later while you are able to search in most data much sooner or easy to handle packages for setting up a cluster).`</p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/opensemanticsearch/open-semantic-search/" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+    
+  </span>
+</div>
+    <script>var base_url = '../../..';</script>
+    <script src="../../../js/theme_extra.js" defer></script>
+    <script src="../../../js/theme.js" defer></script>
+      <script src="../../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
