@@ -153,16 +153,16 @@
               
                 <h1 id="full-text-search-faceted-search-textmining-in-a-database-sql-db">Full text search, faceted search &amp; textmining in a database (SQL DB)</h1>
 <h2 id="connectors-for-relational-database-management-systems-rdbms-structured-query-lanaguage-sql-to-solr-or-elastic-search">Connectors for Relational Database Management Systems (RDBMS) &amp; Structured Query Lanaguage (SQL) to Solr or Elastic Search</h2>
-<p>To be able to use simple and powerful <a href="../../doc/search">search user interfaces (UI)</a> for <a href="../../doc/search">full text search</a>, faceted search, semantic search and ontology or thesaurus based <a href="../../doc/analytics/textmining">text mining</a> research tools on structured data from fields of a SQL database, import their tables to the search index:</p>
+<p>To be able to use simple and powerful <a href="../../doc/search">search user interfaces (UI)</a> for <a href="../../doc/search">full text search</a>, faceted search, semantic search and ontology or thesaurus based <a href="../../doc/analytics/textmining">text mining</a> research tools (on structured data from fields of a SQL database), import their tables to the search index:</p>
 <h2 id="index-sql-databases-like-mysql-or-postgresql">Index SQL databases like MySQL or Postgresql</h2>
-<p>There are multiple ways or open source connectors for import SQL databases like MySQL, MariaDB, PostgreSQL and other SQL databases based on Structured Query Language (SQL) or supported by Open Database Connectivity (ODBC) or Java DataBase Connectivity (JDBC) to Apache Solr index:</p>
+<p>There are multiple ways (open source connectors) for importing SQL databases like MySQL, MariaDB, PostgreSQL and other SQL databases based on Structured Query Language (SQL) or supported by Open Database Connectivity (ODBC) or Java DataBase Connectivity (JDBC) to an Apache Solr index:</p>
 <h2 id="import-sql-database-to-solr-search-index">Import SQL database to Solr search index</h2>
 <p>Free Software for indexing SQL to Apache Solr:
 * <a href="http://manifoldcf.apache.org/release/trunk/en_US/end-user-documentation.html#jdbcrepository">Apache Manifold JDBC Connector</a>
 * <a href="https://nifi.apache.org/">Apache Nifi</a> - Read from <code>ExecuteSQL</code> and write to Solr index
 * Setup the built in <a href="http://wiki.apache.org/solr/DataImportHandler#Usage_with_RDBMS">RDBMS data import handler</a> for your database
-* Export your database to a CSV format and use the build in CSV import of Solr
-* Write a short Python script for database import based on <a href="../../etl">Open Semantic ETL</a> with a concrete SQL query, write the columns to the <code>data</code> variable (data type is a Python dictionary i.e. <code>data['columnname'] = columnvalue</code> and export/write it to index by calling <code>etl.process(data=data)</code>
+* Export your database to a CSV format and use the build in the CSV import of Solr
+* Write a short Python script for database import based on <a href="../../etl">Open Semantic ETL</a> with a concrete SQL query, write the columns to the <code>data</code> variable (data type is a Python dictionary i.e. <code>data['columnname'] = columnvalue</code>) and export/write it to the index by calling <code>etl.process(data=data)</code>
 * Other <a href="../../etl">Extract Transform Load (ETL) - Frameworks</a> like Talend Open Studio</p>
 <h2 id="import-sql-database-to-elastic-search-index">Import SQL database to Elastic Search index</h2>
 <p>Free Software for indexing SQL to Elastic Search:
@@ -170,7 +170,7 @@
 * <a href="https://nifi.apache.org/">Apache Nifi</a> - Read from <code>ExecuteSQL</code> and write to Elastic Search index
 * <a href="https://github.com/jprante/elasticsearch-jdbc">Elastic search JDBC Importer</a>
 * Export your database to a CSV format and use the build in CSV import of Solr
-* Write a short Python script for database import based on <a href="../../etl">Open Semantic ETL</a> with a concrete SQL query, write the columns to the <code>data</code> variable (data type is a Python dictionary i.e. <code>data['columnname'] = columnvalue</code> and export/write it to index by calling <code>etl.process(data=data)</code>
+* Write a short Python script for database import based on <a href="../../etl">Open Semantic ETL</a> with a concrete SQL query, write the columns to the <code>data</code> variable (data type is a Python dictionary i.e. <code>data['columnname'] = columnvalue</code>) and export/write it to the index by calling <code>etl.process(data=data)</code>
 * Other <a href="../../etl">Extract Transform Load (ETL) - Frameworks</a> like Talend Open Studio</p>
               
             </div>

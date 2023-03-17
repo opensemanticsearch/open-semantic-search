@@ -153,7 +153,7 @@
               
                 <h1 id="crawler-for-indexing-websites">Crawler for indexing websites</h1>
 <h2 id="index-a-single-webpage">Index a single Webpage</h2>
-<p>You can index an single Webpage (or an image or an pdf file on a webserver, including automatic text recognition by OCR, if enabled in the connector config <em>/etc/opensemanticsearch/connector-web</em>):</p>
+<p>You can index a single webpage (or image or pdf file on a webserver, including automatic text recognition by OCR, if enabled in the connector config <code>/etc/opensemanticsearch/connector-web</code>):</p>
 <h3 id="start-indexing-by-web-interface">Start indexing by web interface</h3>
 <p>To start indexing a single web page via the web interface (i.e. <em>http://localhost/search/admin/crawl</em>):</p>
 <p>Just write the url into the uri field and submit the form.</p>
@@ -164,10 +164,10 @@
 <p>Using the REST-API:
 <code>http://127.0.0.1/search-apps/api/index-web?uri=*http://www.opensemanticsearch.org/*</code></p>
 <h2 id="crawl-whole-websites-or-parts-of-a-website">Crawl whole websites or parts of a website</h2>
-<p>You can index a whole website with the <a href="http://manifoldcf.apache.org/release/trunk/en_US/end-user-documentation.html#webrepository">web crawler module of Apache ManifoldCF</a>.</p>
-<p>With its Webinterface you can setup a homepage, a sitemap or a RSS-Feed as the start point and set how deep the crawl should be.</p>
+<p>You can index a whole website with the web crawler module of Apache ManifoldCF.</p>
+<p>With its web interface you can setup a homepage, a sitemap or a RSS-Feed as the start point and set how deep the crawl should be.</p>
 <p>Its possible to setup rules which parts to crawl and which to exclude.</p>
-<p>Another software for crawling a website is Scrapy.</p>
+<p>Another software for crawling a website is Scrapy (see <a href="../scraper/">documentation on using Scrapy with Open Semantic Search</a>).</p>
               
             </div>
           </div><footer>
