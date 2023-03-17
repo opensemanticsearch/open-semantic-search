@@ -1,6 +1,6 @@
 ---
-title: Development of free open source search engine software
-authors:
+title: Development of free open source search engine software 
+authors: 
     - Markus Mandalka
 ---
 
@@ -31,6 +31,7 @@ E-Mail: info ät opensemanticsearch.org
 Communicate to or work on the open source software project on Github:
 
 [Open Semantic Search project on Github](https://github.com/opensemanticsearch)
+
 ## Architecture
 
 
@@ -48,13 +49,13 @@ Or if you use a triple store as database use its standard SPARQL interface.
 ## Libraries for different programming languages
 
 
-* [Libraries, bindings, and modules that exist for the explicit purpose of integrating Solr with other applications or programming languages](http://wiki.apache.org/solr/IntegratingSolr)
+* [Libraries, bindings, and modules that exist for the explicit purpose of integrating Solr with other applications or programming languages](https://cwiki.apache.org/confluence/display/solr/IntegratingSolr)
 
 
 ## Data enrichment and data analysis plugins
 
 
-* [Development of own Solr plugins](http://wiki.apache.org/solr/SolrPlugins)
+* [Development of own Solr plugins](https://cwiki.apache.org/confluence/display/solr/SolrPlugins)
 * [Development of own data enrichment plugins](enhancer)
 * [Development of own data enrichment plugins with Python](enhancer/python)
 
