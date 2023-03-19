@@ -1,6 +1,6 @@
 ---
-title: Installation
-authors:
+title: Installation  
+authors:  
     - Markus Mandalka
 ---
 
@@ -10,11 +10,9 @@ authors:
 
 Single desktop users can use the preconfigured toolbox bundle and virtual machine [Open Semantic Desktop Search](../../desktop_search).
 
-
 # Docker
 
 Coming soon.
-
 
 # Installation on a Linux server or VM (organizations or research teams)
 
