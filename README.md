@@ -163,7 +163,7 @@ So thanks to all (current and former) contributors:
 - @andreclinio
 - @agharbeia
 - @ciyer
-
+- @davidshq
 ...
 
 Feel free to extend if you contributed/supported/sponsored in different forms.
