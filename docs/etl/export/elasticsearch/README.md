@@ -1,13 +1,12 @@
 ---
-title: ETL to Elastic Search index
-authors:
+title: ETL to Elastic Search index  
+authors:  
     - Markus Mandalka
 ---
 
 # ETL to Elastic Search index
 
-
-This plugin index extracted and enriched data to [Elastic Search](../../elasticsearch).
+This plugin indexes extracted and enriched data to [Elastic Search](../../elasticsearch).
 
 To configure Open Semantic ETL or a Open Semantic Search connector config to index to Elastic Search, overwrite the output plugin settings in `/etc/opensemanticsearch/etl`:
 

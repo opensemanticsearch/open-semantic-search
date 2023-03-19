@@ -1,11 +1,10 @@
 ---
-title: Open Semantic ETL: Data Export
-authors:
+title: Open Semantic ETL: Data Export  
+authors:  
     - Markus Mandalka
 ---
 
 # Open Semantic ETL: Data Export
-
 
 Output plugins store or export results of the data extraction and data analysis chain to different formats or databases.
 
