@@ -1,8 +1,10 @@
 # Open Semantic Search
 https://opensemanticsearch.org
 
-Integrated search server, ETL framework for document processing (crawling, text extraction, text analysis, named entity recognition and OCR for images and embedded images in PDF), search user interfaces, text mining, text analytics and search apps for fulltext search, faceted search, exploratory search and knowledge graph search
-
+Open Semantic Search is:
+- an integrated search server,
+- ETL framework for document processing (crawling, text extraction, text analysis, named entity recognition and OCR for images and embedded images in PDF),
+- search user interfaces, text mining, text analytics and search apps for fulltext search, faceted search, exploratory search and knowledge graph search
 
 # Documentation
 
@@ -14,7 +16,7 @@ The [documentation for users and admins](docs/doc/README.md) is included in the 
 
 ## Software architecture
 
-You find the [documentation of the search engine architecture in `docs/doc/modules/README.md`](docs/doc/modules/README.md).
+You can find the [documentation of the search engine architecture in `docs/doc/modules/README.md`](docs/doc/modules/README.md).
 
 ## Documentation format
 
@@ -22,11 +24,9 @@ This integrated HTML [documentation](https://opensemanticsearch.org/doc/search/)
 
 The source of the documentation (Markdown format) and the charts ([mermaid](https://mermaid-js.github.io/mermaid/) format) is editable in the directory [`docs`](docs).
 
-
 # Build
 
 How to build the deb package for installation on Debian or Ubuntu server or the docker images for running in Docker containers:
-
 
 ## Clone git repositories
 Clone the repository including the dependencies:
@@ -36,10 +36,9 @@ git clone --recurse-submodules --remote-submodules https://github.com/opensemant
 cd open-semantic-search
 ```
 
-
 ## Build deb package
 
-To build a <code>deb</code> package for *Debian GNU/Linux* or *Ubuntu Linux*, call the build script <code>[build-deb](build-deb)</code> as user root (change user by `su` or `sudo su`):
+To build a `deb` package for *Debian GNU/Linux* or *Ubuntu Linux*, call the build script <code>[build-deb](build-deb)</code> as user root (change user by `su` or `sudo su`):
 
 ```
 ./build-deb
@@ -47,7 +46,7 @@ To build a <code>deb</code> package for *Debian GNU/Linux* or *Ubuntu Linux*, ca
 
 ## Build Desktop Search VM
 
-How to build an *Open Semantic Desktop Search* Appliance for *Virtual Box* is documented in
+How to build an *Open Semantic Desktop Search* Appliance for *VirtualBox* is documented in
 [`src/open-semantic-desktop-search/README.md`](src/open-semantic-desktop-search/README.md).
 
 ## Build docker images
@@ -62,13 +61,13 @@ docker-compose build
 
 After these builds all the Docker images/dependencies/services can be started together by docker-compose with the config file <code>[docker-compose.yml](docker-compose.yml)</code>.
 
-You can start the whole environment by
+You can start the whole environment by running:
 
 ```
 docker-compose up
 ```
 
-which will expose the web user interface on port <code>8080</code>.
+which will expose the web user interface on port `8080`.
 
 You can browse the Open Semantic Search user interface in your favourite browser by this URL: 
 

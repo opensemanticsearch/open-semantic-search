@@ -1,16 +1,14 @@
 ---
-title: How investigative journalists can start to investigate, analyze and explore massive leaks of large document collections with many files much faster
-authors:
+title: How investigative journalists can start to investigate, analyze and explore massive leaks of large document collections with many files much faster  
+authors:  
     - Markus Mandalka
 ---
 
 # How investigative journalists can start to investigate, analyze and explore massive leaks of large document collections with many files much faster
 
-
-A (yet quick and very dirty and work in progress for coming workshop) tutorial on new UIs (more easier to use UIs planned, so it will be extended and imports of entities will get easier next weeks and months) for faster picking of low hanging fruits in big data leak analysis with limited computing resources:
+A (quick and very dirty and work in progress for coming workshop) tutorial on new UIs (more easier to use UIs planned, so it will be extended and imports of entities will get easier next weeks and months) for faster picking of low hanging fruits in big data leak analysis with limited computing resources:
 
 After an overview of useful and powerful data and text analysis methods (which need [long document processing time on initial import, if very large amount of files](#big-data-leaks-with-large-amounts-of-files-and-text-often-need-long-processing-time)) it describes some [methods, config options and new user interfaces for investigative journalists which empower investigative journalism to pick low hanging fruits of huge leaks faster and start to investigate and analyze a big leak much earlier](#get-low-hanging-fruits-very-fast).
-
 
 ## Free Open Source search tools for leak analysis, exploration and discovery for investigative reporting
 
@@ -18,16 +16,13 @@ There are many powerful and useful research features by free software for inform
 
 ![](../../screenshots/search.png)
 
-
 ## Full text search
 
 The full text search user interface allows you to search the index with [powerful search operators](../../doc/search/operators) i.e. for `germany OR german* OR deu OR Berlin OR deutsch* OR "Steffan Mappus"` or some other names.
 
-
 ## Privacy and data protection
 
 Analysis, indexing and search runs on your own computer without using cloud services, so what you search for will not be seen, stored and spied by default like on external cloud services.
-
 
 ## Manage named entities like companies or politicians
 
@@ -35,28 +30,23 @@ You can add names (for example companies or politicians) to the [Thesaurus](http
 
 ![](../../screenshots/named_entities_manager.png)
 
-
 ## Faceted search (Overview and interactive filters of entities)
 
 This names and concepts in thesaurus, ontologies or lists of names (which investigators with domain knowledge know best and which are often very relevant but an automatic named entity recognition by machine learning fails to recognize them) and/or Named entity recognition by machine learning enables an aggregated overview for this Named Entities like people, organizations or places:
 
 ![](../../screenshots/knowledge_graph-entities.png)
 
-
 ### Extracted people and organizations
 
 ![](../../screenshots/sentences-list.png)
-
 
 ### Extracted email addresses, email domains
 
 ![](../../screenshots/email-domains.png)
 
-
 ### Extracted locations and phone numbers
 
 ![](../../screenshots/phone.png)
-
 
 ### Extracted lega codes and law clauses
 
@@ -65,18 +55,15 @@ This names and concepts in thesaurus, ontologies or lists of names (which invest
 The screenshot shows you how you can use this overviews or how to use named entities as interactive filter to narrow down search results.
 So a click to a facet (i.e. an organization) will drill down the search results to fewer documents, matching this additional facet/filter, too.
 
-
 ## How to get this structured facets / overviews and leads by using watchlists and Open Data
 
 But you dont have to add each potential name yourself to add some structure or watchlists like for example names of important people or politicians.
 Import [Open Data](../../doc/datamanagement/opendata) to the [Lists and Ontologies Manager](../../doc/datamanagement/ontologies)
 
-
 ### List of names of people of interest like politicians
 
 Get a [list of names of politians from your country for example from Wikipedias structured database Wikidata.](../../doc/datamanagement/opendata/wikidata)
 So you get another search facet and overview about this potentialy relevant Names occuring in the documents.
-
 
 ### Open Data list of location names
 
@@ -86,7 +73,6 @@ Get a list of town names of your country, for example from [GeoNames](http://www
 So you get another search facet and overview about "Locations" occurring in the documents, which are in your country.
 
 So you can filter for towns in your country and see which people occurre within the documents which maybe are yet unknown and not in your lists of persons but very interesting for the searched context (i.e. your country).
-
 
 ## Fuzzy search
 
@@ -99,7 +85,6 @@ As intelligent human considering more cases and conplexity of languages than a d
 ![](../../screenshots/search-name-variants.png)
 ![](../../screenshots/recommender_results.png)
 
-
 ## Big Data Leaks with large amounts of files and text often need long processing time
 
 Huge leaks can be large document sets with thousands, hundred thousands or millions of document files.
@@ -110,20 +95,17 @@ But the initial text extraction, OCR and indexing such large document collection
 
 But you don't have to wait such a long time until you can start with investigations in such big leaks:
 
-
 ## Lack of IT admins? More user interfaces (UI) for investigative journalists
 
 Most of the below described features and methods to pick low-hanging fruits very fast had been develped years ago by a powerful modular, flexible and extendable Python based plugin architecture, but they needed Linux admin knowledge on Unix command line tools, Extract Transform Load (ETL) pipelines and related command line tools, most investigative journalists do not have.
 
 Like the last releases, the coming Open Source release in March (testing and improving stuff which yet in public Git repository) will provide additional web user interfaces and new default settings, so some features can be easier used even by freelance journalists or members of a team, if a specialized datajournalist or admin is busy or temporary not available:
 
-
 ### Get low-hanging fruits very fast
 
 Many relevant information can be low-hanging fruits from a computing power perspective.
 
 So Open Semantic Search can run the extraction and analysis of documents in multiple stages:
-
 
 ### Very fast indexing of filenames first
 
@@ -137,7 +119,6 @@ If you on this base find interesting paths or documents, you can [prioritize fil
 
 And even in this early stage you may have faceted search for some of the keywords or names from your domain knowledge in thesaurus or lists of names if they occur in this filenames (dependent on file naming).
 
-
 ### Named Entity Recognition (NER) by machine learning (ML) later
 
 Useful Named Entity Recognition of entities (works often even if not yet in your lists of names) by machine learning later needs up to ten times longer than entity extraction by your thesaurus or ontologies.
@@ -145,7 +126,6 @@ Useful Named Entity Recognition of entities (works often even if not yet in your
 So this step can be done later after text extraction, too while you are able to fulltext search all your documents earlier and maybe yet work with faster extracted entities from your domain knowledge by thesaurus or ontology based entity extraction.
 
 So set the ML NER plugin to be processed later (next release will have an UI config option "Do NER by ML later" in Config / Named Entity Recognition)
-
 
 ### Slow OCR latest
 
@@ -157,7 +137,6 @@ This is the new default setting in Config / OCR:
 
 ![](../../screenshots/ocr-priority.png)
 
-
 ### Prioritize text extraction and OCR tasks
 
 With this first analysis results or even only the path names and filenames you can often early identify potentially interesting files or directories for which you want to prioritize extraction and analysis.
@@ -167,7 +146,6 @@ With this first analysis results or even only the path names and filenames you c
 There you can click on "Prioritize" to open an UI where you can set the priority of certain files:
 
 ![](../../screenshots/prioritize-import-ui.png)
-
 
 ### Share load on multiple computers: Additional parallel ETL workers
 

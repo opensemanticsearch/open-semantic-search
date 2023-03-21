@@ -1,12 +1,10 @@
 ---
-title: Solr-PHP-UI: Solr client and user interface for search (UI)
-authors:
+title: Solr-PHP-UI: Solr client and user interface for search (UI)  
+authors:  
     - Markus Mandalka
 ---
 
 # Solr-PHP-UI: Solr client and user interface for search (UI)
-
-
 
 ![](../screenshots/search.png)
 
@@ -18,17 +16,14 @@ Just install the Debian GNU/Linux or Ubuntu Linux package or copy the source to 
 
 ## Features
 
-
 * [Fulltext search](../doc/search)
 * Facetted search (interactive filters)
 * Viewer for preview
 * Analyze text
 * Sorting
-* Different views:
-
+* Different views
 
 ### Views
-
 
 * Result list (with snippets and highlighted search terms)
 * Preview
@@ -38,15 +33,11 @@ Just install the Debian GNU/Linux or Ubuntu Linux package or copy the source to 
 	+ Trend chart
 	+ Networks, connections and relations (graph)
 
-
 ## Configuration
-
-
 
 Edit `/etc/solr-php-ui/config.php` (if installed from a package) or `config/config.php` (if installed from source) for setting another language or for adding custom facets (additional fields and interactive filters).
 
 ## Used libraries
-
 
 *Used libraries and frameworks (all included in the package)*
 * solr-php-client (Solr client library for PHP)
@@ -56,10 +47,7 @@ Edit `/etc/solr-php-ui/config.php` (if installed from a package) or `config/conf
 * nvd3 (d3js based javascript library for charts)
 * Cytoscape.js (graph)
 
-
 ## Dashboards
-
-
 
 Solr-PHP-UI is a lightweight solution which doesn't need a database or special libraries. So the configuration options for the users are limited.
 
@@ -67,12 +55,9 @@ If you want to configure dashboards, add some calls of a view into iframes, show
 
 ## Alternates
 
-
 Alternate components (Open Source user interfaces for Solr):
 * [Velocity](https://cwiki.apache.org/confluence/display/solr/Velocity+Search+UI) (Java)
 * [Solarium](http://www.solarium-project.org/) (PHP)
 * [Drupal Solr](https://drupal.org/project/apachesolr) and [Sarnia](https://drupal.org/project/sarnia) (PHP and Drupal)
 * [Hue Hadoop User Interface](http://www.gethue.com/) (Python and Django)
 * [Blacklight](http://projectblacklight.org/) (Ruby on rails)
-
-
