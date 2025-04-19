@@ -48,7 +48,7 @@ This names and concepts in thesaurus, ontologies or lists of names (which invest
 
 ![](../../screenshots/phone.png)
 
-### Extracted lega codes and law clauses
+### Extracted legal codes and law clauses
 
 ![](../../screenshots/law-code.png)
 
